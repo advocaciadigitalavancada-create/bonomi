@@ -2,13 +2,13 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Relatório do Bonomi Restaurante // Edição P&B Sulfite 75g (2P)</title>
+<title>Relatório Bonomi Restaurante // Edição Sulfite P&B 2P</title>
 <meta name="workaround:engine" content="Playwright / Chromium Headless">
 <meta name="workaround:source" content="relatorio_bonomi_2paginas_pb.html">
-<meta name="workaround:standard" content="A4-SWISS-EDITORIAL-2P (210mm x 297mm)">
+<meta name="workaround:standard" content="A4-SWISS-EDITORIAL-2P (210mm x 297mm) - P&B SULFITE 75G">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700;800&family=Spectral:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=JetBrains+Mono:ital,wght@0,500;0,700;0,800;1,700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
   @page {
     size: A4 portrait;
@@ -22,22 +22,20 @@
 
   :root {
     --bg-page: #FFFFFF;
-    --c-primary: #000000;
-    --c-accent: #000000;
-    --c-accent-dark: #000000;
-    --c-accent-soft: #F0F0F0;
-    --c-sand: #F0F0F0;
-    --c-sand-light: #F8F8F8;
     --c-ink: #000000;
     --c-ink-muted: #333333;
     --c-surface: #FFFFFF;
-    --c-border: #000000;
     --c-border-strong: #000000;
+    --c-border-light: #CCCCCC;
+    --font-display: 'Big Shoulders Display', sans-serif;
+    --font-grotesk: 'Space Grotesk', sans-serif;
+    --font-sans: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
   }
 
   body {
-    background-color: #E5E5E5;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #EAEAEA;
+    font-family: var(--font-sans);
     color: var(--c-ink);
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
@@ -48,14 +46,14 @@
     height: 297mm;
     page-break-after: always;
     position: relative;
-    padding: 8mm 12mm 8mm 12mm;
+    padding: 7.5mm 11mm 7.5mm 11mm;
     overflow: hidden;
-    background-color: var(--bg-page);
+    background-color: #FFFFFF;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     margin: 0 auto 10mm auto;
-    box-shadow: 0 6px 30px rgba(0,0,0,0.12);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
   }
 
   @media print {
@@ -72,720 +70,561 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    border-bottom: 2.5px solid #000000;
-    padding-bottom: 1.5mm;
+    border-bottom: 2.5px solid var(--c-border-strong);
+    padding-bottom: 1.4mm;
     flex-shrink: 0;
   }
   .doc-header .tagline {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 8.2pt;
     font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #000000;
+    color: var(--c-ink);
   }
   .doc-header .serial {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 8.2pt;
     font-weight: 800;
-    color: #000000;
+    color: var(--c-ink);
   }
 
   .doc-footer {
-    height: 7mm;
+    height: 6.8mm;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 2px solid #000000;
-    padding-top: 1.4mm;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 8pt;
-    color: #000000;
+    border-top: 2px solid var(--c-border-strong);
+    padding-top: 1.2mm;
+    font-family: var(--font-mono);
+    font-size: 7.8pt;
+    color: var(--c-ink-muted);
     flex-shrink: 0;
   }
   .doc-footer .doc-ref {
-    font-size: 7.2pt;
-    letter-spacing: 0.08em;
-    font-weight: 700;
-    color: #000000;
+    font-size: 7.3pt;
+    letter-spacing: 0.06em;
+    font-weight: 800;
+    color: var(--c-ink);
   }
   .doc-footer .page-indicator {
-    font-weight: 800;
-    background: #000000;
+    font-weight: 900;
+    background: var(--c-ink);
     color: #FFFFFF;
-    padding: 0.8mm 3.5mm;
+    padding: 0.7mm 3.2mm;
   }
 
-  /* CONTAINER PRINCIPAL A 260MM (A LEI ÁUREA DO A4) */
+  /* CONTAINER 260MM ESTRITO */
   .page-main {
     height: 260mm;
+    max-height: 260mm;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    flex-shrink: 0;
   }
 
-  /* TIPOGRAFIA & ELEMENTOS */
-  .kicker {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 8pt;
-    font-weight: 800;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+  /* BADGES & CARIMBOS P&B */
+  .tape-badge-pb {
+    display: inline-block;
+    background: #F4F4F4;
+    border: 1.5px solid #000000;
     color: #000000;
-    margin-bottom: 0.8mm;
-  }
-
-  .lead-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 29.5pt;
-    line-height: 0.90;
+    font-family: var(--font-mono);
+    font-size: 7.8pt;
     font-weight: 800;
-    letter-spacing: -0.04em;
-    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 1.2mm 3.2mm;
+    transform: rotate(-1.2deg);
+  }
+  .rubber-stamp-pb {
+    display: inline-flex;
+    align-items: center;
+    border: 2px solid #000000;
     color: #000000;
+    font-family: var(--font-mono);
+    font-size: 7.8pt;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 1mm 2.8mm;
+    transform: rotate(1.8deg);
   }
 
-  .subtitle-editorial {
-    font-family: 'Spectral', Georgia, serif;
-    font-size: 11pt;
-    font-style: italic;
-    color: #333333;
-    line-height: 1.22;
+  .hero-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid var(--c-border-strong);
+    padding-bottom: 3.5mm;
+  }
+  .hero-titles { flex: 1; }
+  .hero-kicker-strip {
+    display: flex;
+    gap: 2.5mm;
+    align-items: center;
+    margin-bottom: 1.8mm;
+  }
+  .hero-lead-title {
+    font-family: var(--font-display);
+    font-size: 33pt;
+    font-weight: 900;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: var(--c-ink);
+  }
+  .hero-sublead {
+    font-family: var(--font-sans);
+    font-size: 9.0pt;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--c-ink-muted);
+    margin-top: 1.8mm;
+    max-width: 142mm;
+  }
+
+  .section-label-bar-pb {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #000000;
+    color: #FFFFFF;
+    padding: 1.2mm 2.8mm;
+    font-family: var(--font-mono);
+    font-size: 8.0pt;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .pedigree-tape-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5mm;
+    margin-top: 2mm;
+  }
+  .pedigree-cell-pb {
+    background: #FFFFFF;
+    border: 1.5px solid #000000;
+    padding: 2.4mm 2.8mm;
+    box-shadow: 2px 2px 0 #000000;
+  }
+  .pedigree-cell-pb.highlight {
+    background: #F4F4F4;
+    border: 2px solid #000000;
+  }
+  .pedigree-cell-pb .p-stars {
+    font-family: var(--font-mono);
+    font-size: 7.2pt;
+    font-weight: 900;
+    color: #000000;
+    display: block;
+  }
+  .pedigree-cell-pb .p-name {
+    font-family: var(--font-display);
+    font-size: 16pt;
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+    margin: 1mm 0 0.5mm 0;
+  }
+  .pedigree-cell-pb .p-meta {
+    font-family: var(--font-mono);
+    font-size: 6.8pt;
+    font-weight: 700;
+    color: #444444;
+    text-transform: uppercase;
+  }
+  .pedigree-cell-pb .p-desc {
+    font-size: 7.6pt;
+    line-height: 1.25;
+    color: #000000;
     margin-top: 1.2mm;
   }
 
-  .sec-heading {
+  .maps-banner-box-pb {
+    background: #FFFFFF;
+    border: 2px solid #000000;
+    padding: 2.6mm 3.4mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3.5mm;
+  }
+  .maps-stat-side-pb {
     display: flex;
     align-items: center;
-    gap: 2.2mm;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 10.2pt;
-    font-weight: 800;
-    letter-spacing: -0.015em;
-    text-transform: uppercase;
+    gap: 2.5mm;
+    flex-shrink: 0;
+    border-right: 1.5px solid #000000;
+    padding-right: 3.5mm;
+  }
+  .maps-stat-num-pb {
+    font-family: var(--font-display);
+    font-size: 27pt;
+    font-weight: 900;
+    line-height: 0.9;
     color: #000000;
-    margin-bottom: 1.4mm;
   }
-  .sec-heading .badge {
-    background: #000000;
-    color: #FFFFFF;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 7.8pt;
-    font-weight: 800;
-    padding: 0.4mm 2.2mm;
-  }
-
-  /* META GRID CADASTRO */
-  .meta-grid {
-    display: grid;
-    grid-template-columns: 1.3fr 1.3fr 1.5fr 1fr;
-    background: #FFFFFF;
-    border: 1.5px solid #000000;
-    border-left: 4.5px solid #000000;
-    padding: 2.2mm 3.5mm;
-    gap: 3mm;
-  }
-  .meta-cell {
-    display: flex;
-    flex-direction: column;
-  }
-  .meta-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 6.8pt;
+  .maps-stat-label-pb {
+    font-family: var(--font-mono);
+    font-size: 7.4pt;
     font-weight: 800;
     text-transform: uppercase;
-    color: #444444;
-    letter-spacing: 0.08em;
-  }
-  .meta-val {
-    font-size: 8.3pt;
-    font-weight: 700;
-    color: #000000;
+    line-height: 1.25;
   }
 
-  /* MANIFESTO BANNER */
-  .manifesto-banner {
+  .trio-vanguarda-grid {
     display: grid;
-    grid-template-columns: 1.45fr 1.15fr;
-    gap: 4mm;
+    grid-template-columns: 1.15fr 0.95fr 1.05fr;
+    gap: 2.5mm;
+  }
+  .trio-v-card-pb {
     background: #FFFFFF;
-    color: #000000;
-    padding: 3.6mm 4.2mm;
     border: 1.5px solid #000000;
-    border-left: 5px solid #000000;
-  }
-  .manifesto-quote {
-    font-family: 'Spectral', Georgia, serif;
-    font-size: 12.2pt;
-    line-height: 1.2;
-    font-style: italic;
-    color: #000000;
-    border-bottom: 1.5px solid #000000;
-    padding-bottom: 1.8mm;
-    margin-bottom: 1.8mm;
-  }
-  .manifesto-body {
-    font-size: 8.5pt;
-    line-height: 1.38;
-    color: #111111;
-  }
-  .pedigree-box {
-    background: #F8F8F8;
-    border: 1.5px solid #000000;
-    padding: 2.6mm 3mm;
+    padding: 2.8mm 3.2mm;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
-  .pedigree-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 7pt;
+  .trio-v-card-pb.dark {
+    background: #000000;
+    color: #FFFFFF;
+  }
+  .trio-v-card-pb.gray {
+    background: #F4F4F4;
+  }
+  .trio-header-tag-pb {
+    font-family: var(--font-mono);
+    font-size: 7.2pt;
     font-weight: 800;
-    color: #000000;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
+    margin-bottom: 1mm;
+  }
+  .trio-v-card-pb.dark .trio-header-tag-pb { color: #CCCCCC; }
+  .trio-v-title-pb {
+    font-family: var(--font-grotesk);
+    font-size: 11pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.15;
     margin-bottom: 1.2mm;
   }
-  .pedigree-list {
-    list-style: none;
-    font-size: 7.8pt;
+  .trio-v-p-pb {
+    font-size: 8.1pt;
     line-height: 1.34;
-    color: #222222;
   }
-  .pedigree-list li {
-    margin-top: 1.1mm;
+  .trio-v-card-pb.dark .trio-v-p-pb { color: #E0E0E0; }
+
+  .portal-vanguarda-box-pb {
+    background: #FFFFFF;
+    border: 2.5px solid #000000;
+    padding: 3.2mm 3.8mm;
+    display: flex;
+    gap: 4mm;
+    align-items: center;
+    box-shadow: 4px 4px 0 #000000;
   }
-  .pedigree-list strong {
-    color: #000000;
+  .portal-qr-frame-pb {
+    width: 35mm;
+    height: 35mm;
+    border: 2px solid #000000;
+    padding: 1.5mm;
+    background: #FFFFFF;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .portal-qr-frame-pb img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    image-rendering: pixelated;
   }
 
-  /* PROTOCOLO BOX */
-  .protocol-box {
-    background: #F4F4F4;
-    border: 1.5px solid #000000;
-    border-left: 4.5px solid #000000;
-    padding: 2.8mm 3.8mm;
+  /* PÁGINA 02 STYLES P&B */
+  .meitre-funnel-pipeline-pb {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.8mm;
+    margin: 2mm 0;
   }
-  .protocol-box h3 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 9.6pt;
-    font-weight: 800;
-    text-transform: uppercase;
+  .meitre-step-card-pb {
+    background: #FFFFFF;
+    border: 1.5px solid #000000;
+    padding: 1.8mm 1.8mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .meitre-step-card-pb.stop {
+    background: #000000;
+    color: #FFFFFF;
+  }
+  .meitre-step-card-pb.stop .step-num-tag { color: #FFFFFF; }
+  .meitre-step-card-pb.stop .step-name-title { color: #FFFFFF; }
+  .meitre-step-card-pb.stop .step-crit-desc { color: #CCCCCC; }
+
+  .step-num-tag {
+    font-family: var(--font-mono);
+    font-size: 6.8pt;
+    font-weight: 900;
     color: #000000;
     margin-bottom: 0.8mm;
   }
-  .protocol-box p {
-    font-size: 8.2pt;
-    line-height: 1.36;
-    color: #000000;
-  }
-
-  /* TRIO GRID */
-  .trio-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 3.2mm;
-  }
-  .trio-card {
-    background: #FFFFFF;
-    border: 1.5px solid #000000;
-    padding: 3.2mm 3.5mm;
-    display: flex;
-    flex-direction: column;
-  }
-  .trio-card.highlight {
-    border-top: 4.5px solid #000000;
-  }
-  .trio-card.dark {
-    background: #000000;
-    color: #FFFFFF;
-    border-color: #000000;
-  }
-  .card-kicker {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 7pt;
-    font-weight: 800;
-    text-transform: uppercase;
-    color: #000000;
-    letter-spacing: 0.08em;
-    margin-bottom: 1.1mm;
-  }
-  .trio-card.dark .card-kicker {
-    color: #CCCCCC;
-  }
-  .card-headline {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 10pt;
-    font-weight: 800;
-    line-height: 1.16;
-    color: #000000;
-    margin-bottom: 1.3mm;
-  }
-  .trio-card.dark .card-headline {
-    color: #FFFFFF;
-  }
-  .card-p {
-    font-size: 8pt;
-    line-height: 1.35;
-    color: #222222;
-  }
-  .trio-card.dark .card-p {
-    color: #EEEEEE;
-  }
-
-  /* HERO PORTAL QR CODE */
-  .hero-portal {
-    background: #FFFFFF;
-    border: 2px solid #000000;
-    border-left: 7px solid #000000;
-    padding: 3.2mm 4.2mm;
-    display: grid;
-    grid-template-columns: 34mm 1fr;
-    gap: 4.5mm;
-    align-items: center;
-  }
-  .hero-portal .qr-box {
-    width: 34mm;
-    height: 34mm;
-    border: 1.5px solid #000000;
-    padding: 1mm;
-    background: #FFFFFF;
-  }
-  .hero-portal .qr-box img {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-  .hero-portal .portal-badge {
-    display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 7.2pt;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    background: #000000;
-    color: #FFFFFF;
-    padding: 0.5mm 2.2mm;
-    margin-bottom: 1.2mm;
-  }
-  .hero-portal .portal-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 11.5pt;
-    font-weight: 800;
-    color: #000000;
-    line-height: 1.15;
-    margin-bottom: 1mm;
-  }
-  .hero-portal .portal-desc {
-    font-size: 8.1pt;
-    line-height: 1.36;
-    color: #222222;
-    margin-bottom: 1.3mm;
-  }
-  .hero-portal .portal-action {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 7.4pt;
-    font-weight: 800;
-    color: #000000;
-    letter-spacing: 0.06em;
-  }
-
-  /* PÁGINA 02 */
-  .big-stats-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1.3fr;
-    gap: 3.5mm;
-  }
-  .stat-block {
-    background: #FFFFFF;
-    border: 1.5px solid #000000;
-    padding: 3.2mm 3.8mm;
-    position: relative;
-  }
-  .stat-block.alert {
-    background: #F8F8F8;
-    border: 2px solid #000000;
-  }
-  .stat-block.dark {
-    background: #000000;
-    color: #FFFFFF;
-  }
-  .stat-num {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 27pt;
-    font-weight: 800;
-    line-height: 0.92;
-    letter-spacing: -0.04em;
-    color: #000000;
-  }
-  .stat-block.dark .stat-num {
-    color: #FFFFFF;
-  }
-  .stat-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 7.2pt;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin: 1.2mm 0 0.8mm 0;
-    color: #000000;
-  }
-  .stat-block.dark .stat-label {
-    color: #EEEEEE;
-  }
-  .stat-desc {
+  .step-name-title {
+    font-family: var(--font-grotesk);
     font-size: 7.8pt;
-    line-height: 1.32;
-    color: #333333;
+    font-weight: 800;
+    line-height: 1.15;
+    text-transform: uppercase;
   }
-  .stat-block.dark .stat-desc {
-    color: #CCCCCC;
+  .step-crit-desc {
+    font-size: 6.9pt;
+    line-height: 1.2;
+    color: #444444;
+    margin-top: 1mm;
   }
 
-  /* TABELA FORENSE */
-  .forensic-table {
+  .forensic-v-table-pb {
     width: 100%;
     border-collapse: collapse;
-    font-size: 8.2pt;
-  }
-  .forensic-table th {
-    background: #000000;
-    color: #FFFFFF;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 7pt;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding: 1.8mm 2.5mm;
-    text-align: left;
-  }
-  .forensic-table td {
-    padding: 1.8mm 2.5mm;
-    border-bottom: 1px solid #000000;
-    line-height: 1.3;
-  }
-  .forensic-table tr:nth-child(even) td {
-    background: #F6F6F6;
-  }
-  .col-danger {
-    color: #000000;
-    font-weight: 700;
-    text-decoration: underline;
-  }
-  .col-solution {
-    color: #000000;
-    font-weight: 800;
-  }
-
-  /* PLANOS DE ATIVAÇÃO */
-  .plans-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3.8mm;
-  }
-  .plan-card {
+    font-size: 7.9pt;
     background: #FFFFFF;
     border: 1.5px solid #000000;
-    padding: 3mm 3.8mm;
-    display: flex;
-    flex-direction: column;
   }
-  .plan-card.primary {
-    border-top: 4.5px solid #000000;
-  }
-  .plan-card.pro {
+  .forensic-v-table-pb th {
     background: #000000;
     color: #FFFFFF;
-    border-color: #000000;
-  }
-  .plan-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 1.2mm;
-  }
-  .plan-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 7pt;
+    font-family: var(--font-mono);
+    font-size: 7.4pt;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #000000;
+    padding: 1.6mm 2.4mm;
+    text-align: left;
+    border-right: 1px solid #FFFFFF;
   }
-  .plan-card.pro .plan-tag {
-    color: #CCCCCC;
+  .forensic-v-table-pb td {
+    padding: 1.6mm 2.4mm;
+    line-height: 1.3;
+    border-bottom: 1px solid #CCCCCC;
+    border-right: 1px solid #CCCCCC;
+    vertical-align: top;
   }
-  .plan-price {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 14pt;
-    font-weight: 800;
-    color: #000000;
-  }
-  .plan-card.pro .plan-price {
-    color: #FFFFFF;
-  }
-  .plan-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 10pt;
-    font-weight: 800;
-    margin-bottom: 1mm;
-  }
-  .plan-body {
-    font-size: 7.9pt;
-    line-height: 1.34;
-    color: #222222;
-    margin-bottom: 1.4mm;
-  }
-  .plan-card.pro .plan-body {
-    color: #CCCCCC;
-  }
-  .plan-specs {
-    list-style: none;
-    font-size: 7.6pt;
-    line-height: 1.34;
-  }
-  .plan-specs li {
-    position: relative;
-    padding-left: 3mm;
-    margin-top: 0.6mm;
-  }
-  .plan-specs li::before {
-    content: "■";
-    position: absolute;
-    left: 0;
-    font-size: 5pt;
-    color: #000000;
-    top: -0.2mm;
-  }
-  .plan-card.pro .plan-specs li::before {
-    color: #FFFFFF;
-  }
+  .forensic-v-table-pb tr:last-child td { border-bottom: none; }
+  .forensic-v-table-pb td.bad { background: #F8F8F8; font-weight: 600; }
+  .forensic-v-table-pb td.good { background: #FFFFFF; font-weight: 800; }
 
-  /* DEAL STRIP */
-  .deal-strip {
-    background: #000000;
-    color: #FFFFFF;
-    padding: 2.8mm 3.8mm;
+  .plans-p2-grid {
     display: grid;
-    grid-template-columns: 1.1fr 1.6fr;
-    gap: 4mm;
-    align-items: center;
-    border-left: 5px solid #000000;
+    grid-template-columns: 1fr 1.35fr;
+    gap: 3mm;
   }
-  .deal-left .deal-badge {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 6.8pt;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #CCCCCC;
-    margin-bottom: 0.6mm;
-  }
-  .deal-val {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 25pt;
-    font-weight: 800;
-    line-height: 0.95;
-    letter-spacing: -0.03em;
-  }
-  .deal-terms {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 6.8pt;
-    color: #EEEEEE;
-    margin-top: 0.8mm;
-  }
-  .deal-right-badges {
-    display: flex;
-    gap: 1.8mm;
-    margin-bottom: 1.3mm;
-  }
-  .deal-pill {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 6.3pt;
-    font-weight: 800;
-    padding: 0.4mm 1.8mm;
-    background: rgba(255,255,255,0.22);
-    color: #FFFFFF;
-    text-transform: uppercase;
-  }
-  .deal-right-p {
-    font-size: 7.9pt;
-    line-height: 1.34;
-    color: #EEEEEE;
-  }
-
-  /* PIX PORTAL */
-  .pix-portal {
+  .plan-p2-card-pb {
     background: #FFFFFF;
     border: 2px solid #000000;
+    padding: 2.6mm 3.2mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 3px 3px 0 #000000;
+  }
+  .plan-p2-card-pb.premium {
+    background: #F8F8F8;
+    border: 2.5px solid #000000;
+  }
+  .plan-price-num-pb {
+    font-family: var(--font-display);
+    font-size: 19pt;
+    font-weight: 900;
+    color: #000000;
+  }
+
+  .pacto-balcao-box-pb {
+    background: #F4F4F4;
+    border: 1.5px dashed #000000;
+    padding: 1.8mm 2.8mm;
+    margin-top: 1.8mm;
+    font-family: var(--font-mono);
+    font-size: 7.4pt;
+    line-height: 1.35;
+    color: #000000;
+  }
+
+  /* CARD CHASSI WORKAROUND P&B */
+  .chassi-workaround-card-pb {
+    background: #000000;
+    color: #FFFFFF;
+    border: 2.5px solid #000000;
     padding: 3mm 3.8mm;
-    display: grid;
-    grid-template-columns: 30mm 1fr;
-    gap: 4.5mm;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+    gap: 3.5mm;
   }
-  .pix-portal .qr-box {
-    width: 30mm;
-    height: 30mm;
-    border: 1.5px solid #000000;
-    padding: 1mm;
+  .chassi-bolt {
+    position: absolute;
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    color: #FFFFFF;
+    font-weight: 900;
+    line-height: 1;
+  }
+  .bolt-tl { top: 1mm; left: 1.5mm; }
+  .bolt-tr { top: 1mm; right: 1.5mm; }
+  .bolt-bl { bottom: 1mm; left: 1.5mm; }
+  .bolt-br { bottom: 1mm; right: 1.5mm; }
+
+  .chassi-qr-side-pb {
+    width: 29mm;
+    height: 29mm;
     background: #FFFFFF;
+    border: 1.5px solid #FFFFFF;
+    padding: 1.2mm;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  .pix-portal .qr-box img {
+  .chassi-qr-side-pb img {
     width: 100%;
     height: 100%;
     display: block;
-  }
-  .pix-info-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 10.5pt;
-    font-weight: 800;
-    color: #000000;
-    margin-bottom: 0.6mm;
-  }
-  .pix-info-p {
-    font-size: 7.9pt;
-    line-height: 1.32;
-    color: #222222;
-    margin-bottom: 1mm;
-  }
-  .pix-data-box {
-    background: #F8F8F8;
-    border: 1px solid #000000;
-    border-left: 3.5px solid #000000;
-    padding: 1.6mm 2.6mm;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 7.4pt;
-    line-height: 1.34;
-    color: #000000;
+    image-rendering: pixelated;
   }
 </style>
 </head>
 <body>
 
-<!-- ==================== PÁGINA 01: IDENTIDADE & DIAGNÓSTICO ESTRATÉGICO ==================== -->
+<!-- PÁGINA 01 P&B -->
 <div class="page">
   <div class="doc-header">
-    <div class="tagline">WORKAROUND TI // ENGENHARIA DE PRODUTO DIGITAL SOBERANO</div>
-    <div class="serial">SÉRIE TAVARES-2P // DOC #01 (P&B)</div>
+    <div class="tagline">WORKAROUND // ENGENHARIA DE PRODUTO DIGITAL NÔMADE</div>
+    <div class="serial">SÉRIE TAVARES &bull; PROTOCOLO #01-BONOMI (P&B)</div>
   </div>
 
   <div class="page-main">
-    <!-- CABEÇALHO HERO -->
-    <div>
-      <div class="kicker">AUDITORIA ESTRATÉGICA DE COZINHA &bull; RIO TAVARES / FLORIANÓPOLIS</div>
-      <h1 class="lead-title">RELATÓRIO DO BONOMI RESTAURANTE</h1>
-      <div class="subtitle-editorial">Gastronomia Autoral Descomplicada, Reconhecimento Nacional e Soberania Digital no Balcão</div>
-    </div>
-
-    <!-- META STRIP CADASTRO -->
-    <div class="meta-grid">
-      <div class="meta-cell">
-        <span class="meta-label">Razão Social</span>
-        <span class="meta-val">Bonomi Restaurante Ltda</span>
-      </div>
-      <div class="meta-cell">
-        <span class="meta-label">Comando de Cozinha</span>
-        <span class="meta-val">Chef Rafael Sinko</span>
-      </div>
-      <div class="meta-cell">
-        <span class="meta-label">Território & Sede</span>
-        <span class="meta-val">Rod. Dr. Antônio L. M. Gonzaga, 1895</span>
-      </div>
-      <div class="meta-cell">
-        <span class="meta-label">Engenharia de Balcão</span>
-        <span class="meta-val">Carlos Linzmeyer</span>
-      </div>
-    </div>
-
-    <!-- SEÇÃO 01: MANIFESTO & AUTORIDADE GASTRONÔMICA -->
-    <div>
-      <div class="sec-heading">
-        <span class="badge">01</span>
-        <span>A COZINHA DE PRODUTO & O RECONHECIMENTO NACIONAL NO SUL DA ILHA</span>
-      </div>
-      <div class="manifesto-banner">
-        <div>
-          <div class="manifesto-quote">
-            "Poucos elementos no prato, brasa precisa, sazonalidade radical e foco total no sabor autêntico."
-          </div>
-          <p class="manifesto-body">
-            Comandado pelo chef Rafael Sinko (com passagens marcantes por D.O.M., Tuju e Boragó), o Bonomi colocou o Rio Tavares no centro da gastronomia brasileira ao se consagrar o único restaurante de Santa Catarina finalista do prestigiado <strong>Prêmio Prazeres da Mesa 2026</strong> na categoria Melhor Restaurante da Região Sul.
-          </p>
+    <!-- HERO -->
+    <div class="hero-block">
+      <div class="hero-titles">
+        <div class="hero-kicker-strip">
+          <span class="tape-badge-pb">DOSSIÊ EXECUTIVO DE BALCÃO</span>
+          <span class="rubber-stamp-pb">★ PRAZERES DA MESA 2026</span>
         </div>
-        <div class="pedigree-box">
-          <div class="pedigree-tag">AUDITORIA DE MARCA &bull; DADOS OFICIAIS</div>
-          <ul class="pedigree-list">
-            <li><strong>CNPJ Verificado:</strong> 49.460.864/0001-85.</li>
-            <li><strong>Prêmio Prazeres da Mesa 2026:</strong> Finalista Sul (Único de SC).</li>
-            <li><strong>Formação de Vanguarda:</strong> Escola D.O.M., Tuju e Boragó.</li>
-            <li><strong>Capacidade Íntima:</strong> ~50 comensais por noite (19h e 21h15).</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- PROTOCOLO & PROVA SOCIAL GOOGLE MAPS -->
-    <div class="protocol-box">
-      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.8mm;">
-        <h3>⭐ Autoridade no Google Maps: 4,8 ★★★★★ (Mais de 100 Avaliações Orgânicas)</h3>
-        <span style="font-family: 'JetBrains Mono', monospace; font-size: 7.2pt; font-weight: 800; color: #000000;">RIO TAVARES • BALCÃO VIVO</span>
-      </div>
-      <p style="font-size: 7.9pt; line-height: 1.34; margin-bottom: 1mm;">
-        <em>"Experiência gastronômica inacreditável no Tavares. O atum com curry e cebola frita e os pimentões assados no brioche são obras de arte."</em> — <strong>Cliente Google Maps (5★)</strong> &bull; 
-        <em>"Atendimento impecável, vinhos naturais escolhidos a dedo e ver o chef finalizando os pratos na cozinha aberta é impagável."</em> — <strong>Local Guide (5★)</strong>
-      </p>
-      <div style="font-size: 7.3pt; color: #333333; border-top: 1px dashed #000000; padding-top: 0.8mm;">
-        Validação orgânica: clientes destacam a leveza do serviço, o frescor dos pescados locais e a carta autoral de vinhos de baixa intervenção (Maker!, Lazy Winemaker).
-      </div>
-    </div>
-
-    <!-- SEÇÃO 02: OS 3 PILARES DA EXPERIÊNCIA BONOMI -->
-    <div>
-      <div class="sec-heading">
-        <span class="badge">02</span>
-        <span>A TRÍADE DE BALCÃO // OS 3 PILARES DA EXPERIÊNCIA SOBERANA</span>
-      </div>
-      <div class="trio-grid">
-        <div class="trio-card highlight">
-          <div class="card-kicker">PILAR 01 // COZINHA AUTORAL</div>
-          <div class="card-headline">Atum, Brasa & Sazonalidade</div>
-          <p class="card-p">
-            Pratos icônicos: <em>Atum, curry, vagem, cebola frita</em>, pimentões tostados com azeite brilhante, peixe azul com purê de coco e pescados frescos da costa catarinense.
-          </p>
-        </div>
-        <div class="trio-card">
-          <div class="card-kicker">PILAR 02 // BEBIDAS DE AUTOR</div>
-          <div class="card-headline">Vinhos Naturais & Artesanais</div>
-          <p class="card-p">
-            Curadoria enxuta e viva: produtores independentes de vinho natural (Maker!, Lazy Winemaker), fermentação espontânea e cervejas artesanais selecionadas (Praya).
-          </p>
-        </div>
-        <div class="trio-card dark">
-          <div class="card-kicker">PILAR 03 // AMBIÊNCIA VIVA</div>
-          <div class="card-headline">Balcão Sem Formalidades</div>
-          <p class="card-p">
-            Cozinha aberta onde os comensais acompanham a finalização dos pratos. Dois turnos noturnos de serviço (19h00 e 21h15) com calor humano e proximidade real.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- HERO PORTAL AO VIVO -->
-    <div class="hero-portal">
-      <div class="qr-box">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=280x280&amp;data=https://advocaciadigitalavancada-create.github.io/bonomi/" alt="QR Code Protótipo Bonomi Restaurante">
-      </div>
-      <div>
-        <span class="portal-badge">ENGENHARIA WORKAROUND // PROTÓTIPO NO AR</span>
-        <div class="portal-title">Experimente o Site Móvel Soberano do Bonomi na Palma da Mão</div>
-        <p class="portal-desc">
-          Aponte a câmera do celular para testar a experiência mobile ultrarrápida (&lt;200ms): fotografia autêntica dos pratos na brasa, carta de vinhos naturais, carrossel dinâmico com notas do Google Maps e botão de reserva direta no WhatsApp, sem intermediários.
+        <h1 class="hero-lead-title">BONOMI // COZINHA AUTORAL & BRASA VIVA</h1>
+        <p class="hero-sublead">
+          Dois turnos (19h00 e 21h15), 50 lugares e o rigor técnico de quem passou pelos maiores templos gastronômicos da América Latina — executado com fogo limpo no Rio Tavares.
         </p>
-        <div class="portal-action">&rarr; ESCANEIE O QR CODE AO LADO OU ACESSE NO NAVEGADOR:</div>
-        <div style="font-family:'JetBrains Mono', monospace; font-size:7.2pt; font-weight:800; color:#000000; letter-spacing:0.02em; margin-top:1.2mm;">
-          advocaciadigitalavancada-create.github.io/bonomi/
+      </div>
+      <div style="text-align: right;">
+        <div class="rubber-stamp-pb" style="font-size: 8.5pt;">RIO TAVARES / SC</div>
+        <div style="font-family: var(--font-mono); font-size: 7.2pt; color: var(--c-ink-muted); margin-top: 1mm;">
+          CNPJ: 49.460.864/0001-85<br>
+          CHEF RAFAEL SINKO
+        </div>
+      </div>
+    </div>
+
+    <!-- SEÇÃO 01 -->
+    <div>
+      <div class="section-label-bar-pb">
+        <span>01 // O PASSAPORTE DO FORAGING & RIGOR TÉCNICO</span>
+        <span>MESTRES DE BRASA & PRODUTO</span>
+      </div>
+      <div class="pedigree-tape-grid">
+        <div class="pedigree-cell-pb">
+          <span class="p-stars">★★ MICHELIN</span>
+          <div class="p-name">D.O.M.</div>
+          <div class="p-meta">SP &bull; ALEX ATALA</div>
+          <p class="p-desc">Imersão em botânica brasileira, mandioca, formiga e respeito absoluto ao produtor nativo.</p>
+        </div>
+        <div class="pedigree-cell-pb">
+          <span class="p-stars">★★ MICHELIN</span>
+          <div class="p-name">TUJU</div>
+          <div class="p-meta">SP &bull; IVAN RALSTON</div>
+          <p class="p-desc">Pesquisa sazonal profunda, ciclos climáticos paulistas e rigor cirúrgico de mise en place.</p>
+        </div>
+        <div class="pedigree-cell-pb">
+          <span class="p-stars">TOP 50 THE WORLD</span>
+          <div class="p-name">BORAGÓ</div>
+          <div class="p-meta">CHILE &bull; R. GUZMÁN</div>
+          <p class="p-desc">Cozinha endêmica selvagem, queima de madeira nativa e fermentações ancestrais no fogo.</p>
+        </div>
+        <div class="pedigree-cell-pb highlight">
+          <span class="p-stars">FINALISTA 2026</span>
+          <div class="p-name">BONOMI</div>
+          <div class="p-meta">ÚNICO DE SANTA CATARINA</div>
+          <p class="p-desc">Indicado ao <strong>Prêmio Prazeres da Mesa</strong> como Melhor Restaurante da Região Sul.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEÇÃO 02 -->
+    <div class="maps-banner-box-pb">
+      <div class="maps-stat-side-pb">
+        <div class="maps-stat-num-pb">4,8★</div>
+        <div class="maps-stat-label-pb">
+          Google Maps<br>
+          <span>100+ Avaliações</span>
+        </div>
+      </div>
+      <div style="font-size: 8.0pt; line-height: 1.32; color: #000000;">
+        <em>"Experiência gastronômica inacreditável no Tavares. O atum com curry e cebola frita e os pimentões no brioche são obras de arte na brasa."</em> — <strong>Cliente Maps (5★)</strong> &bull; 
+        <em>"Atendimento acolhedor, vinhos naturais impecáveis e ver o chef finalizando cada prato na cozinha aberta é impagável."</em> — <strong>Local Guide Nível 7 (5★)</strong>
+      </div>
+    </div>
+
+    <!-- SEÇÃO 03 -->
+    <div>
+      <div class="section-label-bar-pb">
+        <span>02 // A TRÍADE DE BALCÃO // PILARES DA EXPERIÊNCIA SOBERANA</span>
+        <span>50 LUGARES POR NOITE</span>
+      </div>
+      <div class="trio-vanguarda-grid" style="margin-top: 2mm;">
+        <div class="trio-v-card-pb gray">
+          <div class="trio-header-tag-pb">PILAR 01 &bull; BRASA & MAR</div>
+          <div class="trio-v-title-pb">Atum, Curry & Fogo</div>
+          <p class="trio-v-p-pb">
+            Lombo de atum selado no carvão incandescente, vagem crocante, cebola frita e caldo de ervas limpo. Pesca costeira fresca sem afetação.
+          </p>
+        </div>
+        <div class="trio-v-card-pb">
+          <div class="trio-header-tag-pb">PILAR 02 &bull; BEBIDAS VIVAS</div>
+          <div class="trio-v-title-pb">Vinhos Naturais</div>
+          <p class="trio-v-p-pb">
+            Curadoria radical de fermentação espontânea: rótulos de baixa intervenção (Maker!, Lazy Winemaker), vinhos laranja e cerveja artesanal.
+          </p>
+        </div>
+        <div class="trio-v-card-pb dark">
+          <div class="trio-header-tag-pb">PILAR 03 &bull; BALCÃO ABERTO</div>
+          <div class="trio-v-title-pb">Dois Turnos Rígidos</div>
+          <p class="trio-v-p-pb">
+            19h00 (abertura do fogo) e 21h15 (noite viva). 6 lugares sem reserva garantidos por ordem de chegada para moradores e vizinhos de balcão.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERO PORTAL -->
+    <div class="portal-vanguarda-box-pb">
+      <div class="portal-qr-frame-pb">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=280x280&amp;data=https://advocaciadigitalavancada-create.github.io/bonomi/" alt="QR Code Site Bonomi">
+      </div>
+      <div style="flex: 1;">
+        <span style="background:#000; color:#FFF; font-family:var(--font-mono); font-size:7.4pt; font-weight:900; padding:0.8mm 2.6mm; text-transform:uppercase;">
+          ENGENHARIA WORKAROUND // PROTÓTIPO VIVO NO AR
+        </span>
+        <div style="font-family:var(--font-display); font-size:18pt; font-weight:900; text-transform:uppercase; line-height:1.05; margin-top:1mm;">
+          APONTE O CELULAR &bull; TESTE A VELOCIDADE BRUTA
+        </div>
+        <p style="font-size:8.2pt; line-height:1.35; color:#000000; margin-top:1mm;">
+          Site móvel soberano rodando em HTML puro (&lt;0.2s): fotos dos pratos na brasa, alternância de atmosfera <strong>[ MODO BRASA ⇄ MODO SALA ]</strong>, roleta do chef e reserva direta no WhatsApp sem intermediários.
+        </p>
+        <div style="font-family:var(--font-mono); font-size:8.0pt; font-weight:800; background:#F0F0F0; padding:0.8mm 2.2mm; display:inline-block; margin-top:1.2mm;">
+          https://advocaciadigitalavancada-create.github.io/bonomi/
         </div>
       </div>
     </div>
@@ -798,156 +637,182 @@
 </div>
 
 
-<!-- ==================== PÁGINA 02: AUDITORIA FORENSE & PROPOSTA COMERCIAL ==================== -->
+<!-- PÁGINA 02 P&B -->
 <div class="page">
   <div class="doc-header">
-    <div class="tagline">WORKAROUND // AUDITORIA FORENSE DE PONTOS DE CONTATO</div>
-    <div class="serial">SÉRIE TAVARES-2P // DOC #02 (P&B)</div>
+    <div class="tagline">WORKAROUND // AUDITORIA FORENSE DE FRICÇÃO & FECHAMENTO</div>
+    <div class="serial">SÉRIE TAVARES &bull; PROTOCOLO #02-BONOMI (P&B)</div>
   </div>
 
   <div class="page-main">
-    <!-- CABEÇALHO DA PÁGINA 02 -->
+    <!-- CABEÇALHO -->
     <div>
-      <div class="kicker">DIAGNÓSTICO DIGITAL DE BALCÃO &bull; VULNERABILIDADE DE TRÁFEGO</div>
-      <h1 class="lead-title">O GARGALO DE RESERVAS</h1>
-      <div class="subtitle-editorial">Por que plataformas terceiras de reserva drenam a margem e afastam o público local do Rio Tavares</div>
+      <div style="display: flex; justify-content: space-between; align-items: baseline;">
+        <span class="tape-badge-pb">DIAGNÓSTICO FORENSE DE BALCÃO</span>
+        <span class="rubber-stamp-pb">BARREIRA DE FRICÇÃO DETECTADA</span>
+      </div>
+      <h2 style="font-family: var(--font-display); font-size: 26pt; font-weight: 900; line-height: 0.95; text-transform: uppercase; margin-top: 1.5mm;">
+        O GARGALO DE 6 TELAS DO MEITRE
+      </h2>
+      <div style="background:#F0F0F0; border:1.5px solid #000; padding:1.4mm 3mm; display:flex; justify-content:space-between; margin-top:1.8mm;">
+        <span style="font-family:var(--font-mono); font-size:8.2pt; font-weight:900; text-transform:uppercase;">
+          ⚠ AUDITORIA DE CAMPO: O FUNIL QUEBRADO QUE AFASTA O CLIENTE LOCAL
+        </span>
+        <span style="font-family:var(--font-display); font-size:12pt; font-weight:900;">
+          -54% DE CONVERSÃO ESTIMADA
+        </span>
+      </div>
     </div>
 
-    <!-- BIG STATS GRID -->
-    <div class="big-stats-grid">
-      <div class="stat-block">
-        <div class="stat-num">4,8 ★</div>
-        <div class="stat-label">Google Maps (100+ Reviews)</div>
-        <p class="stat-desc">Tráfego qualificado de moradores e turistas gastronômicos buscando a casa no Maps todos os dias.</p>
+    <!-- AS 6 TELAS -->
+    <div>
+      <div class="meitre-funnel-pipeline-pb">
+        <div class="meitre-step-card-pb">
+          <span class="step-num-tag">TELA 01</span>
+          <div class="step-name-title">Calendário Rígido</div>
+          <p class="step-crit-desc">Datas e turnos engessados sem diálogo de balcão.</p>
+        </div>
+        <div class="meitre-step-card-pb stop">
+          <span class="step-num-tag">TELA 02</span>
+          <div class="step-name-title">Login Obrigatório</div>
+          <p class="step-crit-desc">Exige conectar conta Google ou criar senha.</p>
+        </div>
+        <div class="meitre-step-card-pb">
+          <span class="step-num-tag">TELA 03</span>
+          <div class="step-name-title">Código SMS</div>
+          <p class="step-crit-desc">Validação de celular por token burocrático.</p>
+        </div>
+        <div class="meitre-step-card-pb">
+          <span class="step-num-tag">TELA 04</span>
+          <div class="step-name-title">Cadastro CPF</div>
+          <p class="step-crit-desc">Formulário de dados pessoais invasivo.</p>
+        </div>
+        <div class="meitre-step-card-pb stop">
+          <span class="step-num-tag">TELA 05</span>
+          <div class="step-name-title">Trava Cartão</div>
+          <p class="step-crit-desc">Bloqueia caução de R$ 50/pessoa no cartão.</p>
+        </div>
+        <div class="meitre-step-card-pb stop">
+          <span class="step-num-tag">TELA 06</span>
+          <div class="step-name-title">Termos No-Show</div>
+          <p class="step-crit-desc">Textos jurídicos antes mesmo de sentar à mesa.</p>
+        </div>
       </div>
-      <div class="stat-block alert">
-        <div class="stat-num">GETIN</div>
-        <div class="stat-label">Barreira de Intermediários</div>
-        <p class="stat-desc">Formulários externos exigem cadastro, criam atrito de reserva e cobram taxas por serviço na intermediação.</p>
-      </div>
-      <div class="stat-block dark">
-        <div class="stat-num">0%</div>
-        <div class="stat-label">Taxa com Hub Soberano</div>
-        <p class="stat-desc">Reserva direta no WhatsApp do salão, sem comissões por comensal e com controle total do restaurante.</p>
+      <div style="font-family: var(--font-mono); font-size: 7.3pt; font-weight: 700; color: #444444; text-align: center;">
+        ➜ <strong>ENGENHARIA SOBERANA WORKAROUND:</strong> Reserva Direta em 1 toque (15 segundos) direto no WhatsApp, com botão híbrido mantido para o Meitre.
       </div>
     </div>
 
     <!-- TABELA FORENSE -->
+    <table class="forensic-v-table-pb">
+      <thead>
+        <tr>
+          <th style="width: 26%;">Parâmetro de Operação</th>
+          <th style="width: 37%;">Modelo Intermediado (Meitre / GetIn)</th>
+          <th style="width: 37%;">Hub Soberano WorkAround TI</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Custo Fixo Anual</strong></td>
+          <td class="bad">R$ 3.000 a R$ 6.000/ano em mensalidades e taxas</td>
+          <td class="good">R$ 0,00 perpétuo &bull; Sem aluguel de software</td>
+        </tr>
+        <tr>
+          <td><strong>Fricção de Reserva</strong></td>
+          <td class="bad">6 telas, login com Google e trava de cartão R$ 50</td>
+          <td class="good">1 toque no WhatsApp com a comanda do turno</td>
+        </tr>
+        <tr>
+          <td><strong>Convivência Pacífica</strong></td>
+          <td class="bad">Monopólio fechado da plataforma externa</td>
+          <td class="good">Canal direto soberano + Botão opcional Meitre</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- PLANOS DOBRADOS & PACTO DE BALCÃO -->
     <div>
-      <div class="sec-heading">
-        <span class="badge">03</span>
-        <span>RAIO-X FORENSE: DEPENDÊNCIA DE TERCEIROS VS. ENGENHARIA SOBERANA</span>
+      <div class="section-label-bar-pb">
+        <span>03 // PROPOSTA DE INVESTIMENTO // ATIVAÇÃO CHAVE NA MÃO EM 24H</span>
+        <span>ZERO MENSALIDADES</span>
       </div>
-      <table class="forensic-table">
-        <thead>
-          <tr>
-            <th style="width: 22%;">Canal / Ponto</th>
-            <th style="width: 39%;">Cenário com Intermediários (GetIn / Bio Seca)</th>
-            <th style="width: 39%;">Engenharia Soberana WorkAround</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Reserva de Mesa</strong></td>
-            <td class="col-danger">Formulários de terceiros com login obrigatório e taxa por reserva.</td>
-            <td class="col-solution"><strong>Reserva direta no WhatsApp:</strong> 1 toque, contato caloroso e sem pedágio.</td>
-          </tr>
-          <tr>
-            <td><strong>Cardápio Sazonal</strong></td>
-            <td class="col-danger">Destaques soltos no Instagram Stories que expiram em 24h.</td>
-            <td class="col-solution"><strong>Vitrine tátil viva:</strong> fotos dos pratos do dia e vinhos naturais atualizados.</td>
-          </tr>
-          <tr>
-            <td><strong>Buscadores por I.A. (ChatGPT, Gemini)</strong></td>
-            <td class="col-danger">Invisível ou com informações truncadas sobre horários e pratos.</td>
-            <td class="col-solution"><strong>Arquivo llms.txt nativo:</strong> IAs recomendam o Bonomi com precisão cirúrgica.</td>
-          </tr>
-          <tr>
-            <td><strong>Soberania & Custos</strong></td>
-            <td class="col-danger">Aluguel perpétuo de softwares e dependência dos algoritmos da Meta.</td>
-            <td class="col-solution"><strong>Código 100% próprio:</strong> zero mensalidade, zero comissão, ativo perpétuo.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- OS DOIS PLANOS DE ATIVAÇÃO -->
-    <div>
-      <div class="sec-heading">
-        <span class="badge">04</span>
-        <span>PROPOSTA DE ENGENHARIA DIGITAL // CHAVE NA MÃO EM 24 HORAS</span>
-      </div>
-      <div class="plans-grid">
-        <div class="plan-card primary">
-          <div class="plan-header">
-            <span class="plan-tag">PLANO 01 // HUB SOBERANO BALCÃO</span>
-            <span class="plan-price">R$ 180<span style="font-size:10pt;">,00</span></span>
+      <div class="plans-p2-grid" style="margin-top: 2mm;">
+        <!-- PLANO 01 -->
+        <div class="plan-p2-card-pb">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom:1.5px solid #000; padding-bottom:1.2mm; margin-bottom:1.4mm;">
+              <span style="font-family:var(--font-mono); font-size:7.2pt; font-weight:900; text-transform:uppercase;">PLANO 01 // VITRINE BRASA</span>
+              <span class="plan-price-num-pb">R$ 360<span style="font-size:11pt;">,00</span></span>
+            </div>
+            <div style="font-family:var(--font-grotesk); font-size:10pt; font-weight:800; text-transform:uppercase; margin-bottom:1mm;">
+              Site Móvel Soberano & Brasa
+            </div>
+            <p style="font-size:7.8pt; line-height:1.3; color:#000;">
+              Vitrine PWA ultrarrápida (&lt;0.2s) com cardápio vivo na fita crepe, Roleta do Chef, fotos tratadas, avaliações 4,8 do Maps e arquivo semântico /llms.txt.
+            </p>
           </div>
-          <div class="plan-title">Site Móvel Soberano & Reserva WhatsApp</div>
-          <p class="plan-body">
-            Site mobile puro em HTML/CSS nativo, estilo bistrô contemporâneo: galeria dos pratos autorais, seleção de vinhos naturais, avaliações reais 4,8 do Google Maps e reserva instantânea sem taxas.
-          </p>
-          <ul class="plan-specs">
-            <li>Arquivo semântico llms.txt para buscadores de I.A.</li>
-            <li>Hospedagem vitalícia gratuita na nuvem do Google</li>
-            <li>Zero mensalidades e zero taxas sobre mesas</li>
-            <li>Entrega técnica e link no ar em até 24 horas</li>
-          </ul>
-        </div>
-
-        <div class="plan-card pro">
-          <div class="plan-header">
-            <span class="plan-tag">PLANO 02 // APLICATIVO & EXPANSÃO</span>
-            <span class="plan-price">R$ 380<span style="font-size:10pt;">,00</span></span>
+          <div class="pacto-balcao-box-pb">
+            <div style="font-weight:900; text-transform:uppercase; margin-bottom:0.5mm;">
+              OU NO PACTO DE BALCÃO (25% PERMUTA):
+            </div>
+            <strong>R$ 270,00 no PIX</strong> + <strong>R$ 90,00 em crédito de consumo</strong> (Entrada de pimentões na brasa + taça de vinho natural).
           </div>
-          <div class="plan-title">App no Celular dos Clientes Habitual + PWA</div>
-          <p class="plan-body">
-            Transforma o Bonomi em aplicativo nativo no smartphone dos clientes frequentes (adicionado à tela inicial em 1 clique sem depender de App Store), com ícone de luxo e kit de QR codes para o balcão.
-          </p>
-          <ul class="plan-specs">
-            <li>Web App PWA com ícone oficial na tela do cliente</li>
-            <li>Configuração de domínio próprio oficial (.com.br)</li>
-            <li>Kit de QR Codes gráficos para o balcão e mesas</li>
-            <li>Atualização prioritária para trocas sazonais de carta</li>
-          </ul>
+        </div>
+
+        <!-- PLANO 02 (PREMIUM) -->
+        <div class="plan-p2-card-pb premium">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom:1.5px solid #000; padding-bottom:1.2mm; margin-bottom:1.4mm;">
+              <span style="font-family:var(--font-mono); font-size:7.2pt; font-weight:900; text-transform:uppercase;">PLANO 02 // PLATAFORMA SOBERANA COMPLETA</span>
+              <span class="plan-price-num-pb">R$ 840<span style="font-size:11pt;">,00</span></span>
+            </div>
+            <div style="font-family:var(--font-grotesk); font-size:10pt; font-weight:800; text-transform:uppercase; margin-bottom:1mm;">
+              Central de Reservas + Carta 20 Vinhos + Sheets
+            </div>
+            <p style="font-size:7.8pt; line-height:1.3; color:#000;">
+              Modo Sala completo com gestão dos 50 assentos, 2 turnos, convivência híbrida com botão Meitre, carta de 20 vinhos naturais, 14 pratos oficiais e backend Google Apps Script.
+            </p>
+          </div>
+          <div class="pacto-balcao-box-pb" style="background:#EAEAEA;">
+            <div style="font-weight:900; text-transform:uppercase; margin-bottom:0.5mm;">
+              OU NO PACTO DE BALCÃO (25% PERMUTA):
+            </div>
+            <strong>R$ 630,00 no PIX</strong> + <strong>R$ 210,00 em crédito de consumo</strong> (Jantar completo no balcão do chef: Atum com curry + Brioche + Viognier natural).
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- FAIXA DE VALOR & GARANTIAS DE BALCÃO -->
-    <div class="deal-strip">
-      <div class="deal-left">
-        <div class="deal-badge">INVESTIMENTO DE ATIVAÇÃO IMEDIATA</div>
-        <div class="deal-val">R$ 180<span style="font-size:17pt; vertical-align:super;">,00</span></div>
-        <div class="deal-terms">TAXA ÚNICA PIX &bull; NO AR EM 24 HORAS</div>
-      </div>
-      <div class="deal-right">
-        <div class="deal-right-badges">
-          <span class="deal-pill">SEM MENSALIDADES</span>
-          <span class="deal-pill">ZERO TAXAS</span>
-          <span class="deal-pill">VIZINHANÇA TAVARES</span>
-          <span class="deal-pill">ENTREGA 24H</span>
-        </div>
-        <p class="deal-right-p">
-          Sem aluguel de software nem comissões predatórias. Engenharia de software enxuta executada por vizinhos de bairro no Rio Tavares, entregando um ativo definitivo que se paga já nas primeiras reservas diretas sem comissão.
-        </p>
-      </div>
-    </div>
+    <!-- CARD CHASSI WORKAROUND P&B -->
+    <div class="chassi-workaround-card-pb">
+      <span class="chassi-bolt bolt-tl">+</span>
+      <span class="chassi-bolt bolt-tr">+</span>
+      <span class="chassi-bolt bolt-bl">+</span>
+      <span class="chassi-bolt bolt-br">+</span>
 
-    <!-- PORTAL PIX DE FECHAMENTO -->
-    <div class="pix-portal">
-      <div class="qr-box">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&amp;data=carlos.linz@hotmail.com" alt="QR Code PIX Carlos Linzmeyer">
-      </div>
-      <div>
-        <div class="pix-info-title">Ativação Imediata de Balcão // WorkAround TI</div>
-        <p class="pix-info-p">
-          Para ativar o site soberano do Bonomi e colocar o link no ar em 24h, basta confirmar a taxa única via PIX:
-        </p>
-        <div class="pix-data-box">
-          <strong>CHAVE PIX (E-MAIL):</strong> carlos.linz@hotmail.com &bull; <strong>TITULAR:</strong> Carlos Linzmeyer<br>
-          <strong>OPERAÇÃO:</strong> WorkAround TI &bull; <strong>BASE:</strong> Rio Tavares, Florianópolis / SC
+      <div style="flex:1; padding-left:2mm;">
+        <div style="display:flex; align-items:center; gap:2.5mm; margin-bottom:1mm;">
+          <h3 style="font-family:var(--font-display); font-size:15pt; font-weight:900; letter-spacing:0.04em; text-transform:uppercase; color:#FFFFFF; line-height:1;">
+            WORKAROUND TI
+          </h3>
+          <span style="background:#FFFFFF; color:#000000; font-family:var(--font-mono); font-size:6.8pt; font-weight:900; padding:0.6mm 2.2mm; text-transform:uppercase; letter-spacing:0.08em;">
+            ENGENHARIA DE PRODUTO NÔMADE
+          </span>
         </div>
+        <p style="font-size:7.9pt; line-height:1.34; color:#E0E0E0;">
+          Fundador: <strong style="color:#FFF;">Carlos Linzmeyer</strong> &bull; Base Operacional: <strong style="color:#FFF;">Rio Tavares, Sul da Ilha / Florianópolis</strong>.<br>
+          Desenvolvemos infraestrutura digital soberana para quem vive do comércio e da gastronomia real. <strong>Zero mensalidades, zero comissões predatórias e autonomia total.</strong> <em>"Quem programa software soberano come no mesmo balcão em que o Chef cozinha."</em>
+        </p>
+        <div style="font-family:var(--font-mono); font-size:7.0pt; font-weight:700; color:#CCCCCC; margin-top:1.2mm; display:flex; gap:3mm;">
+          <span>⚡ ATIVAÇÃO IMEDIATA: CHAVE PIX (E-MAIL) <strong>carlos.linz@hotmail.com</strong></span>
+          <span>&bull;</span>
+          <span>VIZINHO DE BALCÃO NO TAVARES</span>
+        </div>
+      </div>
+
+      <div class="chassi-qr-side-pb">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&amp;data=carlos.linz@hotmail.com" alt="QR Code PIX Carlos Linzmeyer">
       </div>
     </div>
   </div>

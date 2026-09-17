@@ -11,14 +11,16 @@ CONFIGS = [
     {
         "name": "color",
         "html": os.path.join(BASE_DIR, "relatorio_bonomi_2paginas_color.html"),
-        "pdf": os.path.join(BASE_DIR, "relatorio_bonomi_2paginas_color.pdf"),
+        "pdf": os.path.join(BASE_DIR, "relatorio_bonomi_2paginas_vanguarda_color.pdf"),
+        "pdf_standard": os.path.join(BASE_DIR, "relatorio_bonomi_2paginas_color.pdf"),
         "preview_p1": os.path.join(BASE_DIR, "preview_color_p1.png"),
         "preview_p2": os.path.join(BASE_DIR, "preview_color_p2.png"),
     },
     {
         "name": "pb",
         "html": os.path.join(BASE_DIR, "relatorio_bonomi_2paginas_pb.html"),
-        "pdf": os.path.join(BASE_DIR, "relatorio_bonomi_2paginas_pb.pdf"),
+        "pdf": os.path.join(BASE_DIR, "relatorio_bonomi_2paginas_vanguarda_pb.pdf"),
+        "pdf_standard": os.path.join(BASE_DIR, "relatorio_bonomi_2paginas_pb.pdf"),
         "preview_p1": os.path.join(BASE_DIR, "preview_pb_p1.png"),
         "preview_p2": os.path.join(BASE_DIR, "preview_pb_p2.png"),
     }
@@ -48,7 +50,14 @@ async def render_config(browser, cfg):
         print_background=True,
         margin={"top": "0", "right": "0", "bottom": "0", "left": "0"}
     )
-    print(f"[OK] PDF gerado: {cfg['pdf']}")
+    print(f"[OK] PDF Vanguarda gerado: {cfg['pdf']}")
+    
+    try:
+        shutil.copy2(cfg["pdf"], cfg["pdf_standard"])
+        print(f"[OK] PDF padrao atualizado: {cfg['pdf_standard']}")
+    except Exception as e:
+        print(f"[AVISO] Nao foi possivel sobrescrever {os.path.basename(cfg['pdf_standard'])} (arquivo aberto em leitor de PDF). O PDF atualizado esta disponivel em {os.path.basename(cfg['pdf'])}.")
+        
     await page.close()
 
 async def main():
@@ -61,13 +70,14 @@ async def main():
     print("\n[*] Replicando arquivos canonicos para a pasta central relatorios_2p/bonomi/...")
     for cfg in CONFIGS:
         shutil.copy2(cfg["html"], os.path.join(CENTRAL_DIR, os.path.basename(cfg["html"])))
-        shutil.copy2(cfg["pdf"], os.path.join(CENTRAL_DIR, os.path.basename(cfg["pdf"])))
+        if os.path.exists(cfg["pdf"]):
+            shutil.copy2(cfg["pdf"], os.path.join(CENTRAL_DIR, os.path.basename(cfg["pdf"])))
         if os.path.exists(cfg["preview_p1"]):
             shutil.copy2(cfg["preview_p1"], os.path.join(CENTRAL_DIR, os.path.basename(cfg["preview_p1"])))
         if os.path.exists(cfg["preview_p2"]):
             shutil.copy2(cfg["preview_p2"], os.path.join(CENTRAL_DIR, os.path.basename(cfg["preview_p2"])))
             
-    print("[SUCESSO] Pipeline de geracao e replicacao do relatorio 2P concluido!")
+    print("[SUCESSO] Pipeline de geracao e replicacao do relatorio 2P concluido com sucesso!")
 
 if __name__ == "__main__":
     asyncio.run(main())

@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Bonomi Restaurante // Proposta Executiva Soberana 4P (P&amp;B)</title>
+<meta name="workaround:engine" content="Playwright / Chromium Headless">
+<meta name="workaround:source" content="relatorio_bonomi_4paginas_pb.html">
+<meta name="workaround:standard" content="A4-SWISS-EDITORIAL-4P-MONO (210mm x 297mm - 260mm Main)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700;800&family=Spectral:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  :root {
+    --bg-page: #FFFFFF;
+    --c-primary: #000000;
+    --c-accent: #000000;
+    --c-accent-dark: #000000;
+    --c-accent-soft: #F2F2F2;
+    --c-sand: #EEEEEE;
+    --c-sand-light: #F7F7F7;
+    --c-ink: #111111;
+    --c-ink-muted: #555555;
+    --c-surface: #FFFFFF;
+    --c-border: rgba(0, 0, 0, 0.18);
+    --c-border-strong: #000000;
+    --c-tape: #F0F0F0;
+    --c-tape-border: #999999;
+  }
+
+  body {
+    background-color: #DDDDDD;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--c-ink);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    page-break-after: always;
+    position: relative;
+    padding: 8mm 12mm 8mm 12mm;
+    overflow: hidden;
+    background-color: var(--bg-page);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 auto 10mm auto;
+    box-shadow: 0 6px 30px rgba(0,0,0,0.12);
+  }
+
+  @media print {
+    body { background: transparent; }
+    .page {
+      margin: 0;
+      box-shadow: none;
+    }
+  }
+
+  /* HEADER & FOOTER RIGOROSOS */
+  .doc-header {
+    height: 7.5mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2.5px solid var(--c-border-strong);
+    padding-bottom: 1.5mm;
+    flex-shrink: 0;
+  }
+  .doc-header .tagline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.2pt;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c-primary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .doc-header .tagline::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--c-primary);
+  }
+  .doc-header .serial {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.2pt;
+    font-weight: 800;
+    color: var(--c-primary);
+  }
+
+  .doc-footer {
+    height: 7mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px solid var(--c-border-strong);
+    padding-top: 1.4mm;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    color: var(--c-ink-muted);
+    flex-shrink: 0;
+  }
+  .doc-footer .doc-ref {
+    font-size: 7.4pt;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: var(--c-primary);
+  }
+  .doc-footer .page-indicator {
+    font-weight: 800;
+    background: var(--c-primary);
+    color: #FFFFFF;
+    padding: 0.8mm 3.5mm;
+    letter-spacing: 0.05em;
+  }
+
+  /* A LEI ÁUREA DO A4: CONTAINER PRINCIPAL A 260MM */
+  .page-main {
+    height: 260mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* TIPOGRAFIA & ELEMENTOS */
+  .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-primary);
+    margin-bottom: 0.8mm;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .lead-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 26pt;
+    line-height: 0.92;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    color: var(--c-primary);
+  }
+  .lead-title.tight {
+    font-size: 24pt;
+    letter-spacing: -0.035em;
+  }
+
+  .subtitle-editorial {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: 10.2pt;
+    font-style: italic;
+    color: var(--c-ink-muted);
+    line-height: 1.25;
+    margin-top: 1.4mm;
+  }
+
+  .sec-heading {
+    display: flex;
+    align-items: center;
+    gap: 2.2mm;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10pt;
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+    color: var(--c-primary);
+    margin-bottom: 1.4mm;
+  }
+  .sec-heading .badge {
+    background: var(--c-primary);
+    color: #FFFFFF;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.6pt;
+    font-weight: 800;
+    padding: 0.4mm 2.2mm;
+  }
+
+  /* CARIMBOS MONO */
+  .stamp-box {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--c-primary);
+    padding: 1.5mm 3.5mm;
+    transform: rotate(-2.5deg);
+    background: #F4F4F4;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.4);
+  }
+  .stamp-box .stamp-line1 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.2pt;
+    font-weight: 800;
+    color: var(--c-primary);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .stamp-box .stamp-line2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10pt;
+    font-weight: 800;
+    color: var(--c-primary);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* FITA CREPE P&B */
+  .tape-strip {
+    background-color: var(--c-tape);
+    border: 1px dashed var(--c-tape-border);
+    padding: 2mm 3.5mm;
+    position: relative;
+    box-shadow: 1px 2px 4px rgba(0,0,0,0.05);
+  }
+  .tape-strip.rot-neg { transform: rotate(-1.2deg); }
+  .tape-strip.rot-pos { transform: rotate(1.4deg); }
+
+  /* CHASSI CARD MONO */
+  .chassi-card {
+    background: #000000;
+    color: #FFFFFF;
+    border: 2px solid #000000;
+    padding: 3mm 4mm;
+    position: relative;
+  }
+  .chassi-card::before {
+    content: "CHASSI SERIAL: WA-RT-2026-FOGO";
+    position: absolute;
+    top: -3mm;
+    right: 3mm;
+    background: #FFFFFF;
+    color: #000000;
+    border: 1px solid #000000;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 6pt;
+    font-weight: 800;
+    padding: 0.3mm 2mm;
+    letter-spacing: 0.08em;
+  }
+  .chassi-card .chassi-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding-bottom: 1.5mm;
+    margin-bottom: 2mm;
+  }
+  .chassi-card .chassi-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10pt;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+  }
+  .chassi-card .chassi-base {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.2pt;
+    color: #E0E0E0;
+    font-weight: 700;
+  }
+  .chassi-card .chassi-manifesto {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 8.2pt;
+    line-height: 1.35;
+    color: #E5E5E5;
+    margin-bottom: 2mm;
+  }
+  .chassi-card .chassi-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2mm;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7pt;
+    border-top: 1px dashed rgba(255,255,255,0.3);
+    padding-top: 1.5mm;
+    color: #CCCCCC;
+  }
+  .chassi-card .chassi-meta-grid strong {
+    color: #FFFFFF;
+    display: block;
+  }
+
+  .grid-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5mm;
+  }
+  .grid-3col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5mm;
+  }
+
+  .card-metric {
+    background: var(--c-surface);
+    border: 1.5px solid var(--c-border);
+    padding: 2.2mm 2.8mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .card-metric .num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16pt;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--c-primary);
+  }
+  .card-metric .lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--c-ink-muted);
+    letter-spacing: 0.05em;
+    margin-top: 1mm;
+  }
+
+  .friction-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 2.5mm;
+    background: #F8F8F8;
+    border-left: 3.5px solid var(--c-primary);
+    padding: 1.8mm 2.5mm;
+    margin-bottom: 1.5mm;
+  }
+  .friction-item .num-badge {
+    background: var(--c-primary);
+    color: #FFFFFF;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.2pt;
+    font-weight: 800;
+    padding: 0.4mm 1.8mm;
+    flex-shrink: 0;
+  }
+  .friction-item .content {
+    font-size: 8.1pt;
+    line-height: 1.25;
+    color: var(--c-ink);
+  }
+  .friction-item .content strong {
+    color: var(--c-primary);
+    display: block;
+    font-size: 8.3pt;
+  }
+
+  .portal-block {
+    background: var(--c-sand-light);
+    border: 2px solid var(--c-border-strong);
+    padding: 3mm;
+    display: flex;
+    align-items: center;
+    gap: 4mm;
+  }
+  .portal-block .qr-container {
+    width: 33mm;
+    height: 33mm;
+    background: #FFFFFF;
+    border: 1.5px solid var(--c-border-strong);
+    padding: 1.5mm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .portal-block .qr-container img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .portal-block .info-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .pricing-table-card {
+    background: var(--c-surface);
+    border: 2px solid var(--c-border-strong);
+    padding: 3mm;
+    position: relative;
+  }
+  .pricing-table-card.featured {
+    background: var(--c-sand-light);
+    border: 2.5px solid var(--c-primary);
+  }
+  .pricing-table-card .pkg-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.2pt;
+    font-weight: 800;
+    color: var(--c-primary);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .pricing-table-card .pkg-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13pt;
+    font-weight: 800;
+    color: var(--c-primary);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin-top: 0.5mm;
+  }
+  .pricing-table-card .price-row {
+    margin: 1.5mm 0;
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+  .pricing-table-card .price-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20pt;
+    font-weight: 800;
+    color: var(--c-primary);
+    line-height: 1;
+  }
+  .pricing-table-card .price-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.4pt;
+    color: var(--c-ink-muted);
+    font-weight: 700;
+  }
+  .pricing-table-card .permuta-box {
+    background: #F0F0F0;
+    border: 1px dashed var(--c-primary);
+    padding: 1.6mm 2mm;
+    margin-top: 1.5mm;
+  }
+  .pricing-table-card .permuta-box .permuta-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.4pt;
+    font-weight: 800;
+    color: var(--c-primary);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .pricing-table-card .permuta-box .permuta-values {
+    font-size: 8.2pt;
+    line-height: 1.3;
+    color: var(--c-ink);
+    margin-top: 0.8mm;
+  }
+
+  .brand-symbol-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--c-primary);
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  .brand-symbol-circle::after {
+    content: "";
+    width: 4px;
+    height: 4px;
+    background: var(--c-primary);
+    border-radius: 50%;
+  }
+</style>
+</head>
+<body>
+
+<!-- PÁGINA 1: AUDITORIA FORENSE // O CANO FURADO DO MEITRE -->
+<div class="page" id="page-1">
+  <div class="doc-header">
+    <div class="tagline">WORKAROUND TI // ENGENHARIA DE PRODUTO NÔMADE</div>
+    <div class="serial">DOC: WA-BONOMI-2026-P1/4 // FORENSE (P&amp;B)</div>
+  </div>
+
+  <div class="page-main">
+    <div>
+      <div class="kicker">AUDITORIA TÉCNICA DE BALCÃO // RIO TAVARES, SUL DA ILHA</div>
+      <div class="lead-title">O CANO FURADO DAS 6 TELAS DO MEITRE</div>
+      <div class="subtitle-editorial">
+        Como a intermediação burocrática drena até 40% dos comensais locais de Rafael Sinko enquanto a brasa do Bonomi queima a 800°C.
+      </div>
+    </div>
+
+    <div class="grid-3col">
+      <div class="card-metric">
+        <div class="num">6 TELAS</div>
+        <div class="lbl">Fricção Burocrática Meitre</div>
+      </div>
+      <div class="card-metric">
+        <div class="num">0.2s SPEED</div>
+        <div class="lbl">Tempo Carregamento Hub Soberano</div>
+      </div>
+      <div class="card-metric">
+        <div class="num">4,8 ★★★★★</div>
+        <div class="lbl">Nota Google Maps (+100 Reviews)</div>
+      </div>
+    </div>
+
+    <div class="grid-2col" style="align-items: stretch;">
+      <div style="background:var(--c-surface); border:1.5px solid var(--c-border); padding:3mm; display:flex; flex-direction:column; justify-content:space-between;">
+        <div>
+          <div class="sec-heading">
+            <span class="badge">AUDITADO</span>
+            <span>O Funil de 6 Barreiras Meitre</span>
+          </div>
+          <p style="font-size:8.1pt; color:var(--c-ink-muted); margin-bottom:2mm; line-height:1.25;">
+            Análise forense realizada no fluxo oficial de reserva da casa. O comensal enfrenta uma maratona de barreiras:
+          </p>
+
+          <div class="friction-item">
+            <div class="num-badge">01</div>
+            <div class="content"><strong>Escolha Restritiva:</strong> Grade engessada de turnos sem visualização imersiva do balcão.</div>
+          </div>
+          <div class="friction-item">
+            <div class="num-badge">02</div>
+            <div class="content"><strong>Login Obrigatório:</strong> Exigência compulsória de SSO Google ou login com senha externa.</div>
+          </div>
+          <div class="friction-item">
+            <div class="num-badge">03</div>
+            <div class="content"><strong>Validação por SMS/WhatsApp:</strong> Trava de envio de código e consentimento de marketing.</div>
+          </div>
+          <div class="friction-item">
+            <div class="num-badge">04</div>
+            <div class="content"><strong>Formulário Cadastral:</strong> Coleta invasiva de CPF, nome completo e histórico pessoal.</div>
+          </div>
+          <div class="friction-item">
+            <div class="num-badge">05</div>
+            <div class="content"><strong>Trava de Caução R$ 50/pax:</strong> Digitação de cartão de crédito para débito em caso de no-show.</div>
+          </div>
+          <div class="friction-item" style="margin-bottom:0;">
+            <div class="num-badge">06</div>
+            <div class="content"><strong>Aceite Legal Rígido:</strong> Contrato de cancelamento de 6h gerando insegurança no morador local.</div>
+          </div>
+        </div>
+
+        <div style="font-family:'JetBrains Mono',monospace; font-size:7.2pt; color:var(--c-primary); background:var(--c-sand); padding:1.5mm; border-left:3px solid var(--c-primary); margin-top:2mm;">
+          DIAGNÓSTICO: O cliente local quer rapidez humana. Essa burocracia de SaaS drena até 40% das reservas espontâneas.
+        </div>
+      </div>
+
+      <div style="background:var(--c-sand-light); border:2px solid var(--c-border-strong); padding:3mm; display:flex; flex-direction:column; justify-content:space-between;">
+        <div>
+          <div class="sec-heading">
+            <span class="badge">SOLUÇÃO</span>
+            <span>A Soberania Digital WorkAround</span>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:2.5mm; margin-bottom:2mm;">
+            <div class="stamp-box">
+              <span class="stamp-line1">STATUS PROTÓTIPO</span>
+              <span class="stamp-line2">NO AR &amp; TESTADO</span>
+            </div>
+            <div style="font-size:8.1pt; line-height:1.25; color:var(--c-ink-muted);">
+              Desenvolvido a 400 metros da sua cozinha por <strong>Carlos Linzmeyer</strong>, operador de produto e vizinho do Rio Tavares.
+            </div>
+          </div>
+
+          <div style="background:#FFFFFF; border:1px solid var(--c-border); padding:2mm; margin-bottom:2mm;">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:7.6pt; font-weight:800; color:var(--c-primary); margin-bottom:1mm;">
+              ★ PEDIGREE MICHELIN CHANCELADO:
+            </div>
+            <div style="font-size:8pt; line-height:1.3; color:var(--c-ink);">
+              O site estampa com dignidade artística a escola do Chef Rafael Sinko: <strong>D.O.M. (Alex Atala, 2★ Michelin)</strong>, <strong>Tuju (2★ Michelin)</strong>, <strong>Boragó (Chile, The World's 50 Best)</strong> e a consagração como <strong>Finalista do Prêmio Prazeres da Mesa 2026</strong> (único de SC).
+            </div>
+          </div>
+
+          <div style="background:#FFFFFF; border:1px solid var(--c-border); padding:2mm;">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:7.6pt; font-weight:800; color:var(--c-primary); margin-bottom:1mm;">
+              ✓ FLUXO DE RESERVA EM 15 SEGUNDOS:
+            </div>
+            <div style="font-size:8pt; line-height:1.3; color:var(--c-ink);">
+              O comensal escolhe pessoas, dia, turno e assento (Balcão ou Salão) e dispara comanda limpa direto no <strong>WhatsApp oficial (48 99104-0698)</strong>. Sem cadastros, sem senhas, sem intermediários.
+            </div>
+          </div>
+        </div>
+
+        <div style="font-family:'JetBrains Mono',monospace; font-size:7.2pt; color:var(--c-primary); background:#FFFFFF; padding:1.5mm; border:1px solid var(--c-border-strong); margin-top:2mm;">
+          REDUÇÃO DE LATÊNCIA: Reserva concluída em 3 toques sem retenção de dados por terceiros.
+        </div>
+      </div>
+    </div>
+
+    <div class="portal-block">
+      <div class="qr-container">
+        <img src="./qr_bonomi_site.png" alt="QR Code Site Bonomi">
+      </div>
+      <div class="info-col">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:7.8pt; font-weight:800; color:var(--c-primary); letter-spacing:0.08em; text-transform:uppercase;">
+            TESTE EM TEMPO REAL NO SEU SMARTPHONE
+          </div>
+          <div style="font-family:'Space Grotesk',sans-serif; font-size:12pt; font-weight:800; color:var(--c-primary); text-transform:uppercase; margin:0.5mm 0;">
+            ESCANEIE O QR CODE AO LADO OU DIGITE O LINK
+          </div>
+          <div style="font-family:'Spectral',serif; font-style:italic; font-size:9pt; color:var(--c-ink-muted); line-height:1.2;">
+            Navegue pelo site móvel já montado, teste a Roleta do Chef, consulte o cardápio em fita crepe e simule a reserva de balcão.
+          </div>
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:8pt; font-weight:700; color:var(--c-primary); margin-top:1.5mm; background:rgba(0,0,0,0.06); padding:1mm 2mm; display:inline-block;">
+          → https://advocaciadigitalavancada-create.github.io/bonomi/
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    <div class="doc-ref">WORKAROUND TI // BONOMI RESTAURANTE // FORENSE MEITRE</div>
+    <div class="page-indicator">PÁG. 01 / 04</div>
+  </div>
+</div>
+
+<!-- PÁGINA 2: CARDÁPIO BRUTALISTA VIVO & CARTA DE VINHOS NATURAIS -->
+<div class="page" id="page-2">
+  <div class="doc-header">
+    <div class="tagline">WORKAROUND TI // ARQUITETURA DE PRODUTO &amp; IDENTIDADE</div>
+    <div class="serial">DOC: WA-BONOMI-2026-P2/4 // MENU &amp; CARTA (P&amp;B)</div>
+  </div>
+
+  <div class="page-main">
+    <div>
+      <div class="kicker"><span class="brand-symbol-circle"></span>IDENTIDADE TÁTIL // TAPE BRUTALISM &amp; COZINHA DE FOGO</div>
+      <div class="lead-title tight">CARDÁPIO VIVO &amp; VINHOS DE BAIXA INTERVENÇÃO</div>
+      <div class="subtitle-editorial">
+        Diagramação com o símbolo oficial, fita crepe de cozinha industrial, 14 pratos autorais e seleção de 20 rótulos naturais e cervejas selvagens.
+      </div>
+    </div>
+
+    <div class="tape-strip rot-neg" style="margin: 0.5mm 0;">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:7.8pt; font-weight:800; color:var(--c-primary); text-transform:uppercase; letter-spacing:0.06em;">
+          ★ PROTOCOLO DE DESIGN: FITA CREPE TÁTIL &amp; TIPOGRAFIA MONUMENTAL
+        </span>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:7.2pt; color:var(--c-ink-muted); font-weight:700;">
+          MENU DINÂMICO &bull; ATUALIZAÇÃO EM 1 MINUTO
+        </span>
+      </div>
+      <div style="font-size:8.1pt; color:var(--c-ink); margin-top:1mm; line-height:1.25;">
+        Cozinhas artesanais mudam conforme a pesca do dia e a colheita dos produtores parceiros. Nosso código brutalista reflete os tickets de serviço colados com fita crepe na bancada de inox, permitindo que o Chef Rafael troque ou oculte pratos em segundos via planilha simples.
+      </div>
+    </div>
+
+    <div class="grid-2col" style="align-items:stretch;">
+      <div style="background:var(--c-surface); border:1.5px solid var(--c-border); padding:3mm; display:flex; flex-direction:column; justify-content:space-between;">
+        <div>
+          <div class="sec-heading">
+            <span class="badge">COZINHA</span>
+            <span>Cardápio Oficial de Balcão (14 Pratos)</span>
+          </div>
+
+          <table style="width:100%; border-collapse:collapse; font-size:7.8pt; line-height:1.25;">
+            <thead>
+              <tr style="border-bottom:1.5px solid var(--c-border-strong); font-family:'JetBrains Mono',monospace; font-size:6.8pt; text-transform:uppercase; color:var(--c-ink-muted);">
+                <th style="text-align:left; padding-bottom:1mm;">Prato / Criação Autoral</th>
+                <th style="text-align:right; padding-bottom:1mm;">Preço (R$)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px dashed var(--c-border);"><td style="padding:1mm 0;"><strong>Pão da Casa:</strong> Levain, manteiga fermentada da casa</td><td style="text-align:right; font-weight:800; font-family:'JetBrains Mono',monospace;">25,00</td></tr>
+              <tr style="border-bottom:1px dashed var(--c-border);"><td style="padding:1mm 0;"><strong>Cenouras Glaceadas:</strong> Melado de cana, queijo de cabra</td><td style="text-align:right; font-weight:800; font-family:'JetBrains Mono',monospace;">38,00</td></tr>
+              <tr style="border-bottom:1px dashed var(--c-border); background:#F7F7F7;"><td style="padding:1mm 0;"><strong>Pimentões na Brasa:</strong> Brioche tostado, azeite infusionado</td><td style="text-align:right; font-weight:800; font-family:'JetBrains Mono',monospace;">48,00</td></tr>
+              <tr style="border-bottom:1px dashed var(--c-border);"><td style="padding:1mm 0;"><strong>Beterraba na Cinza:</strong> Creme azedo, castanha tostada</td><td style="text-align:right; font-weight:800; font-family:'JetBrains Mono',monospace;">36,00</td></tr>
+              <tr style="border-bottom:1px dashed var(--c-border); background:#F7F7F7;"><td style="padding:1mm 0;"><strong>Atum com Curry:</strong> Vagem holandesa, cebola crocante ★</td><td style="text-align:right; font-weight:800; font-family:'JetBrains Mono',monospace;">56,00</td></tr>
+              <tr style="border-bottom:1px dashed var(--c-border);"><td style="padding:1mm 0;"><strong>Peixe do Dia na Grelha:</strong> Molho de ervas frescas, batata</td><td style="text-align:right; font-weight:800; font-family:'JetBrains Mono',monospace;">54,00</td></tr>
+              <tr style="border-bottom:1px dashed var(--c-border);"><td style="padding:1mm 0;"><strong>Polvo na Brasa:</strong> Aioli de alho negro, batatas ao murro</td><td style="text-align:right; font-weight:800; font-family:'JetBrains Mono',monospace;">54,00</td></tr>
+              <tr style="border-bottom:1px dashed var(--c-border);"><td style="padding:1mm 0;"><strong>Crudo de Peixe Branco:</strong> Leche de tigre artesanal, pimenta</td><td style="text-align:right; font-weight:800; font-family:'JetBrains Mono',monospace;">46,00</td></tr>
+              <tr style="border-bottom:1px dashed var(--c-border);"><td style="padding:1mm 0;"><strong>Arroz de Costela Caldoso:</strong> Agrião fresco, tutano</td><td style="text-align:right; font-weight:800; font-family:'JetBrains Mono',monospace;">52,00</td></tr>
+              <tr style="border-bottom:1px dashed var(--c-border);"><td style="padding:1mm 0;"><strong>Bife de Chorizo na Brasa:</strong> Farofa artesanal de milho</td><td style="text-align:right; font-weight:800; font-family:'JetBrains Mono',monospace;">56,00</td></tr>
+              <tr style="border-bottom:1px dashed var(--c-border);"><td style="padding:1mm 0;"><strong>Torta de Chocolate Amargo:</strong> Flor de sal e cumaru</td><td style="text-align:right; font-weight:800; font-family:'JetBrains Mono',monospace;">28,00</td></tr>
+              <tr><td style="padding:1mm 0;"><strong>Frutas da Estação na Brasa:</strong> Sabayon de cachaça</td><td style="text-align:right; font-weight:800; font-family:'JetBrains Mono',monospace;">26,00</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="font-family:'JetBrains Mono',monospace; font-size:7pt; color:var(--c-ink-muted); border-top:1px solid var(--c-border); padding-top:1mm; margin-top:1.5mm;">
+          ★ Prato mais elogiado nas 100+ avaliações 4,8 do Google Maps.
+        </div>
+      </div>
+
+      <div style="background:var(--c-surface); border:1.5px solid var(--c-border); padding:3mm; display:flex; flex-direction:column; justify-content:space-between;">
+        <div>
+          <div class="sec-heading">
+            <span class="badge">BEBIDAS</span>
+            <span>Vinhos Naturais &amp; Cervejas Selvagens</span>
+          </div>
+
+          <div style="margin-bottom:2mm;">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:7.2pt; font-weight:800; color:var(--c-primary); text-transform:uppercase;">
+              🍷 VINHOS DE MÍNIMA INTERVENÇÃO (20 RÓTULOS):
+            </div>
+            <div style="font-size:7.8pt; line-height:1.25; color:var(--c-ink); margin-top:0.5mm;">
+              • <strong>Pet-Nat Cantina Mincarone (2023):</strong> Sangiovese, Serra Gaúcha — R$ 195<br>
+              • <strong>Vega Tolosa Macabeo (2022):</strong> Manchuela, Espanha (Orgânico) — R$ 145<br>
+              • <strong>Lazy Winemaker Laranja (2025):</strong> Curicó, Chile (Casca) — R$ 185<br>
+              • <strong>Domaine Geigerkoenig (2022):</strong> Pinot Gris / Gewürztraminer, França — R$ 265<br>
+              • <strong>Taça de Vinho do Dia:</strong> Garrafa aberta da noite — R$ 33 a R$ 45
+            </div>
+          </div>
+
+          <div style="margin-bottom:2mm; border-top:1px dashed var(--c-border); padding-top:1.5mm;">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:7.2pt; font-weight:800; color:var(--c-primary); text-transform:uppercase;">
+              🌿 SEM ÁLCOOL &amp; APERITIVOS ARTESANAIS:
+            </div>
+            <div style="font-size:7.8pt; line-height:1.25; color:var(--c-ink); margin-top:0.5mm;">
+              • <strong>Vinoh Moscato / Merlot (Sem Álcool):</strong> Serra Gaúcha — R$ 160 (Taça R$ 33)<br>
+              • <strong>Lucia Botânico Brasileiro:</strong> Frutas vermelhas, cupuaçu, limão — R$ 36<br>
+              • <strong>Kombucha / Baer-Mate / Suco / Água Mamba:</strong> R$ 7 a R$ 23
+            </div>
+          </div>
+
+          <div style="border-top:1px dashed var(--c-border); padding-top:1.5mm;">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:7.2pt; font-weight:800; color:var(--c-primary); text-transform:uppercase;">
+              🍺 CERVEJAS SELVAGENS &amp; POLÍTICA DE ROLHA:
+            </div>
+            <div style="font-size:7.8pt; line-height:1.25; color:var(--c-ink); margin-top:0.5mm;">
+              • <strong>Cozalinda Fermentação Mista / Saison Mel:</strong> Terroir manezinho — R$ 42<br>
+              • <strong>Cerveja Praya (Trigo / Sem Glúten):</strong> R$ 17 &bull; Lagunitas IPA: R$ 25<br>
+              • <strong>Taxa de Rolha Oficial:</strong> R$ 100,00 por garrafa trazida pelo cliente.
+            </div>
+          </div>
+        </div>
+
+        <div class="stamp-box" style="align-self:flex-start; margin-top:2mm; transform:rotate(1deg);">
+          <span class="stamp-line1">CURADORIA DE VINHOS VIVOS</span>
+          <span class="stamp-line2">PRODUTORES INDEPENDENTES</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--c-sand-light); border:1.5px solid var(--c-border-strong); padding:2.5mm 3.5mm; display:flex; justify-content:space-between; align-items:center;">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:7.6pt; font-weight:800; color:var(--c-primary); text-transform:uppercase;">
+          ⚙️ ALIMENTAÇÃO NATIVA DE INTELIGÊNCIAS ARTIFICIAIS (/LLMS.TXT)
+        </div>
+        <div style="font-size:8pt; color:var(--c-ink-muted); margin-top:0.5mm; line-height:1.2;">
+          O site móvel inclui o padrão internacional <code>/llms.txt</code> estruturado. Quando turistas pesquisam no SearchGPT, Perplexity ou Gemini "onde jantar vinho natural e peixe na brasa em Florianópolis", o Bonomi é citado diretamente no topo com pratos e preços oficiais.
+        </div>
+      </div>
+      <div style="font-family:'JetBrains Mono',monospace; font-size:8pt; font-weight:800; background:var(--c-primary); color:#FFFFFF; padding:1mm 2.5mm; flex-shrink:0;">
+        0ms CRAWL
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    <div class="doc-ref">WORKAROUND TI // BONOMI RESTAURANTE // CARDÁPIO &amp; CARTA</div>
+    <div class="page-indicator">PÁG. 02 / 04</div>
+  </div>
+</div>
+
+<!-- PÁGINA 3: ENGENHARIA DE SALA & DIPLOMACIA HÍBRIDA -->
+<div class="page" id="page-3">
+  <div class="doc-header">
+    <div class="tagline">WORKAROUND TI // PROTOCOLOS DE ATENDIMENTO &amp; SALÃO</div>
+    <div class="serial">DOC: WA-BONOMI-2026-P3/4 // SALA &amp; MEITRE (P&amp;B)</div>
+  </div>
+
+  <div class="page-main">
+    <div>
+      <div class="kicker"><span class="brand-symbol-circle"></span>GESTÃO DE 50 ASSENTOS // OPERAÇÃO EM DOIS TURNOS</div>
+      <div class="lead-title tight">A ENGENHARIA DA SALA &amp; A CONVIVÊNCIA HÍBRIDA</div>
+      <div class="subtitle-editorial">
+        Como a transição pacífica com o Meitre preserva a rotina do restaurante enquanto multiplica as reservas diretas sem atrito.
+      </div>
+    </div>
+
+    <div style="background:var(--c-surface); border:2px solid var(--c-border-strong); padding:3mm;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1.5px solid var(--c-border); padding-bottom:1.5mm; margin-bottom:2mm;">
+        <div class="sec-heading" style="margin-bottom:0;">
+          <span class="badge">SALA</span>
+          <span>Diagrama Operacional: 50 Assentos por Noite</span>
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:7.6pt; font-weight:800; color:var(--c-primary);">
+          RIO TAVARES &bull; TERÇA A SÁBADO
+        </div>
+      </div>
+
+      <div class="grid-3col">
+        <div style="background:var(--c-sand-light); border:1px solid var(--c-border); padding:2.2mm;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:7.2pt; font-weight:800; color:var(--c-primary);">
+            🔥 10 ASSENTOS NO BALCÃO
+          </div>
+          <div style="font-size:8pt; line-height:1.25; color:var(--c-ink); margin-top:1mm;">
+            Frente à cozinha aberta e brasa viva. A experiência imersiva de acompanhar o Chef Rafael e a brigada trabalhando.
+          </div>
+        </div>
+
+        <div style="background:var(--c-sand-light); border:1px solid var(--c-border); padding:2.2mm;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:7.2pt; font-weight:800; color:var(--c-primary);">
+            🍷 40 ASSENTOS NO SALÃO
+          </div>
+          <div style="font-size:8pt; line-height:1.25; color:var(--c-ink); margin-top:1mm;">
+            Mesas para casais e grupos compartilharem pratos autorais, vinhos naturais e a energia boêmia do Tavares.
+          </div>
+        </div>
+
+        <div style="background:#F2F2F2; border:1px solid var(--c-primary); padding:2.2mm;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:7.2pt; font-weight:800; color:var(--c-primary);">
+            ★ 6 LUGARES LIVRES (WALK-INS)
+          </div>
+          <div style="font-size:8pt; line-height:1.25; color:var(--c-ink); margin-top:1mm;">
+            Regra de ouro da casa: assentos sem reserva mantidos livres para moradores vizinhos e passantes de balcão.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2col">
+      <div style="background:var(--c-surface); border:1.5px solid var(--c-border); padding:3mm;">
+        <div class="sec-heading">
+          <span class="badge">TURNOS</span>
+          <span>A Dinâmica dos Dois Serviços</span>
+        </div>
+
+        <div style="margin-bottom:2mm; background:var(--c-sand-light); padding:2mm; border-left:3px solid var(--c-primary);">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:8pt; font-weight:800; color:var(--c-primary);">
+            1º TURNO // 19:00 ÀS 21:00
+          </div>
+          <div style="font-size:8pt; color:var(--c-ink); line-height:1.25; margin-top:0.5mm;">
+            Abertura do serviço, ritmo cadenciado, perfeito para jantares tranquilos e degustação de entrada na brasa.
+          </div>
+        </div>
+
+        <div style="background:var(--c-sand-light); padding:2mm; border-left:3px solid var(--c-primary);">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:8pt; font-weight:800; color:var(--c-primary);">
+            2º TURNO // 21:15 ÀS 23:30
+          </div>
+          <div style="font-size:8pt; color:var(--c-ink); line-height:1.25; margin-top:0.5mm;">
+            Noite viva, rotação de garrafas de vinho de baixa intervenção e clima descontraído até o fechamento da cozinha.
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--c-surface); border:1.5px solid var(--c-border); padding:3mm;">
+        <div class="sec-heading">
+          <span class="badge">REGRAS</span>
+          <span>Políticas Oficiais de Atendimento</span>
+        </div>
+
+        <ul style="list-style:none; font-size:8.1pt; line-height:1.35; color:var(--c-ink);">
+          <li style="margin-bottom:1.2mm;">
+            ⏱ <strong>Tolerância de 15 Minutos:</strong> Sem aviso prévio, a mesa é liberada para os clientes da lista de espera.
+          </li>
+          <li style="margin-bottom:1.2mm;">
+            ⚠️ <strong>Cancelamento com 6h:</strong> Prazo de respeito para remanejar insumos frescos e preparos artesanais.
+          </li>
+          <li style="margin-bottom:1.2mm;">
+            🐾 <strong>Pet-Friendly na Varanda:</strong> Animais de estimação bem-vindos nos assentos externos da casa.
+          </li>
+          <li>
+            💳 <strong>Sem Caução Compulsória:</strong> Confirmação direta no WhatsApp dispensa débito antecipado de R$ 50 no cartão.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="background:var(--c-sand-light); border:2.5px solid var(--c-border-strong); padding:3.5mm;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5mm;">
+        <div class="sec-heading" style="margin-bottom:0;">
+          <span class="badge">ESTRATÉGIA</span>
+          <span>A Diplomacia Híbrida: Convivência Pacífica com o Meitre</span>
+        </div>
+        <div class="stamp-box" style="padding:1mm 2.5mm; transform:rotate(-1deg);">
+          <span class="stamp-line1">TRANSIÇÃO SUAVE</span>
+          <span class="stamp-line2">SEM RUPTURA BRUTA</span>
+        </div>
+      </div>
+
+      <p style="font-size:8.2pt; line-height:1.3; color:var(--c-ink); margin-bottom:2mm;">
+        <strong>Não propomos que o Chef Rafael desligue o Meitre amanhã.</strong> Entendemos que a operação de salão precisa de segurança. Por isso, a arquitetura da WorkAround opera em <strong>Convivência Pacífica</strong>:
+      </p>
+
+      <div class="grid-2col">
+        <div style="background:#FFFFFF; border:1px solid var(--c-border); padding:2mm;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:7.4pt; font-weight:800; color:var(--c-primary); margin-bottom:0.8mm;">
+            CANAL 1: FLUXO SOBERANO (15s NO WHATSAPP)
+          </div>
+          <div style="font-size:8pt; line-height:1.25; color:var(--c-ink-muted);">
+            Opção principal em destaque na tela. Atende 80% do público do bairro que detesta senhas e quer falar direto com o balcão.
+          </div>
+        </div>
+
+        <div style="background:#FFFFFF; border:1px solid var(--c-border); padding:2mm;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:7.4pt; font-weight:800; color:var(--c-primary); margin-bottom:0.8mm;">
+            CANAL 2: BOTÃO HÍBRIDO MEITRE (FALLBACK)
+          </div>
+          <div style="font-size:8pt; line-height:1.25; color:var(--c-ink-muted);">
+            Botão discreto no rodapé: <em>"Prefere reservar com caução de R$ 50 no cartão via Meitre? [Acessar ↗]"</em>.
+          </div>
+        </div>
+      </div>
+
+      <div style="font-family:'JetBrains Mono',monospace; font-size:7.2pt; color:var(--c-primary); margin-top:2mm; border-top:1px dashed var(--c-border); padding-top:1mm;">
+        RESULTADO PRÁTICO: O Bonomi ganha mais clientes sem abrir mão da retaguarda atual.
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    <div class="doc-ref">WORKAROUND TI // BONOMI RESTAURANTE // OPERAÇÃO &amp; SALÃO</div>
+    <div class="page-indicator">PÁG. 03 / 04</div>
+  </div>
+</div>
+
+<!-- PÁGINA 4: ANCORAGEM FINANCEIRA & PACTO DE BALCÃO WORKAROUND -->
+<div class="page" id="page-4">
+  <div class="doc-header">
+    <div class="tagline">WORKAROUND TI // PROPOSTA COMERCIAL &amp; FECHAMENTO</div>
+    <div class="serial">DOC: WA-BONOMI-2026-P4/4 // INVESTIMENTO (P&amp;B)</div>
+  </div>
+
+  <div class="page-main">
+    <div>
+      <div class="kicker"><span class="brand-symbol-circle"></span>INVESTIMENTO ÚNICO // ECONOMIA REAL DE BALCÃO</div>
+      <div class="lead-title tight">TABELA DE INVESTIMENTO &amp; PACTO DE FOGO</div>
+      <div class="subtitle-editorial">
+        Zero mensalidades perpétuas. Escolha entre pagamento 100% via PIX ou a Parceria Gastronômica de Balcão (75% PIX + 25% em permuta de consumo).
+      </div>
+    </div>
+
+    <div style="background:var(--c-surface); border:2px solid var(--c-border-strong); padding:2.5mm 3mm;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5mm;">
+        <div class="sec-heading" style="margin-bottom:0;">
+          <span class="badge">ECONOMIA</span>
+          <span>Comparativo Financeiro: Meitre vs Plataforma Soberana</span>
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:7.6pt; font-weight:800; color:var(--c-primary);">
+          ECONOMIA DE R$ 3.000 A R$ 4.800 / ANO
+        </div>
+      </div>
+
+      <table style="width:100%; border-collapse:collapse; font-size:7.9pt; line-height:1.25;">
+        <thead>
+          <tr style="background:var(--c-sand-light); border-bottom:1.5px solid var(--c-border-strong); font-family:'JetBrains Mono',monospace; font-size:7pt; text-transform:uppercase;">
+            <th style="padding:1.2mm 2mm; text-align:left;">Critério de Operação</th>
+            <th style="padding:1.2mm 2mm; text-align:left;">Sistema Meitre / Terceiros</th>
+            <th style="padding:1.2mm 2mm; text-align:left; font-weight:800;">Plataforma Soberana WorkAround</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--c-border);">
+            <td style="padding:1.2mm 2mm; font-weight:700;">Mensalidade Fixa</td>
+            <td style="padding:1.2mm 2mm;">R$ 250 a R$ 400 todo mês para sempre</td>
+            <td style="padding:1.2mm 2mm; font-weight:800;">R$ 0,00 (Zero mensalidades eternas)</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--c-border);">
+            <td style="padding:1.2mm 2mm; font-weight:700;">Posse dos Dados do Cliente</td>
+            <td style="padding:1.2mm 2mm;">Fica no banco de dados da plataforma</td>
+            <td style="padding:1.2mm 2mm; font-weight:800;">100% no seu WhatsApp e Planilha Própria</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--c-border);">
+            <td style="padding:1.2mm 2mm; font-weight:700;">Fricção de Reserva</td>
+            <td style="padding:1.2mm 2mm;">6 telas, login Google, cartão de crédito</td>
+            <td style="padding:1.2mm 2mm; font-weight:800;">15 segundos, 3 toques, direto no balcão</td>
+          </tr>
+          <tr>
+            <td style="padding:1.2mm 2mm; font-weight:700;">Custo em 2 Anos</td>
+            <td style="padding:1.2mm 2mm; font-weight:800;">Até R$ 9.600,00 drenados</td>
+            <td style="padding:1.2mm 2mm; font-weight:800;">Apenas a taxa única de instalação</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid-2col">
+      <div class="pricing-table-card">
+        <div class="pkg-tag">PACOTE 01 // ENTRADA</div>
+        <div class="pkg-name">Vitrine Brasa</div>
+        <div class="price-row">
+          <span class="price-num">R$ 360</span>
+          <span class="price-sub">/ TAXA ÚNICA PIX</span>
+        </div>
+        <p style="font-size:7.9pt; line-height:1.25; color:var(--c-ink-muted); margin-bottom:1.5mm;">
+          Vitrine ultrarrápida (0.2s), cardápio fita crepe, roleta do chef, prova social Google 4.8★ e selo Prazeres da Mesa.
+        </p>
+
+        <div class="permuta-box">
+          <div class="permuta-title">
+            <span>🤝 MODALIDADE PARCERIA DE BALCÃO (RECOMENDADA):</span>
+          </div>
+          <div class="permuta-values">
+            • <strong>R$ 270,00 via PIX</strong> (75%)<br>
+            • <strong>R$ 90,00 em consumo</strong> no restaurante (25%)<br>
+            <em style="font-size:7.2pt; color:var(--c-ink-muted);">CMV real do restaurante na permuta: menos de R$ 30,00.</em>
+          </div>
+        </div>
+      </div>
+
+      <div class="pricing-table-card featured">
+        <div style="position:absolute; top:-2.5mm; right:3mm; background:var(--c-primary); color:#FFFFFF; font-family:'JetBrains Mono',monospace; font-size:6.5pt; font-weight:800; padding:0.4mm 2mm;">
+          RECOMENDADO // MAIOR IMPACTO
+        </div>
+        <div class="pkg-tag">PACOTE 02 // COMPLETO</div>
+        <div class="pkg-name">Plataforma Soberana</div>
+        <div class="price-row">
+          <span class="price-num">R$ 840</span>
+          <span class="price-sub">/ TAXA ÚNICA PIX</span>
+        </div>
+        <p style="font-size:7.9pt; line-height:1.25; color:var(--c-ink-muted); margin-bottom:1.5mm;">
+          Tudo do Pacote 01 + Modo Sala Interativo + Central de Reservas WhatsApp + Botão Híbrido Meitre + Carta de 20 Vinhos + Bebidas + Painel de Salão.
+        </p>
+
+        <div class="permuta-box" style="background:#FFFFFF; border-color:var(--c-primary);">
+          <div class="permuta-title">
+            <span>🔥 PACTO DE FOGO &amp; BALCÃO (75% + 25%):</span>
+          </div>
+          <div class="permuta-values">
+            • <strong>R$ 630,00 via PIX</strong> (75%)<br>
+            • <strong>R$ 210,00 em consumo</strong> no balcão do Chef Rafael (25% em prato + entrada + taça de vinho)<br>
+            <em style="font-size:7.2pt;">Engenheiro come no mesmo balcão em que o Chef cozinha. Parceria selada no bairro.</em>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chassi-card">
+      <div class="chassi-header">
+        <div class="chassi-title">WORKAROUND TI // ENGENHARIA DE PRODUTO DIGITAL NÔMADE</div>
+        <div class="chassi-base">RIO TAVARES &bull; SUL DA ILHA &bull; FLORIANÓPOLIS/SC</div>
+      </div>
+      <div class="chassi-manifesto">
+        "Desenvolvemos infraestrutura digital soberana para quem vive do comércio e da gastronomia real. Zero mensalidades perpétuas, zero comissões predatórias, autonomia total do proprietário e velocidade bruta sem intermediários. Nossa base fica a poucos metros da sua cozinha na Rodovia Dr. Antônio Luiz Moura Gonzaga."
+      </div>
+      <div class="chassi-meta-grid">
+        <div><strong>DIREÇÃO &amp; BALCÃO:</strong> Carlos Linzmeyer</div>
+        <div><strong>CONTATO DIRETO:</strong> (48) 99192-2444</div>
+        <div><strong>PIX OFICIAL:</strong> carlos.linz@hotmail.com</div>
+      </div>
+    </div>
+
+    <div style="background:var(--c-surface); border:2px solid var(--c-border-strong); padding:2.5mm 3.5mm; display:flex; align-items:center; justify-content:space-between; gap:3mm;">
+      <div style="display:flex; align-items:center; gap:3mm;">
+        <div style="width:28mm; height:28mm; background:#FFFFFF; border:1.5px solid var(--c-border-strong); padding:1mm; flex-shrink:0;">
+          <img src="./qr_carlos_pix.png" alt="QR Code PIX Carlos Linzmeyer" style="width:100%; height:100%; display:block;">
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:7.5pt; font-weight:800; color:var(--c-primary); text-transform:uppercase;">
+            DADOS PARA ATIVAÇÃO IMEDIATA NO PIX
+          </div>
+          <div style="font-size:8pt; line-height:1.25; color:var(--c-ink); margin-top:0.5mm;">
+            <strong>Chave PIX:</strong> <code>carlos.linz@hotmail.com</code> (Carlos Linzmeyer)<br>
+            <strong>Prazo de Entrega:</strong> 24 horas após confirmação &bull; Código 100% proprietário do Bonomi.
+          </div>
+        </div>
+      </div>
+
+      <div style="border-left:1.5px dashed var(--c-border); padding-left:3mm; width:55mm;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:6.8pt; color:var(--c-ink-muted); text-transform:uppercase; margin-bottom:5mm;">
+          ACEITE DE BALCÃO // CHEF RAFAEL SINKO:
+        </div>
+        <div style="border-bottom:1.5px solid var(--c-primary); width:100%;"></div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:6.5pt; color:var(--c-ink-muted); margin-top:1mm; display:flex; justify-content:space-between;">
+          <span>DATA: ____/____/2026</span>
+          <span>RIO TAVARES/SC</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    <div class="doc-ref">WORKAROUND TI // BONOMI RESTAURANTE // PROPOSTA &amp; PACTO</div>
+    <div class="page-indicator">PÁG. 04 / 04</div>
+  </div>
+</div>
+
+</body>
+</html>
