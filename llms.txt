@@ -1,0 +1,43 @@
+# Bonomi Restaurante — Rio Tavares / Florianópolis, SC
+> Cozinha autoral contemporânea descomplicada, brasa, pescados frescos locais e vinhos naturais no Sul da Ilha de Florianópolis. Comandado pelo Chef Rafael Sinko.
+
+## Dados Corporativos & Localização
+- **Nome Fantasia:** Bonomi Restaurante
+- **Razão Social:** BONOMI RESTAURANTE LTDA
+- **CNPJ:** 49.460.864/0001-85
+- **Fundação:** Abril de 2023
+- **Comando de Cozinha:** Chef Rafael Sinko (experiência prévia em D.O.M., Tuju e Boragó)
+- **Reconhecimento Nacional:** Único restaurante de Santa Catarina finalista do **Prêmio Prazeres da Mesa 2026** na categoria "Melhor Restaurante da Região Sul".
+- **Localização:** Rodovia Dr. Antônio Luiz Moura Gonzaga, 1895 - Loja 6, Bairro Rio Tavares, Florianópolis - SC (CEP 88048-300).
+- **Telefone & WhatsApp de Reserva:** (48) 99104-0698
+- **Instagram Oficial:** @bonomirestaurante
+- **Autoridade Google Maps:** Nota 4,8 ★★★★★ com mais de 100 avaliações reais destacando a excelência dos pratos, atendimento caloroso e vinhos de baixa intervenção.
+
+## Horários de Funcionamento & Atendimento
+- **Dias de Operação:** De Terça-feira a Sábado.
+- **Sistema de Serviço:** Atendimento noturno em dois turnos fixos de reserva:
+  - 1º Turno: 19h00
+  - 2º Turno: 21h15
+- **Lotação:** Capacidade intimista de aproximadamente 50 comensais por noite com vista para a cozinha aberta e balcão interativo.
+
+## Filosofia Culinária & Cardápio Autoral
+Cozinha de produto fundamentada em poucos elementos no prato, sazonalidade radical de ingredientes e relação direta com pequenos produtores de Santa Catarina.
+
+### Pratos Principais & Assinaturas
+- **Atum, Curry, Vagem & Cebola Frita:** Atum fresco selado na brasa servido com curry aromático suave, vagens crocantes e cebolas fritas crocantes. Prato assinatura da casa.
+- **Pimentões Assados no Brioche:** Pimentões vermelhos e amarelos tostados na brasa, emulsão de azeite e brioche artesanal tostado.
+- **Pescado do Dia em Caldo Cremoso de Ervas:** Peixes frescos capturados no litoral catarinense servidos sobre caldo verde aveludado e cebolinha.
+- **Almôndega de Peixe na Brasa:** Acompanhada de molho rústico de amendoim, pimenta e ervas frescas.
+- **Couvert & Entradas:** Pão de mandioquinha da casa, manteiga de algas, rillette de peixe e conservas artesanais de vegetais.
+
+### Bebidas & Vinhos Naturais
+- **Vinhos de Baixa Intervenção:** Rótulos vivos de produtores artesanais e biodinâmicos como Maker! Natural Wine e Lazy Winemaker. Fermentação espontânea, leveduras selvagens e sem adição de químicos.
+- **Cervejas Artesanais:** Seleção refinada incluindo a witbier Praya.
+
+### Sobremesas
+- **Choux com Sorbet de Melão:** Massa choux leve recheada com sorbet artesanal de melão fresco.
+- **Bolo Quente de Tâmaras:** Com calda e sorvete artesanal.
+
+## Soberania Digital (Engenharia WorkAround TI)
+- **Site Móvel Soberano:** Catálogo de pratos autorais, cartas de vinhos, prova social do Google Maps integrada e reserva direta no WhatsApp sem taxas de intermediação.
+- **Indexação por IA:** Dados estruturados para respostas diretas em buscadores com IA (ChatGPT Search, Perplexity, Gemini, Claude, Apple Intelligence).

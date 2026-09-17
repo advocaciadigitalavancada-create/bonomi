@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Relatório do Bonomi Restaurante // Edição P&B Sulfite 75g (2P)</title>
+<meta name="workaround:engine" content="Playwright / Chromium Headless">
+<meta name="workaround:source" content="relatorio_bonomi_2paginas_pb.html">
+<meta name="workaround:standard" content="A4-SWISS-EDITORIAL-2P (210mm x 297mm)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700;800&family=Spectral:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  :root {
+    --bg-page: #FFFFFF;
+    --c-primary: #000000;
+    --c-accent: #000000;
+    --c-accent-dark: #000000;
+    --c-accent-soft: #F0F0F0;
+    --c-sand: #F0F0F0;
+    --c-sand-light: #F8F8F8;
+    --c-ink: #000000;
+    --c-ink-muted: #333333;
+    --c-surface: #FFFFFF;
+    --c-border: #000000;
+    --c-border-strong: #000000;
+  }
+
+  body {
+    background-color: #E5E5E5;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--c-ink);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    page-break-after: always;
+    position: relative;
+    padding: 8mm 12mm 8mm 12mm;
+    overflow: hidden;
+    background-color: var(--bg-page);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 auto 10mm auto;
+    box-shadow: 0 6px 30px rgba(0,0,0,0.12);
+  }
+
+  @media print {
+    body { background: transparent; }
+    .page {
+      margin: 0;
+      box-shadow: none;
+    }
+  }
+
+  /* HEADER & FOOTER */
+  .doc-header {
+    height: 7.5mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2.5px solid #000000;
+    padding-bottom: 1.5mm;
+    flex-shrink: 0;
+  }
+  .doc-header .tagline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.2pt;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #000000;
+  }
+  .doc-header .serial {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.2pt;
+    font-weight: 800;
+    color: #000000;
+  }
+
+  .doc-footer {
+    height: 7mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px solid #000000;
+    padding-top: 1.4mm;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    color: #000000;
+    flex-shrink: 0;
+  }
+  .doc-footer .doc-ref {
+    font-size: 7.2pt;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: #000000;
+  }
+  .doc-footer .page-indicator {
+    font-weight: 800;
+    background: #000000;
+    color: #FFFFFF;
+    padding: 0.8mm 3.5mm;
+  }
+
+  /* CONTAINER PRINCIPAL A 260MM (A LEI ÁUREA DO A4) */
+  .page-main {
+    height: 260mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+
+  /* TIPOGRAFIA & ELEMENTOS */
+  .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 0.8mm;
+  }
+
+  .lead-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 29.5pt;
+    line-height: 0.90;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    color: #000000;
+  }
+
+  .subtitle-editorial {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: 11pt;
+    font-style: italic;
+    color: #333333;
+    line-height: 1.22;
+    margin-top: 1.2mm;
+  }
+
+  .sec-heading {
+    display: flex;
+    align-items: center;
+    gap: 2.2mm;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10.2pt;
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 1.4mm;
+  }
+  .sec-heading .badge {
+    background: #000000;
+    color: #FFFFFF;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.8pt;
+    font-weight: 800;
+    padding: 0.4mm 2.2mm;
+  }
+
+  /* META GRID CADASTRO */
+  .meta-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1.3fr 1.5fr 1fr;
+    background: #FFFFFF;
+    border: 1.5px solid #000000;
+    border-left: 4.5px solid #000000;
+    padding: 2.2mm 3.5mm;
+    gap: 3mm;
+  }
+  .meta-cell {
+    display: flex;
+    flex-direction: column;
+  }
+  .meta-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 6.8pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #444444;
+    letter-spacing: 0.08em;
+  }
+  .meta-val {
+    font-size: 8.3pt;
+    font-weight: 700;
+    color: #000000;
+  }
+
+  /* MANIFESTO BANNER */
+  .manifesto-banner {
+    display: grid;
+    grid-template-columns: 1.45fr 1.15fr;
+    gap: 4mm;
+    background: #FFFFFF;
+    color: #000000;
+    padding: 3.6mm 4.2mm;
+    border: 1.5px solid #000000;
+    border-left: 5px solid #000000;
+  }
+  .manifesto-quote {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: 12.2pt;
+    line-height: 1.2;
+    font-style: italic;
+    color: #000000;
+    border-bottom: 1.5px solid #000000;
+    padding-bottom: 1.8mm;
+    margin-bottom: 1.8mm;
+  }
+  .manifesto-body {
+    font-size: 8.5pt;
+    line-height: 1.38;
+    color: #111111;
+  }
+  .pedigree-box {
+    background: #F8F8F8;
+    border: 1.5px solid #000000;
+    padding: 2.6mm 3mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .pedigree-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7pt;
+    font-weight: 800;
+    color: #000000;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1.2mm;
+  }
+  .pedigree-list {
+    list-style: none;
+    font-size: 7.8pt;
+    line-height: 1.34;
+    color: #222222;
+  }
+  .pedigree-list li {
+    margin-top: 1.1mm;
+  }
+  .pedigree-list strong {
+    color: #000000;
+  }
+
+  /* PROTOCOLO BOX */
+  .protocol-box {
+    background: #F4F4F4;
+    border: 1.5px solid #000000;
+    border-left: 4.5px solid #000000;
+    padding: 2.8mm 3.8mm;
+  }
+  .protocol-box h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 9.6pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 0.8mm;
+  }
+  .protocol-box p {
+    font-size: 8.2pt;
+    line-height: 1.36;
+    color: #000000;
+  }
+
+  /* TRIO GRID */
+  .trio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3.2mm;
+  }
+  .trio-card {
+    background: #FFFFFF;
+    border: 1.5px solid #000000;
+    padding: 3.2mm 3.5mm;
+    display: flex;
+    flex-direction: column;
+  }
+  .trio-card.highlight {
+    border-top: 4.5px solid #000000;
+  }
+  .trio-card.dark {
+    background: #000000;
+    color: #FFFFFF;
+    border-color: #000000;
+  }
+  .card-kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #000000;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.1mm;
+  }
+  .trio-card.dark .card-kicker {
+    color: #CCCCCC;
+  }
+  .card-headline {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10pt;
+    font-weight: 800;
+    line-height: 1.16;
+    color: #000000;
+    margin-bottom: 1.3mm;
+  }
+  .trio-card.dark .card-headline {
+    color: #FFFFFF;
+  }
+  .card-p {
+    font-size: 8pt;
+    line-height: 1.35;
+    color: #222222;
+  }
+  .trio-card.dark .card-p {
+    color: #EEEEEE;
+  }
+
+  /* HERO PORTAL QR CODE */
+  .hero-portal {
+    background: #FFFFFF;
+    border: 2px solid #000000;
+    border-left: 7px solid #000000;
+    padding: 3.2mm 4.2mm;
+    display: grid;
+    grid-template-columns: 34mm 1fr;
+    gap: 4.5mm;
+    align-items: center;
+  }
+  .hero-portal .qr-box {
+    width: 34mm;
+    height: 34mm;
+    border: 1.5px solid #000000;
+    padding: 1mm;
+    background: #FFFFFF;
+  }
+  .hero-portal .qr-box img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .hero-portal .portal-badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.2pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background: #000000;
+    color: #FFFFFF;
+    padding: 0.5mm 2.2mm;
+    margin-bottom: 1.2mm;
+  }
+  .hero-portal .portal-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11.5pt;
+    font-weight: 800;
+    color: #000000;
+    line-height: 1.15;
+    margin-bottom: 1mm;
+  }
+  .hero-portal .portal-desc {
+    font-size: 8.1pt;
+    line-height: 1.36;
+    color: #222222;
+    margin-bottom: 1.3mm;
+  }
+  .hero-portal .portal-action {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.4pt;
+    font-weight: 800;
+    color: #000000;
+    letter-spacing: 0.06em;
+  }
+
+  /* PÁGINA 02 */
+  .big-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.3fr;
+    gap: 3.5mm;
+  }
+  .stat-block {
+    background: #FFFFFF;
+    border: 1.5px solid #000000;
+    padding: 3.2mm 3.8mm;
+    position: relative;
+  }
+  .stat-block.alert {
+    background: #F8F8F8;
+    border: 2px solid #000000;
+  }
+  .stat-block.dark {
+    background: #000000;
+    color: #FFFFFF;
+  }
+  .stat-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 27pt;
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    color: #000000;
+  }
+  .stat-block.dark .stat-num {
+    color: #FFFFFF;
+  }
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.2pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 1.2mm 0 0.8mm 0;
+    color: #000000;
+  }
+  .stat-block.dark .stat-label {
+    color: #EEEEEE;
+  }
+  .stat-desc {
+    font-size: 7.8pt;
+    line-height: 1.32;
+    color: #333333;
+  }
+  .stat-block.dark .stat-desc {
+    color: #CCCCCC;
+  }
+
+  /* TABELA FORENSE */
+  .forensic-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8.2pt;
+  }
+  .forensic-table th {
+    background: #000000;
+    color: #FFFFFF;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 1.8mm 2.5mm;
+    text-align: left;
+  }
+  .forensic-table td {
+    padding: 1.8mm 2.5mm;
+    border-bottom: 1px solid #000000;
+    line-height: 1.3;
+  }
+  .forensic-table tr:nth-child(even) td {
+    background: #F6F6F6;
+  }
+  .col-danger {
+    color: #000000;
+    font-weight: 700;
+    text-decoration: underline;
+  }
+  .col-solution {
+    color: #000000;
+    font-weight: 800;
+  }
+
+  /* PLANOS DE ATIVAÇÃO */
+  .plans-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.8mm;
+  }
+  .plan-card {
+    background: #FFFFFF;
+    border: 1.5px solid #000000;
+    padding: 3mm 3.8mm;
+    display: flex;
+    flex-direction: column;
+  }
+  .plan-card.primary {
+    border-top: 4.5px solid #000000;
+  }
+  .plan-card.pro {
+    background: #000000;
+    color: #FFFFFF;
+    border-color: #000000;
+  }
+  .plan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1.2mm;
+  }
+  .plan-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #000000;
+  }
+  .plan-card.pro .plan-tag {
+    color: #CCCCCC;
+  }
+  .plan-price {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14pt;
+    font-weight: 800;
+    color: #000000;
+  }
+  .plan-card.pro .plan-price {
+    color: #FFFFFF;
+  }
+  .plan-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10pt;
+    font-weight: 800;
+    margin-bottom: 1mm;
+  }
+  .plan-body {
+    font-size: 7.9pt;
+    line-height: 1.34;
+    color: #222222;
+    margin-bottom: 1.4mm;
+  }
+  .plan-card.pro .plan-body {
+    color: #CCCCCC;
+  }
+  .plan-specs {
+    list-style: none;
+    font-size: 7.6pt;
+    line-height: 1.34;
+  }
+  .plan-specs li {
+    position: relative;
+    padding-left: 3mm;
+    margin-top: 0.6mm;
+  }
+  .plan-specs li::before {
+    content: "■";
+    position: absolute;
+    left: 0;
+    font-size: 5pt;
+    color: #000000;
+    top: -0.2mm;
+  }
+  .plan-card.pro .plan-specs li::before {
+    color: #FFFFFF;
+  }
+
+  /* DEAL STRIP */
+  .deal-strip {
+    background: #000000;
+    color: #FFFFFF;
+    padding: 2.8mm 3.8mm;
+    display: grid;
+    grid-template-columns: 1.1fr 1.6fr;
+    gap: 4mm;
+    align-items: center;
+    border-left: 5px solid #000000;
+  }
+  .deal-left .deal-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 6.8pt;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #CCCCCC;
+    margin-bottom: 0.6mm;
+  }
+  .deal-val {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 25pt;
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+  }
+  .deal-terms {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 6.8pt;
+    color: #EEEEEE;
+    margin-top: 0.8mm;
+  }
+  .deal-right-badges {
+    display: flex;
+    gap: 1.8mm;
+    margin-bottom: 1.3mm;
+  }
+  .deal-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 6.3pt;
+    font-weight: 800;
+    padding: 0.4mm 1.8mm;
+    background: rgba(255,255,255,0.22);
+    color: #FFFFFF;
+    text-transform: uppercase;
+  }
+  .deal-right-p {
+    font-size: 7.9pt;
+    line-height: 1.34;
+    color: #EEEEEE;
+  }
+
+  /* PIX PORTAL */
+  .pix-portal {
+    background: #FFFFFF;
+    border: 2px solid #000000;
+    padding: 3mm 3.8mm;
+    display: grid;
+    grid-template-columns: 30mm 1fr;
+    gap: 4.5mm;
+    align-items: center;
+  }
+  .pix-portal .qr-box {
+    width: 30mm;
+    height: 30mm;
+    border: 1.5px solid #000000;
+    padding: 1mm;
+    background: #FFFFFF;
+  }
+  .pix-portal .qr-box img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .pix-info-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10.5pt;
+    font-weight: 800;
+    color: #000000;
+    margin-bottom: 0.6mm;
+  }
+  .pix-info-p {
+    font-size: 7.9pt;
+    line-height: 1.32;
+    color: #222222;
+    margin-bottom: 1mm;
+  }
+  .pix-data-box {
+    background: #F8F8F8;
+    border: 1px solid #000000;
+    border-left: 3.5px solid #000000;
+    padding: 1.6mm 2.6mm;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.4pt;
+    line-height: 1.34;
+    color: #000000;
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== PÁGINA 01: IDENTIDADE & DIAGNÓSTICO ESTRATÉGICO ==================== -->
+<div class="page">
+  <div class="doc-header">
+    <div class="tagline">WORKAROUND TI // ENGENHARIA DE PRODUTO DIGITAL SOBERANO</div>
+    <div class="serial">SÉRIE TAVARES-2P // DOC #01 (P&B)</div>
+  </div>
+
+  <div class="page-main">
+    <!-- CABEÇALHO HERO -->
+    <div>
+      <div class="kicker">AUDITORIA ESTRATÉGICA DE COZINHA &bull; RIO TAVARES / FLORIANÓPOLIS</div>
+      <h1 class="lead-title">RELATÓRIO DO BONOMI RESTAURANTE</h1>
+      <div class="subtitle-editorial">Gastronomia Autoral Descomplicada, Reconhecimento Nacional e Soberania Digital no Balcão</div>
+    </div>
+
+    <!-- META STRIP CADASTRO -->
+    <div class="meta-grid">
+      <div class="meta-cell">
+        <span class="meta-label">Razão Social</span>
+        <span class="meta-val">Bonomi Restaurante Ltda</span>
+      </div>
+      <div class="meta-cell">
+        <span class="meta-label">Comando de Cozinha</span>
+        <span class="meta-val">Chef Rafael Sinko</span>
+      </div>
+      <div class="meta-cell">
+        <span class="meta-label">Território & Sede</span>
+        <span class="meta-val">Rod. Dr. Antônio L. M. Gonzaga, 1895</span>
+      </div>
+      <div class="meta-cell">
+        <span class="meta-label">Engenharia de Balcão</span>
+        <span class="meta-val">Carlos Linzmeyer</span>
+      </div>
+    </div>
+
+    <!-- SEÇÃO 01: MANIFESTO & AUTORIDADE GASTRONÔMICA -->
+    <div>
+      <div class="sec-heading">
+        <span class="badge">01</span>
+        <span>A COZINHA DE PRODUTO & O RECONHECIMENTO NACIONAL NO SUL DA ILHA</span>
+      </div>
+      <div class="manifesto-banner">
+        <div>
+          <div class="manifesto-quote">
+            "Poucos elementos no prato, brasa precisa, sazonalidade radical e foco total no sabor autêntico."
+          </div>
+          <p class="manifesto-body">
+            Comandado pelo chef Rafael Sinko (com passagens marcantes por D.O.M., Tuju e Boragó), o Bonomi colocou o Rio Tavares no centro da gastronomia brasileira ao se consagrar o único restaurante de Santa Catarina finalista do prestigiado <strong>Prêmio Prazeres da Mesa 2026</strong> na categoria Melhor Restaurante da Região Sul.
+          </p>
+        </div>
+        <div class="pedigree-box">
+          <div class="pedigree-tag">AUDITORIA DE MARCA &bull; DADOS OFICIAIS</div>
+          <ul class="pedigree-list">
+            <li><strong>CNPJ Verificado:</strong> 49.460.864/0001-85.</li>
+            <li><strong>Prêmio Prazeres da Mesa 2026:</strong> Finalista Sul (Único de SC).</li>
+            <li><strong>Formação de Vanguarda:</strong> Escola D.O.M., Tuju e Boragó.</li>
+            <li><strong>Capacidade Íntima:</strong> ~50 comensais por noite (19h e 21h15).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROTOCOLO & PROVA SOCIAL GOOGLE MAPS -->
+    <div class="protocol-box">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.8mm;">
+        <h3>⭐ Autoridade no Google Maps: 4,8 ★★★★★ (Mais de 100 Avaliações Orgânicas)</h3>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 7.2pt; font-weight: 800; color: #000000;">RIO TAVARES • BALCÃO VIVO</span>
+      </div>
+      <p style="font-size: 7.9pt; line-height: 1.34; margin-bottom: 1mm;">
+        <em>"Experiência gastronômica inacreditável no Tavares. O atum com curry e cebola frita e os pimentões assados no brioche são obras de arte."</em> — <strong>Cliente Google Maps (5★)</strong> &bull; 
+        <em>"Atendimento impecável, vinhos naturais escolhidos a dedo e ver o chef finalizando os pratos na cozinha aberta é impagável."</em> — <strong>Local Guide (5★)</strong>
+      </p>
+      <div style="font-size: 7.3pt; color: #333333; border-top: 1px dashed #000000; padding-top: 0.8mm;">
+        Validação orgânica: clientes destacam a leveza do serviço, o frescor dos pescados locais e a carta autoral de vinhos de baixa intervenção (Maker!, Lazy Winemaker).
+      </div>
+    </div>
+
+    <!-- SEÇÃO 02: OS 3 PILARES DA EXPERIÊNCIA BONOMI -->
+    <div>
+      <div class="sec-heading">
+        <span class="badge">02</span>
+        <span>A TRÍADE DE BALCÃO // OS 3 PILARES DA EXPERIÊNCIA SOBERANA</span>
+      </div>
+      <div class="trio-grid">
+        <div class="trio-card highlight">
+          <div class="card-kicker">PILAR 01 // COZINHA AUTORAL</div>
+          <div class="card-headline">Atum, Brasa & Sazonalidade</div>
+          <p class="card-p">
+            Pratos icônicos: <em>Atum, curry, vagem, cebola frita</em>, pimentões tostados com azeite brilhante, peixe azul com purê de coco e pescados frescos da costa catarinense.
+          </p>
+        </div>
+        <div class="trio-card">
+          <div class="card-kicker">PILAR 02 // BEBIDAS DE AUTOR</div>
+          <div class="card-headline">Vinhos Naturais & Artesanais</div>
+          <p class="card-p">
+            Curadoria enxuta e viva: produtores independentes de vinho natural (Maker!, Lazy Winemaker), fermentação espontânea e cervejas artesanais selecionadas (Praya).
+          </p>
+        </div>
+        <div class="trio-card dark">
+          <div class="card-kicker">PILAR 03 // AMBIÊNCIA VIVA</div>
+          <div class="card-headline">Balcão Sem Formalidades</div>
+          <p class="card-p">
+            Cozinha aberta onde os comensais acompanham a finalização dos pratos. Dois turnos noturnos de serviço (19h00 e 21h15) com calor humano e proximidade real.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERO PORTAL AO VIVO -->
+    <div class="hero-portal">
+      <div class="qr-box">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=280x280&amp;data=https://advocaciadigitalavancada-create.github.io/bonomi/" alt="QR Code Protótipo Bonomi Restaurante">
+      </div>
+      <div>
+        <span class="portal-badge">ENGENHARIA WORKAROUND // PROTÓTIPO NO AR</span>
+        <div class="portal-title">Experimente o Site Móvel Soberano do Bonomi na Palma da Mão</div>
+        <p class="portal-desc">
+          Aponte a câmera do celular para testar a experiência mobile ultrarrápida (&lt;200ms): fotografia autêntica dos pratos na brasa, carta de vinhos naturais, carrossel dinâmico com notas do Google Maps e botão de reserva direta no WhatsApp, sem intermediários.
+        </p>
+        <div class="portal-action">&rarr; ESCANEIE O QR CODE AO LADO OU ACESSE NO NAVEGADOR:</div>
+        <div style="font-family:'JetBrains Mono', monospace; font-size:7.2pt; font-weight:800; color:#000000; letter-spacing:0.02em; margin-top:1.2mm;">
+          advocaciadigitalavancada-create.github.io/bonomi/
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    <div class="doc-ref">BONOMI RESTAURANTE // AUDITORIA ESTRATÉGICA &bull; WORKAROUND TI &bull; RIO TAVARES / FLORIANÓPOLIS</div>
+    <div class="page-indicator">PÁG. 01 / 02</div>
+  </div>
+</div>
+
+
+<!-- ==================== PÁGINA 02: AUDITORIA FORENSE & PROPOSTA COMERCIAL ==================== -->
+<div class="page">
+  <div class="doc-header">
+    <div class="tagline">WORKAROUND // AUDITORIA FORENSE DE PONTOS DE CONTATO</div>
+    <div class="serial">SÉRIE TAVARES-2P // DOC #02 (P&B)</div>
+  </div>
+
+  <div class="page-main">
+    <!-- CABEÇALHO DA PÁGINA 02 -->
+    <div>
+      <div class="kicker">DIAGNÓSTICO DIGITAL DE BALCÃO &bull; VULNERABILIDADE DE TRÁFEGO</div>
+      <h1 class="lead-title">O GARGALO DE RESERVAS</h1>
+      <div class="subtitle-editorial">Por que plataformas terceiras de reserva drenam a margem e afastam o público local do Rio Tavares</div>
+    </div>
+
+    <!-- BIG STATS GRID -->
+    <div class="big-stats-grid">
+      <div class="stat-block">
+        <div class="stat-num">4,8 ★</div>
+        <div class="stat-label">Google Maps (100+ Reviews)</div>
+        <p class="stat-desc">Tráfego qualificado de moradores e turistas gastronômicos buscando a casa no Maps todos os dias.</p>
+      </div>
+      <div class="stat-block alert">
+        <div class="stat-num">GETIN</div>
+        <div class="stat-label">Barreira de Intermediários</div>
+        <p class="stat-desc">Formulários externos exigem cadastro, criam atrito de reserva e cobram taxas por serviço na intermediação.</p>
+      </div>
+      <div class="stat-block dark">
+        <div class="stat-num">0%</div>
+        <div class="stat-label">Taxa com Hub Soberano</div>
+        <p class="stat-desc">Reserva direta no WhatsApp do salão, sem comissões por comensal e com controle total do restaurante.</p>
+      </div>
+    </div>
+
+    <!-- TABELA FORENSE -->
+    <div>
+      <div class="sec-heading">
+        <span class="badge">03</span>
+        <span>RAIO-X FORENSE: DEPENDÊNCIA DE TERCEIROS VS. ENGENHARIA SOBERANA</span>
+      </div>
+      <table class="forensic-table">
+        <thead>
+          <tr>
+            <th style="width: 22%;">Canal / Ponto</th>
+            <th style="width: 39%;">Cenário com Intermediários (GetIn / Bio Seca)</th>
+            <th style="width: 39%;">Engenharia Soberana WorkAround</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Reserva de Mesa</strong></td>
+            <td class="col-danger">Formulários de terceiros com login obrigatório e taxa por reserva.</td>
+            <td class="col-solution"><strong>Reserva direta no WhatsApp:</strong> 1 toque, contato caloroso e sem pedágio.</td>
+          </tr>
+          <tr>
+            <td><strong>Cardápio Sazonal</strong></td>
+            <td class="col-danger">Destaques soltos no Instagram Stories que expiram em 24h.</td>
+            <td class="col-solution"><strong>Vitrine tátil viva:</strong> fotos dos pratos do dia e vinhos naturais atualizados.</td>
+          </tr>
+          <tr>
+            <td><strong>Buscadores por I.A. (ChatGPT, Gemini)</strong></td>
+            <td class="col-danger">Invisível ou com informações truncadas sobre horários e pratos.</td>
+            <td class="col-solution"><strong>Arquivo llms.txt nativo:</strong> IAs recomendam o Bonomi com precisão cirúrgica.</td>
+          </tr>
+          <tr>
+            <td><strong>Soberania & Custos</strong></td>
+            <td class="col-danger">Aluguel perpétuo de softwares e dependência dos algoritmos da Meta.</td>
+            <td class="col-solution"><strong>Código 100% próprio:</strong> zero mensalidade, zero comissão, ativo perpétuo.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- OS DOIS PLANOS DE ATIVAÇÃO -->
+    <div>
+      <div class="sec-heading">
+        <span class="badge">04</span>
+        <span>PROPOSTA DE ENGENHARIA DIGITAL // CHAVE NA MÃO EM 24 HORAS</span>
+      </div>
+      <div class="plans-grid">
+        <div class="plan-card primary">
+          <div class="plan-header">
+            <span class="plan-tag">PLANO 01 // HUB SOBERANO BALCÃO</span>
+            <span class="plan-price">R$ 180<span style="font-size:10pt;">,00</span></span>
+          </div>
+          <div class="plan-title">Site Móvel Soberano & Reserva WhatsApp</div>
+          <p class="plan-body">
+            Site mobile puro em HTML/CSS nativo, estilo bistrô contemporâneo: galeria dos pratos autorais, seleção de vinhos naturais, avaliações reais 4,8 do Google Maps e reserva instantânea sem taxas.
+          </p>
+          <ul class="plan-specs">
+            <li>Arquivo semântico llms.txt para buscadores de I.A.</li>
+            <li>Hospedagem vitalícia gratuita na nuvem do Google</li>
+            <li>Zero mensalidades e zero taxas sobre mesas</li>
+            <li>Entrega técnica e link no ar em até 24 horas</li>
+          </ul>
+        </div>
+
+        <div class="plan-card pro">
+          <div class="plan-header">
+            <span class="plan-tag">PLANO 02 // APLICATIVO & EXPANSÃO</span>
+            <span class="plan-price">R$ 380<span style="font-size:10pt;">,00</span></span>
+          </div>
+          <div class="plan-title">App no Celular dos Clientes Habitual + PWA</div>
+          <p class="plan-body">
+            Transforma o Bonomi em aplicativo nativo no smartphone dos clientes frequentes (adicionado à tela inicial em 1 clique sem depender de App Store), com ícone de luxo e kit de QR codes para o balcão.
+          </p>
+          <ul class="plan-specs">
+            <li>Web App PWA com ícone oficial na tela do cliente</li>
+            <li>Configuração de domínio próprio oficial (.com.br)</li>
+            <li>Kit de QR Codes gráficos para o balcão e mesas</li>
+            <li>Atualização prioritária para trocas sazonais de carta</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAIXA DE VALOR & GARANTIAS DE BALCÃO -->
+    <div class="deal-strip">
+      <div class="deal-left">
+        <div class="deal-badge">INVESTIMENTO DE ATIVAÇÃO IMEDIATA</div>
+        <div class="deal-val">R$ 180<span style="font-size:17pt; vertical-align:super;">,00</span></div>
+        <div class="deal-terms">TAXA ÚNICA PIX &bull; NO AR EM 24 HORAS</div>
+      </div>
+      <div class="deal-right">
+        <div class="deal-right-badges">
+          <span class="deal-pill">SEM MENSALIDADES</span>
+          <span class="deal-pill">ZERO TAXAS</span>
+          <span class="deal-pill">VIZINHANÇA TAVARES</span>
+          <span class="deal-pill">ENTREGA 24H</span>
+        </div>
+        <p class="deal-right-p">
+          Sem aluguel de software nem comissões predatórias. Engenharia de software enxuta executada por vizinhos de bairro no Rio Tavares, entregando um ativo definitivo que se paga já nas primeiras reservas diretas sem comissão.
+        </p>
+      </div>
+    </div>
+
+    <!-- PORTAL PIX DE FECHAMENTO -->
+    <div class="pix-portal">
+      <div class="qr-box">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&amp;data=carlos.linz@hotmail.com" alt="QR Code PIX Carlos Linzmeyer">
+      </div>
+      <div>
+        <div class="pix-info-title">Ativação Imediata de Balcão // WorkAround TI</div>
+        <p class="pix-info-p">
+          Para ativar o site soberano do Bonomi e colocar o link no ar em 24h, basta confirmar a taxa única via PIX:
+        </p>
+        <div class="pix-data-box">
+          <strong>CHAVE PIX (E-MAIL):</strong> carlos.linz@hotmail.com &bull; <strong>TITULAR:</strong> Carlos Linzmeyer<br>
+          <strong>OPERAÇÃO:</strong> WorkAround TI &bull; <strong>BASE:</strong> Rio Tavares, Florianópolis / SC
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    <div class="doc-ref">WORKAROUND TI &bull; ENGENHARIA DE PRODUTO DIGITAL NÔMADE &bull; RIO TAVARES / SUL DA ILHA</div>
+    <div class="page-indicator">PÁG. 02 / 02</div>
+  </div>
+</div>
+
+</body>
+</html>

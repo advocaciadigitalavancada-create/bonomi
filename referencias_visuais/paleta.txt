@@ -1,0 +1,12 @@
+PALETA DE CORES // BONOMI RESTAURANTE (RIO TAVARES)
+Estética: Bistrô Contemporâneo Orgânico / Bauhaus Editorial
+
+- Fundo Principal (Dark Bistrô): #111213
+- Fundo Secundário / Cards: #1B1D1F
+- Borda / Linhas Arquiteturais: #2D3035
+- Texto Principal: #F4F1EA (Cerâmica Crua / Off-White)
+- Texto Secundário: #9EA3A8
+- Acento Primário (Curry & Pimentão Tostado): #E06D26
+- Acento Secundário (Vinho Natural Âmbar): #D49B4B
+- Acento Herbal (Azeite & Cebolinha): #5E7153
+- Branco Puro (Impressão / Sulfite): #FFFFFF
