@@ -1824,10 +1824,10 @@
     <div class="mode-switch-wrapper">
       <div class="mode-switch-bar">
         <button id="btn-mode-brasa" class="mode-btn active" onclick="setMode('brasa')">
-          <span>🔥 MODO BRASA (O RESTAURANTE)</span>
+          <span>🔥 MODO BRASA - RESTAURANTE E CHEF</span>
         </button>
         <button id="btn-mode-sala" class="mode-btn" onclick="setMode('sala')">
-          <span>🍷 MODO SALA (RESERVAS)</span>
+          <span>🍷 MODO SALA - SALÃO E RESERVAS</span>
         </button>
       </div>
     </div>
@@ -2792,7 +2792,7 @@
   <div class="bottom-booking-bar">
     <div class="bottom-booking-inner">
       <button id="btn-bottom-dynamic" class="btn-main-booking" onclick="handleBottomBarAction()">
-        <span id="bottom-bar-text">RESERVAR MESA NO MODO SALA &rarr;</span>
+        <span id="bottom-bar-text">MODO SALA - SALÃO E RESERVAS &rarr;</span>
       </button>
     </div>
   </div>
@@ -2943,13 +2943,13 @@
         body.classList.add('mode-sala');
         btnSala.classList.add('active');
         btnBrasa.classList.remove('active');
-        bottomText.innerText = "🔥 VOLTAR PARA O RESTAURANTE (MODO BRASA)";
+        bottomText.innerText = "🔥 VOLTAR AO MODO BRASA - RESTAURANTE E CHEF";
         updateWhatsAppReservationUrl();
       } else {
         body.classList.remove('mode-sala');
         btnBrasa.classList.add('active');
         btnSala.classList.remove('active');
-        bottomText.innerText = "🍷 RESERVAR MESA NO MODO SALA →";
+        bottomText.innerText = "🍷 MODO SALA - SALÃO E RESERVAS →";
       }
     }
 
