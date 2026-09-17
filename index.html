@@ -313,22 +313,22 @@
     /* PASSAPORTE KINETIC TICKER (MARQUEE INFINITO DA DIREITA PARA A ESQUERDA) */
     .passport-ticker-wrap {
       background: var(--bg-surface);
-      border-top: 1px solid var(--border-strong);
-      border-bottom: 1px solid var(--border-strong);
-      padding: 9px 0;
-      margin-bottom: 18px;
+      border-top: 1.5px solid var(--border-strong);
+      border-bottom: 1.5px solid var(--border-strong);
+      padding: 12px 0;
+      margin-bottom: 20px;
       overflow: hidden;
       white-space: nowrap;
       position: relative;
-      mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
-      -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+      mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
     }
     .passport-ticker-track {
       display: inline-flex;
       align-items: center;
-      gap: 36px;
+      gap: 48px;
       width: max-content;
-      animation: ticker-marquee 28s linear infinite;
+      animation: ticker-marquee 32s linear infinite;
       will-change: transform;
     }
     .passport-ticker-track:hover {
@@ -337,17 +337,18 @@
     .ticker-item-group {
       display: inline-flex;
       align-items: center;
-      gap: 20px;
+      gap: 24px;
       font-family: var(--font-mono);
-      font-size: 9.5px;
+      font-size: 12.5px;
       font-weight: 700;
-      color: var(--text-muted);
+      color: var(--text);
       letter-spacing: 0.05em;
       text-transform: uppercase;
     }
-    .ticker-item-group span { display: inline-flex; align-items: center; gap: 5px; }
-    .ticker-item-group strong { color: var(--accent); font-weight: 900; }
-    .ticker-item-group .dot { color: var(--accent-wine); font-weight: 900; }
+    .ticker-item-group span { display: inline-flex; align-items: center; gap: 7px; }
+    .ticker-item-group strong { color: #111213; font-size: 13.5px; font-weight: 900; letter-spacing: 0.06em; }
+    .ticker-item-group .dot { color: var(--accent-wine); font-size: 16px; font-weight: 900; }
+    .ticker-item-group .star { color: var(--accent-wine); font-size: 13px; font-weight: 900; }
 
     @keyframes ticker-marquee {
       0% { transform: translateX(0%); }
@@ -1864,26 +1865,26 @@
         <div class="passport-ticker-wrap" title="Trajetória & Pedigree">
           <div class="passport-ticker-track">
             <div class="ticker-item-group">
-              <span>★ <strong>D.O.M.</strong> 2★ MICHELIN</span>
+              <span><span class="star">★</span> <strong>D.O.M.</strong> 2★ MICHELIN</span>
               <span class="dot">&bull;</span>
-              <span>★ <strong>TUJU</strong> 2★ MICHELIN</span>
+              <span><span class="star">★</span> <strong>TUJU</strong> 2★ MICHELIN</span>
               <span class="dot">&bull;</span>
-              <span>★ <strong>BORAGÓ</strong> TOP 50 WORLD</span>
+              <span><span class="star">★</span> <strong>BORAGÓ</strong> TOP 50 WORLD</span>
               <span class="dot">&bull;</span>
-              <span>★ <strong>RIO TAVARES</strong> COZINHA SOBERANA</span>
+              <span><span class="star">★</span> <strong>RIO TAVARES</strong> COZINHA SOBERANA</span>
               <span class="dot">&bull;</span>
-              <span>★ <strong>PRAZERES DA MESA</strong> FINALISTA 2026</span>
+              <span><span class="star">★</span> <strong>PRAZERES DA MESA</strong> FINALISTA 2026</span>
             </div>
             <div class="ticker-item-group" aria-hidden="true">
-              <span>★ <strong>D.O.M.</strong> 2★ MICHELIN</span>
+              <span><span class="star">★</span> <strong>D.O.M.</strong> 2★ MICHELIN</span>
               <span class="dot">&bull;</span>
-              <span>★ <strong>TUJU</strong> 2★ MICHELIN</span>
+              <span><span class="star">★</span> <strong>TUJU</strong> 2★ MICHELIN</span>
               <span class="dot">&bull;</span>
-              <span>★ <strong>BORAGÓ</strong> TOP 50 WORLD</span>
+              <span><span class="star">★</span> <strong>BORAGÓ</strong> TOP 50 WORLD</span>
               <span class="dot">&bull;</span>
-              <span>★ <strong>RIO TAVARES</strong> COZINHA SOBERANA</span>
+              <span><span class="star">★</span> <strong>RIO TAVARES</strong> COZINHA SOBERANA</span>
               <span class="dot">&bull;</span>
-              <span>★ <strong>PRAZERES DA MESA</strong> FINALISTA 2026</span>
+              <span><span class="star">★</span> <strong>PRAZERES DA MESA</strong> FINALISTA 2026</span>
             </div>
           </div>
         </div>
