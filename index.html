@@ -1569,6 +1569,162 @@
       border: 1px solid var(--border);
       letter-spacing: 0.04em;
     }
+
+    /* =========================================================
+       SEÇÃO: A CASA & A TRAJETÓRIA DO CHEF RAFAEL SINKO
+       Do rigor dos estrelados à brasa viva no Rio Tavares
+       ========================================================= */
+    .chef-casa-sheet {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-strong);
+      padding: 22px 18px;
+      margin-top: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      position: relative;
+    }
+    .chef-casa-stamp {
+      border-bottom: 2px solid var(--border-strong);
+      padding-bottom: 12px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .chef-stamp-tag {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-wine);
+    }
+    .chef-stamp-sub {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .chef-photo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .chef-photo-item {
+      position: relative;
+      background: var(--bg);
+      border: 1px solid var(--border-strong);
+      overflow: hidden;
+    }
+    .chef-photo-item img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      display: block;
+      filter: contrast(1.05);
+    }
+    .chef-photo-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(17, 18, 19, 0.88);
+      color: #F7F4EE;
+      padding: 6px 8px;
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+    }
+    .trajectory-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .trajectory-item {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      border-left: 3.5px solid var(--border-strong);
+    }
+    .trajectory-item.highlight {
+      border-left-color: var(--accent-wine);
+      background: rgba(122, 28, 44, 0.03);
+    }
+    .trajectory-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+    .trajectory-place {
+      font-family: var(--font-grotesk);
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+    }
+    .trajectory-badge {
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      font-weight: 800;
+      background: var(--text);
+      color: #FFFFFF;
+      padding: 2px 6px;
+      text-transform: uppercase;
+    }
+    .trajectory-badge.wine {
+      background: var(--accent-wine);
+    }
+    .trajectory-desc {
+      font-family: var(--font-sans);
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.38;
+    }
+    .chef-manifesto-box {
+      background: #FFFFFF;
+      border: 1px dashed var(--border-strong);
+      padding: 14px 16px;
+      margin-top: 14px;
+      margin-bottom: 14px;
+    }
+    .chef-manifesto-p {
+      font-family: var(--font-sans);
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .chef-quote-box {
+      border-left: 3px solid var(--accent-wine);
+      padding-left: 12px;
+      margin-top: 10px;
+      font-family: 'Spectral', serif;
+      font-style: italic;
+      font-size: 13.5px;
+      line-height: 1.4;
+      color: var(--accent-wine);
+    }
+    .chef-quote-author {
+      display: block;
+      margin-top: 4px;
+      font-family: var(--font-mono);
+      font-style: normal;
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--text);
+    }
   </style>
 </head>
 <body>
@@ -1664,6 +1820,17 @@
             <span style="color:var(--text); font-weight:900; font-size:16px;">&darr;</span>
           </a>
 
+          <a href="#chef-casa-anchor" class="bio-hub-btn">
+            <div class="bio-hub-btn-left">
+              <span class="bio-hub-icon">👨‍🍳</span>
+              <div>
+                <span>A Casa &amp; O Chef // Rafael Sinko</span>
+                <span class="bio-hub-sub">D.O.M. 2★, Tuju 2★, Boragó &amp; Brasa a 800°C</span>
+              </div>
+            </div>
+            <span class="bio-hub-tag" style="color:var(--accent-curry); border-color:var(--accent-curry); background:rgba(224,109,38,0.08);">HISTÓRIA</span>
+          </a>
+
           <a href="#faq-regras-anchor" class="bio-hub-btn">
             <div class="bio-hub-btn-left">
               <span class="bio-hub-icon">📋</span>
@@ -1738,6 +1905,109 @@
           <div class="r-icon">⏳ TOLERÂNCIA</div>
           <div class="r-text">Tolerância de <strong>15 minutos</strong> de atraso antes de liberar o assento.</div>
         </div>
+      </div>
+
+      <!-- =========================================================
+           A CASA & A TRAJETÓRIA DO CHEF RAFAEL SINKO
+           Do rigor dos estrelados à brasa viva no Rio Tavares
+           ========================================================= -->
+      <div id="chef-casa-anchor" class="section-header-block">
+        <div class="section-header-title">
+          <span>A Casa &amp; O Chef</span>
+        </div>
+        <div class="section-header-meta">Rafael Sinko // Brasa &amp; Pedigree</div>
+      </div>
+
+      <div class="chef-casa-sheet">
+        <div class="chef-casa-stamp">
+          <div>
+            <span class="chef-stamp-tag">★ TRAJETÓRIA ESTRELADA &bull; BRASA VIVA A 800°C</span>
+            <div style="font-family:var(--font-grotesk); font-size:16px; font-weight:800; color:var(--text); text-transform:uppercase; margin-top:3px;">
+              Do Rigor dos Estrelados ao Fogo Livre no Tavares
+            </div>
+          </div>
+          <span class="chef-stamp-sub">50 Lugares &bull; Rod. Dr. Antônio Luiz Moura Gonzaga 1895</span>
+        </div>
+
+        <!-- GRID FOTOGRÁFICO AUTORAL -->
+        <div class="chef-photo-grid">
+          <div class="chef-photo-item">
+            <img src="referencias_visuais/chef_rafael_sinko.jpg" alt="Chef Rafael Sinko no Bonomi Restaurante">
+            <div class="chef-photo-caption">
+              <span>Chef Rafael Sinko</span>
+              <span>Comando do Fogo</span>
+            </div>
+          </div>
+          <div class="chef-photo-item">
+            <img src="referencias_visuais/cozinha_servico.jpg" alt="Cozinha aberta em serviço no Bonomi Restaurante">
+            <div class="chef-photo-caption">
+              <span>Cozinha Aberta</span>
+              <span>Serviço ao Vivo</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- MANIFESTO DA CASA -->
+        <div class="chef-manifesto-box">
+          <p class="chef-manifesto-p">
+            O <strong>Bonomi</strong> nasceu no Rio Tavares com uma premissa clara: despir a alta gastronomia de todo o protocolo engravatado e focar naquilo que realmente importa — o produto excepcional, o calor da brasa a 800°C e a conexão direta de quem cozinha com quem come.
+          </p>
+          <p class="chef-manifesto-p">
+            Em um salão intimista de apenas <strong>50 lugares</strong> na Rodovia do Rio Tavares, a cozinha aberta funciona como palco vivo. Os comensais sentem o calor do carvão, observam a finalização de cada prato e podem sentar espontaneamente nas <strong>6 banquetas do balcão</strong>, mantidas sempre livres sem necessidade de reserva prévia.
+          </p>
+          <div class="chef-quote-box">
+            "A cozinha autoral só tem sentido quando aproxima as pessoas do fogo, da terra e de quem produz."
+            <span class="chef-quote-author">— Chef Rafael Sinko</span>
+          </div>
+        </div>
+
+        <!-- LINHA DO TEMPO & PEDIGREE DO CHEF -->
+        <div class="trajectory-list">
+          <div class="trajectory-item highlight">
+            <div class="trajectory-item-header">
+              <span class="trajectory-place">D.O.M. // São Paulo</span>
+              <span class="trajectory-badge wine">2★ MICHELIN</span>
+            </div>
+            <div class="trajectory-desc">
+              O rigor técnico da cozinha de Alex Atala e o respeito absoluto pela biodiversidade e ingredientes brasileiros de pequenos produtores.
+            </div>
+          </div>
+
+          <div class="trajectory-item highlight">
+            <div class="trajectory-item-header">
+              <span class="trajectory-place">TUJU // São Paulo</span>
+              <span class="trajectory-badge wine">2★ MICHELIN</span>
+            </div>
+            <div class="trajectory-desc">
+              A vanguarda da pesquisa sazonal com Ivan Ralston: técnicas de precisão, infusões botânicas e a disciplina da alta gastronomia contemporânea.
+            </div>
+          </div>
+
+          <div class="trajectory-item highlight">
+            <div class="trajectory-item-header">
+              <span class="trajectory-place">BORAGÓ // Santiago do Chile</span>
+              <span class="trajectory-badge">TOP 50 WORLD</span>
+            </div>
+            <div class="trajectory-desc">
+              A imersão radical no território selvagem com Rodolfo Guzmán: domínio do fogo primitivo, colheita nativa e respeito à ancestralidade dos alimentos.
+            </div>
+          </div>
+
+          <div class="trajectory-item">
+            <div class="trajectory-item-header">
+              <span class="trajectory-place">PRÊMIO PRAZERES DA MESA 2026</span>
+              <span class="trajectory-badge wine">FINALISTA REGIONAL</span>
+            </div>
+            <div class="trajectory-desc">
+              Indicado a <strong>Melhor Restaurante da Região Sul</strong> — o único representante de Santa Catarina na disputa, colocando o Sul da Ilha no mapa da gastronomia brasileira.
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTÃO PARA ROLAR ATÉ O MENU -->
+        <a href="#menu-oficial-anchor" class="roleta-btn-action" style="display:block; text-align:center; text-decoration:none; margin-top:8px;">
+          Ver Cardápio Autoral na Brasa &darr;
+        </a>
       </div>
 
       <!-- =========================================================
