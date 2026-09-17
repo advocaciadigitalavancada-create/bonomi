@@ -311,26 +311,49 @@
       margin-bottom: 16px;
     }
 
-    /* PASSAPORTE KINETIC TICKER */
-    .passport-ticker {
+    /* PASSAPORTE KINETIC TICKER (MARQUEE INFINITO DA DIREITA PARA A ESQUERDA) */
+    .passport-ticker-wrap {
       background: var(--bg-surface);
       border-top: 1px solid var(--border-strong);
       border-bottom: 1px solid var(--border-strong);
-      padding: 8px 12px;
+      padding: 9px 0;
       margin-bottom: 18px;
-      display: flex;
-      justify-content: space-between;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+    }
+    .passport-ticker-track {
+      display: inline-flex;
       align-items: center;
+      gap: 36px;
+      width: max-content;
+      animation: ticker-marquee 28s linear infinite;
+      will-change: transform;
+    }
+    .passport-ticker-track:hover {
+      animation-play-state: paused;
+    }
+    .ticker-item-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
       font-family: var(--font-mono);
-      font-size: 9px;
+      font-size: 9.5px;
       font-weight: 700;
       color: var(--text-muted);
-      overflow-x: auto;
-      white-space: nowrap;
-      gap: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
-    .passport-ticker span { display: inline-flex; align-items: center; gap: 4px; }
-    .passport-ticker strong { color: var(--accent); }
+    .ticker-item-group span { display: inline-flex; align-items: center; gap: 5px; }
+    .ticker-item-group strong { color: var(--accent); font-weight: 900; }
+    .ticker-item-group .dot { color: var(--accent-wine); font-weight: 900; }
+
+    @keyframes ticker-marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
 
     /* FOTO HERO DO ATUM SELADO */
     .hero-photo-frame {
@@ -407,13 +430,72 @@
       letter-spacing: 0.05em;
     }
 
-    /* CARDÁPIO COMPLETO EM TABELAS FLUIDAS (ESTILO STORIES OFICIAIS) */
+    /* CARDÁPIO COMPLETO & CARTA DE VINHOS (COM CONTROLE EXPANDIR / FECHAR) */
     .official-menu-container {
       background: var(--bg-surface);
       border: 2px solid var(--border-strong);
       padding: 16px;
       margin-bottom: 24px;
       box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+      transition: all 0.3s ease;
+    }
+    .official-menu-container.is-collapsed .menu-collapsible-body {
+      display: none;
+    }
+    .btn-menu-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 5px 9px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-menu-toggle:hover {
+      background: #111213;
+      color: #FFFFFF;
+    }
+    .btn-menu-toggle-footer {
+      width: 100%;
+      background: var(--bg-surface-elevated);
+      border: 1px dashed var(--border-strong);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 11px;
+      margin-top: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .btn-menu-toggle-footer:hover {
+      background: #111213;
+      color: #FFFFFF;
+      border-style: solid;
+    }
+    .menu-collapsed-preview {
+      display: none;
+      padding: 8px 0;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+    .official-menu-container.is-collapsed .menu-collapsed-preview {
+      display: block;
     }
     .menu-category-title {
       font-family: var(--font-mono);
@@ -1779,15 +1861,32 @@
           Sem cerimônias, sem garçom engravatado. O rigor de quem passou pelo D.O.M., Tuju e Boragó executado ao vivo em 50 lugares na Rodovia do Rio Tavares.
         </p>
 
-        <!-- PASSAPORTE KINETIC TICKER -->
-        <div class="passport-ticker">
-          <span>★ <strong>D.O.M.</strong> 2★ MICHELIN</span>
-          <span>&bull;</span>
-          <span>★ <strong>TUJU</strong> 2★ MICHELIN</span>
-          <span>&bull;</span>
-          <span>★ <strong>BORAGÓ</strong> TOP 50 WORLD</span>
-          <span>&bull;</span>
-          <span>★ <strong>RIO TAVARES</strong> COZINHA SOBERANA</span>
+        <!-- PASSAPORTE KINETIC TICKER (MARQUEE INFINITO DA DIREITA PARA A ESQUERDA) -->
+        <div class="passport-ticker-wrap" title="Trajetória & Pedigree">
+          <div class="passport-ticker-track">
+            <div class="ticker-item-group">
+              <span>★ <strong>D.O.M.</strong> 2★ MICHELIN</span>
+              <span class="dot">&bull;</span>
+              <span>★ <strong>TUJU</strong> 2★ MICHELIN</span>
+              <span class="dot">&bull;</span>
+              <span>★ <strong>BORAGÓ</strong> TOP 50 WORLD</span>
+              <span class="dot">&bull;</span>
+              <span>★ <strong>RIO TAVARES</strong> COZINHA SOBERANA</span>
+              <span class="dot">&bull;</span>
+              <span>★ <strong>PRAZERES DA MESA</strong> FINALISTA 2026</span>
+            </div>
+            <div class="ticker-item-group" aria-hidden="true">
+              <span>★ <strong>D.O.M.</strong> 2★ MICHELIN</span>
+              <span class="dot">&bull;</span>
+              <span>★ <strong>TUJU</strong> 2★ MICHELIN</span>
+              <span class="dot">&bull;</span>
+              <span>★ <strong>BORAGÓ</strong> TOP 50 WORLD</span>
+              <span class="dot">&bull;</span>
+              <span>★ <strong>RIO TAVARES</strong> COZINHA SOBERANA</span>
+              <span class="dot">&bull;</span>
+              <span>★ <strong>PRAZERES DA MESA</strong> FINALISTA 2026</span>
+            </div>
+          </div>
         </div>
       </header>
 
@@ -1877,13 +1976,13 @@
         </div>
       </div>
 
-      <!-- FOTO HERO: CORTE AUTORAL NA BRASA -->
+      <!-- FOTO HERO: TARTAR AUTORAL DO BONOMI (SUBSTITUINDO O ATUM) -->
       <div class="hero-photo-frame">
-        <img src="referencias_visuais/atum_curry_vagem_cebola_frita.jpg" alt="Atum com curry, vagem e cebola frita no Bonomi Restaurante">
-        <div class="photo-corner-stamp">PRATO ASSINATURA // CORTE Nº 01</div>
+        <img src="referencias_visuais/tartar_atum_prato_oficial.png" alt="Tartar de Atum Fresco com chili oil, gergelim e folhas no Bonomi Restaurante">
+        <div class="photo-corner-stamp">PRATO ASSINATURA // COZINHA AUTORAL</div>
         <div class="photo-caption-bar">
-          <span class="dish-name">Atum Selado, Curry & Vagem Crocante</span>
-          <span class="dish-tag">Pesca Local & Brasa</span>
+          <span class="dish-name">Tartar de Atum Fresco &amp; Chili Oil</span>
+          <span class="dish-tag">Pesca do Dia &bull; Rio Tavares</span>
         </div>
       </div>
 
@@ -1939,10 +2038,10 @@
             </div>
           </div>
           <div class="chef-photo-item">
-            <img src="referencias_visuais/cozinha_servico.jpg" alt="Cozinha aberta em serviço no Bonomi Restaurante">
+            <img src="referencias_visuais/equipe_bonomi_feliz.png" alt="Equipe de cozinha do Bonomi Restaurante feliz em serviço">
             <div class="chef-photo-caption">
-              <span>Cozinha Aberta</span>
-              <span>Serviço ao Vivo</span>
+              <span>Equipe Bonomi</span>
+              <span>Cozinha &amp; Brasa</span>
             </div>
           </div>
         </div>
@@ -2108,12 +2207,12 @@
 
         <div id="roleta-card" class="roleta-display-card">
           <div class="roleta-img-frame">
-            <img id="roleta-img" src="referencias_visuais/atum_curry_vagem_cebola_frita.jpg" alt="Sugestão do Chef">
+            <img id="roleta-img" src="referencias_visuais/tartar_atum_prato_oficial.png" alt="Sugestão do Chef: Tartar de Atum Fresco">
           </div>
           <div class="roleta-info">
-            <div id="roleta-cat" class="roleta-dish-cat">DO MAR // BRASA A 800°C</div>
-            <div id="roleta-title" class="roleta-dish-title">Atum Selado, Curry &amp; Vagem</div>
-            <div id="roleta-desc" class="roleta-dish-desc">Lombo de atum selado no fogo, curry aromático, vagem crocante e cebola frita.</div>
+            <div id="roleta-cat" class="roleta-dish-cat">DO MAR // COZINHA AUTORAL</div>
+            <div id="roleta-title" class="roleta-dish-title">Tartar de Atum Fresco</div>
+            <div id="roleta-desc" class="roleta-dish-desc">Pesca da costa no corte clássico crú, óleo de pimenta artesanal, gergelim e ervas frescas.</div>
             <div class="roleta-wine-box">
               <strong>Harmonização:</strong> <span id="roleta-wine">Vinho Branco Viognier Mas des Agrunelles (2022)</span>
             </div>
@@ -2140,119 +2239,134 @@
           </div>
           <span>Menu Oficial</span>
         </div>
-        <div class="section-header-meta">Pequenos Pratos para Compartilhar</div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <button id="btn-toggle-menu" class="btn-menu-toggle" onclick="toggleContainer('container-menu-oficial', 'btn-toggle-menu', 'Menu')">
+            <span class="toggle-icon">−</span>
+            <span class="toggle-text">Fechar Menu</span>
+          </button>
+        </div>
       </div>
 
-      <div class="official-menu-container">
+      <div id="container-menu-oficial" class="official-menu-container">
         
-        <!-- PÃO -->
-        <div class="menu-category-title">PÃO</div>
-        <div class="menu-row-item">
-          <div class="menu-item-left">
-            <div class="dish-head">Pão de Levain</div>
-            <div class="dish-sub">Manteiga noisette & mel fermentado artesanal da casa.</div>
-          </div>
-          <div class="dish-price">25</div>
+        <div class="menu-collapsed-preview">
+          Cardápio recolhido. Clique no botão acima ou abaixo para expandir a lista completa de pequenos pratos à la carte.
         </div>
 
-        <!-- VEGETAIS -->
-        <div class="menu-category-title">VEGETAIS</div>
-        <div class="menu-row-item">
-          <div class="menu-item-left">
-            <div class="dish-head">Pimentões Assados</div>
-            <div class="dish-sub">Brioche dourado, bechamel aveludado e ovo perfeito.</div>
+        <div class="menu-collapsible-body">
+          <!-- PÃO -->
+          <div class="menu-category-title">PÃO</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Pão de Levain</div>
+              <div class="dish-sub">Manteiga noisette & mel fermentado artesanal da casa.</div>
+            </div>
+            <div class="dish-price">25</div>
           </div>
-          <div class="dish-price">42</div>
-        </div>
-        <div class="menu-row-item">
-          <div class="menu-item-left">
-            <div class="dish-head">Alho-Poró na Brasa</div>
-            <div class="dish-sub">Demiglace vegetal profundo, picles crocante de enoki e pão frito.</div>
-          </div>
-          <div class="dish-price">42</div>
-        </div>
-        <div class="menu-row-item">
-          <div class="menu-item-left">
-            <div class="dish-head">Milho Tostado</div>
-            <div class="dish-sub">Cogumelos portobello, manteiga de levedura e uva fresca.</div>
-          </div>
-          <div class="dish-price">39</div>
-        </div>
 
-        <!-- DO MAR -->
-        <div class="menu-category-title">DO MAR</div>
-        <div class="menu-row-item">
-          <div class="menu-item-left">
-            <div class="dish-head">Peixe Curado</div>
-            <div class="dish-sub">Pescado fresco da costa, chili oil artesanal e kiwi.</div>
+          <!-- VEGETAIS -->
+          <div class="menu-category-title">VEGETAIS</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Pimentões Assados</div>
+              <div class="dish-sub">Brioche dourado, bechamel aveludado e ovo perfeito.</div>
+            </div>
+            <div class="dish-price">42</div>
           </div>
-          <div class="dish-price">44</div>
-        </div>
-        <div class="menu-row-item">
-          <div class="menu-item-left">
-            <div class="dish-head">Quenelle de Peixe Branco</div>
-            <div class="dish-sub">Molho rico de conchas marinhas e emulsão de ervas.</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Alho-Poró na Brasa</div>
+              <div class="dish-sub">Demiglace vegetal profundo, picles crocante de enoki e pão frito.</div>
+            </div>
+            <div class="dish-price">42</div>
           </div>
-          <div class="dish-price">46</div>
-        </div>
-        <div class="menu-row-item">
-          <div class="menu-item-left">
-            <div class="dish-head">Atum, Curry & Vagem</div>
-            <div class="dish-sub">Lombo de atum selado no fogo, curry aromático, vagem e cebola frita. <em>Harmoniza perfeitamente com Praya Lager!</em></div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Milho Tostado</div>
+              <div class="dish-sub">Cogumelos portobello, manteiga de levedura e uva fresca.</div>
+            </div>
+            <div class="dish-price">39</div>
           </div>
-          <div class="dish-price">56</div>
-        </div>
 
-        <!-- CARNES -->
-        <div class="menu-category-title">CARNES</div>
-        <div class="menu-row-item">
-          <div class="menu-item-left">
-            <div class="dish-head">Tartar de Carne</div>
-            <div class="dish-sub">Tomate queimado na brasa, cebola confit, mostarda e queijo curado.</div>
+          <!-- DO MAR -->
+          <div class="menu-category-title">DO MAR</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Tartar de Atum Fresco</div>
+              <div class="dish-sub">Pesca da costa selada no ponto crú, infusão de chili oil artesanal da casa, gergelim e ervas.</div>
+            </div>
+            <div class="dish-price">56</div>
           </div>
-          <div class="dish-price">42</div>
-        </div>
-        <div class="menu-row-item">
-          <div class="menu-item-left">
-            <div class="dish-head">Kufteh de Cordeiro</div>
-            <div class="dish-sub">Cordeiro aromático na brasa, hortelã fresca e labneh cremoso.</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Peixe Curado</div>
+              <div class="dish-sub">Pescado fresco da costa, chili oil artesanal e kiwi.</div>
+            </div>
+            <div class="dish-price">44</div>
           </div>
-          <div class="dish-price">43</div>
-        </div>
-        <div class="menu-row-item">
-          <div class="menu-item-left">
-            <div class="dish-head">Língua de Angus</div>
-            <div class="dish-sub">Creme untuoso de grão de bico com alho negro e folhas frescas.</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Quenelle de Peixe Branco</div>
+              <div class="dish-sub">Molho rico de conchas marinhas e emulsão de ervas.</div>
+            </div>
+            <div class="dish-price">46</div>
           </div>
-          <div class="dish-price">40</div>
-        </div>
-        <div class="menu-row-item">
-          <div class="menu-item-left">
-            <div class="dish-head">Pancetta na Brasa (2un)</div>
-            <div class="dish-sub">Mamão verde em tiras, gohan clássico e demiglace com infusão de café.</div>
-          </div>
-          <div class="dish-price">43</div>
-        </div>
 
-        <!-- SOBREMESAS -->
-        <div class="menu-category-title">SOBREMESAS</div>
-        <div class="menu-row-item">
-          <div class="menu-item-left">
-            <div class="dish-head">Sorvete de Chocolate</div>
-            <div class="dish-sub">Calda dandan aromática e crocante biscoito de gergelim tostado.</div>
+          <!-- CARNES -->
+          <div class="menu-category-title">CARNES</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Tartar de Carne</div>
+              <div class="dish-sub">Tomate queimado na brasa, cebola confit, mostarda e queijo curado.</div>
+            </div>
+            <div class="dish-price">42</div>
           </div>
-          <div class="dish-price">39</div>
-        </div>
-        <div class="menu-row-item">
-          <div class="menu-item-left">
-            <div class="dish-head">Bolo de Tâmaras Quente</div>
-            <div class="dish-sub">Especiarias amazônicas, toffee aveludado e crème fraîche batido.</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Kufteh de Cordeiro</div>
+              <div class="dish-sub">Cordeiro aromático na brasa, hortelã fresca e labneh cremoso.</div>
+            </div>
+            <div class="dish-price">43</div>
           </div>
-          <div class="dish-price">39</div>
-        </div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Língua de Angus</div>
+              <div class="dish-sub">Creme untuoso de grão de bico com alho negro e folhas frescas.</div>
+            </div>
+            <div class="dish-price">40</div>
+          </div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Pancetta na Brasa (2un)</div>
+              <div class="dish-sub">Mamão verde em tiras, gohan clássico e demiglace com infusão de café.</div>
+            </div>
+            <div class="dish-price">43</div>
+          </div>
 
-        <div style="font-family: var(--font-mono); font-size: 9.5px; color: var(--text-muted); margin-top: 14px; text-align: center;">
-          *Por favor, avise-nos previamente sobre qualquer restrição ou alergia alimentar.
+          <!-- SOBREMESAS -->
+          <div class="menu-category-title">SOBREMESAS</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Sorvete de Chocolate</div>
+              <div class="dish-sub">Calda dandan aromática e crocante biscoito de gergelim tostado.</div>
+            </div>
+            <div class="dish-price">39</div>
+          </div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Bolo de Tâmaras Quente</div>
+              <div class="dish-sub">Especiarias amazônicas, toffee aveludado e crème fraîche batido.</div>
+            </div>
+            <div class="dish-price">39</div>
+          </div>
+
+          <div style="font-family: var(--font-mono); font-size: 9.5px; color: var(--text-muted); margin-top: 14px; text-align: center;">
+            *Por favor, avise-nos previamente sobre qualquer restrição ou alergia alimentar.
+          </div>
+
+          <button class="btn-menu-toggle-footer" onclick="toggleContainer('container-menu-oficial', 'btn-toggle-menu', 'Menu')">
+            <span>▲ Recolher Cardápio</span>
+          </button>
         </div>
       </div>
 
@@ -2260,100 +2374,118 @@
            CARTA DE VINHOS NATURAIS OFICIAL (RESUMO SELECIONADO)
            ========================================================= -->
       <div id="vinhos-anchor" class="section-header-block">
-        <div class="section-header-title">Vinhos Naturais</div>
-        <div class="section-header-meta">Mínima Intervenção &bull; Vinhos Vivos</div>
+        <div class="section-header-title">
+          <span>Vinhos Naturais</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <button id="btn-toggle-vinhos" class="btn-menu-toggle" onclick="toggleContainer('container-vinhos-oficial', 'btn-toggle-vinhos', 'Carta')">
+            <span class="toggle-icon">−</span>
+            <span class="toggle-text">Fechar Carta</span>
+          </button>
+        </div>
       </div>
 
-      <div class="official-menu-container">
-        <div class="menu-category-title">PET-NAT & ESPUMANTES</div>
-        <div class="menu-row-item">
-          <div class="menu-item-left">
-            <div class="dish-head">Cantina Mincarone (2023)</div>
-            <div class="dish-sub">Sangiovese &bull; Serra Gaúcha/RS, Brasil</div>
-          </div>
-          <div class="dish-price">195</div>
+      <div id="container-vinhos-oficial" class="official-menu-container">
+        
+        <div class="menu-collapsed-preview">
+          Carta de vinhos recolhida. Clique no botão acima ou abaixo para expandir rótulos naturais, biodinâmicos, taças do dia e cervejas selvagens.
         </div>
 
-        <div class="menu-category-title">BRANCOS & LARANJAS</div>
-        <div class="menu-row-item">
-          <div class="menu-item-left">
-            <div class="dish-head">Vega Tolosa Macabeo (2022)</div>
-            <div class="dish-sub">Manchuela, Espanha &bull; Frescor e mineralidade pura</div>
+        <div class="menu-collapsible-body">
+          <div class="menu-category-title">PET-NAT & ESPUMANTES</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Cantina Mincarone (2023)</div>
+              <div class="dish-sub">Sangiovese &bull; Serra Gaúcha/RS, Brasil</div>
+            </div>
+            <div class="dish-price">195</div>
           </div>
-          <div class="dish-price">145</div>
-        </div>
-        <div class="menu-row-item">
-          <div class="menu-item-left">
-            <div class="dish-head">Lazy Winemaker Sauvignon Blanc (2025)</div>
-            <div class="dish-sub">Laranja &bull; Vale do Curicó, Chile &bull; Maceração em casca</div>
-          </div>
-          <div class="dish-price">185</div>
-        </div>
-        <div class="menu-row-item">
-          <div class="menu-item-left">
-            <div class="dish-head">Domaine Geigerkoenig (2022)</div>
-            <div class="dish-sub">Pinot Gris / Gewürztraminer &bull; Alsácia, França</div>
-          </div>
-          <div class="dish-price">265</div>
-        </div>
 
-        <div class="menu-category-title">TINTOS & TAÇAS</div>
-        <div class="menu-row-item">
-          <div class="menu-item-left">
-            <div class="dish-head">Montlaiz Cabernet Sauvignon (2024)</div>
-            <div class="dish-sub">Mendoza, Argentina &bull; Fermentação selvagem</div>
+          <div class="menu-category-title">BRANCOS & LARANJAS</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Vega Tolosa Macabeo (2022)</div>
+              <div class="dish-sub">Manchuela, Espanha &bull; Frescor e mineralidade pura</div>
+            </div>
+            <div class="dish-price">145</div>
           </div>
-          <div class="dish-price">160</div>
-        </div>
-        <div class="menu-category-title">SEM ÁLCOOL & APERITIVOS</div>
-        <div class="menu-row-item">
-          <div class="menu-item-left">
-            <div class="dish-head">Vinoh Moscato / Merlot (Sem Álcool)</div>
-            <div class="dish-sub">Garrafa 750ml &bull; Serra Gaúcha/RS &bull; Taça: R$ 33</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Lazy Winemaker Sauvignon Blanc (2025)</div>
+              <div class="dish-sub">Laranja &bull; Vale do Curicó, Chile &bull; Maceração em casca</div>
+            </div>
+            <div class="dish-price">185</div>
           </div>
-          <div class="dish-price">160</div>
-        </div>
-        <div class="menu-row-item">
-          <div class="menu-item-left">
-            <div class="dish-head">Lucia Botânico Brasileiro (Aperitivo)</div>
-            <div class="dish-sub">Frutas vermelhas, cupuaçu, limão e leve amargor</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Domaine Geigerkoenig (2022)</div>
+              <div class="dish-sub">Pinot Gris / Gewürztraminer &bull; Alsácia, França</div>
+            </div>
+            <div class="dish-price">265</div>
           </div>
-          <div class="dish-price">36</div>
-        </div>
-        <div class="menu-row-item">
-          <div class="menu-item-left">
-            <div class="dish-head">Kombucha / Baer-Mate / Suco / Água Mamba</div>
-            <div class="dish-sub">Opções artesanais gaseificadas e cafés espresso (R$ 7 a R$ 23)</div>
-          </div>
-          <div class="dish-price">7-23</div>
-        </div>
 
-        <div class="menu-category-title">CERVEJAS SELVAGENS & ARTESANAIS</div>
-        <div class="menu-row-item">
-          <div class="menu-item-left">
-            <div class="dish-head">Cozalinda Fermentação Mista / Saison Mel</div>
-            <div class="dish-sub">Florianópolis, SC &bull; Cervejas selvagens de terroir manezinho &bull; 330/375ml</div>
+          <div class="menu-category-title">TINTOS & TAÇAS</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Montlaiz Cabernet Sauvignon (2024)</div>
+              <div class="dish-sub">Mendoza, Argentina &bull; Fermentação selvagem</div>
+            </div>
+            <div class="dish-price">160</div>
           </div>
-          <div class="dish-price">42</div>
-        </div>
-        <div class="menu-row-item">
-          <div class="menu-item-left">
-            <div class="dish-head">Cerveja Praya (Golden Ale / Sem Glúten)</div>
-            <div class="dish-sub">Ou Heineken, Heineken 0,0%, Lagunitas IPA (R$ 17 a R$ 25)</div>
+          <div class="menu-category-title">SEM ÁLCOOL & APERITIVOS</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Vinoh Moscato / Merlot (Sem Álcool)</div>
+              <div class="dish-sub">Garrafa 750ml &bull; Serra Gaúcha/RS &bull; Taça: R$ 33</div>
+            </div>
+            <div class="dish-price">160</div>
           </div>
-          <div class="dish-price">17+</div>
-        </div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Lucia Botânico Brasileiro (Aperitivo)</div>
+              <div class="dish-sub">Frutas vermelhas, cupuaçu, limão e leve amargor</div>
+            </div>
+            <div class="dish-price">36</div>
+          </div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Kombucha / Baer-Mate / Suco / Água Mamba</div>
+              <div class="dish-sub">Opções artesanais gaseificadas e cafés espresso (R$ 7 a R$ 23)</div>
+            </div>
+            <div class="dish-price">7-23</div>
+          </div>
 
-        <!-- AVISO EDITORIAL DE ROLHA // CARTA DE VINHOS -->
-        <div class="wine-corkage-callout">
-          <div class="wine-corkage-header">
-            <span class="wine-corkage-icon">🍷</span>
-            <span class="wine-corkage-title">CARTA DE VINHOS VIVOS &amp; TAXA DE ROLHA</span>
+          <div class="menu-category-title">CERVEJAS SELVAGENS & ARTESANAIS</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Cozalinda Fermentação Mista / Saison Mel</div>
+              <div class="dish-sub">Florianópolis, SC &bull; Cervejas selvagens de terroir manezinho &bull; 330/375ml</div>
+            </div>
+            <div class="dish-price">42</div>
           </div>
-          <p class="wine-corkage-body">
-            Nossa carta foi pensada com muito cuidado e carinho para fazer sentido com nossos pratos e a proposta da casa, então a sugestão é que provem o que temos para oferecer! 
-            <strong>Se preferir trazer um vinho de casa, nossa taxa de rolha é R$ 100 por garrafa.</strong>
-          </p>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Cerveja Praya (Golden Ale / Sem Glúten)</div>
+              <div class="dish-sub">Ou Heineken, Heineken 0,0%, Lagunitas IPA (R$ 17 a R$ 25)</div>
+            </div>
+            <div class="dish-price">17+</div>
+          </div>
+
+          <!-- AVISO EDITORIAL DE ROLHA // CARTA DE VINHOS -->
+          <div class="wine-corkage-callout">
+            <div class="wine-corkage-header">
+              <span class="wine-corkage-icon">🍷</span>
+              <span class="wine-corkage-title">CARTA DE VINHOS VIVOS &amp; TAXA DE ROLHA</span>
+            </div>
+            <p class="wine-corkage-body">
+              Nossa carta foi pensada com muito cuidado e carinho para fazer sentido com nossos pratos e a proposta da casa, então a sugestão é que provem o que temos para oferecer! 
+              <strong>Se preferir trazer um vinho de casa, nossa taxa de rolha é R$ 100 por garrafa.</strong>
+            </p>
+          </div>
+
+          <button class="btn-menu-toggle-footer" onclick="toggleContainer('container-vinhos-oficial', 'btn-toggle-vinhos', 'Carta')">
+            <span>▲ Recolher Carta de Vinhos</span>
+          </button>
         </div>
       </div>
 
@@ -2667,6 +2799,26 @@
 
   <!-- SCRIPT DE COMPORTAMENTO & BACKEND SOBERANO -->
   <script>
+    // FUNÇÃO PARA ABRIR / FECHAR SEÇÕES DE CARDÁPIO E CARTA DE VINHOS
+    function toggleContainer(containerId, btnId, labelName) {
+      var container = document.getElementById(containerId);
+      var btn = document.getElementById(btnId);
+      if (!container) return;
+
+      var isCollapsed = container.classList.toggle('is-collapsed');
+      if (btn) {
+        var icon = btn.querySelector('.toggle-icon');
+        var text = btn.querySelector('.toggle-text');
+        if (isCollapsed) {
+          if (icon) icon.textContent = '+';
+          if (text) text.textContent = 'Ver ' + labelName;
+        } else {
+          if (icon) icon.textContent = '−';
+          if (text) text.textContent = 'Fechar ' + labelName;
+        }
+      }
+    }
+
     var currentMode = "brasa";
     var resPax = "2 Pessoas";
     var resDate = "Sexta-feira (Hoje/Próx)";
@@ -2678,11 +2830,11 @@
     // ROLETA DO CHEF // DADOS OFICIAIS & COMBINAÇÃO BRASA + VINHO
     var chefPairings = [
       {
-        dish: "Atum Selado, Curry & Vagem Crocante",
-        cat: "DO MAR // BRASA A 800°C",
-        desc: "Lombo de atum selado no fogo, curry aromático fresco, vagem crocante e cebola frita.",
+        dish: "Tartar de Atum Fresco & Chili Oil",
+        cat: "DO MAR // COZINHA AUTORAL",
+        desc: "Pesca da costa no corte clássico crú, óleo de pimenta artesanal, gergelim e ervas frescas.",
         wine: "Vinho Branco Viognier Mas des Agrunelles (2022) ou Praya Lager",
-        img: "referencias_visuais/atum_curry_vagem_cebola_frita.jpg"
+        img: "referencias_visuais/tartar_atum_prato_oficial.png"
       },
       {
         dish: "Pimentões Assados, Brioche & Ovo Perfeito",
