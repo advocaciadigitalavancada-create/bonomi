@@ -1,0 +1,25 @@
+﻿{
+  "name": "Bonomi Restaurante // Rio Tavares",
+  "short_name": "Bonomi",
+  "description": "Cozinha autoral de brasa viva, vinhos de baixa intervenção e central soberana de reservas do Chef Rafael Sinko no Rio Tavares, Florianópolis.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#111213",
+  "theme_color": "#111213",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

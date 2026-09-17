@@ -49,13 +49,29 @@ async def render_config(browser, cfg):
             await p_el.screenshot(path=target_path)
             print(f"[OK] Preview P{i+1} salvo: {os.path.basename(target_path)}")
         
-    await page.pdf(
-        path=cfg["pdf"],
-        format="A4",
-        print_background=True,
-        margin={"top": "0", "right": "0", "bottom": "0", "left": "0"}
-    )
-    print(f"[OK] PDF 4P gerado: {cfg['pdf']}")
+    saved_pdf = None
+    candidates = [
+        cfg["pdf"],
+        cfg["pdf"].replace(".pdf", "_atualizado.pdf"),
+        cfg["pdf"].replace(".pdf", "_respiro.pdf"),
+        cfg["pdf"].replace(".pdf", "_novo2.pdf")
+    ]
+    for cand in candidates:
+        try:
+            await page.pdf(
+                path=cand,
+                format="A4",
+                print_background=True,
+                margin={"top": "0", "right": "0", "bottom": "0", "left": "0"}
+            )
+            saved_pdf = cand
+            print(f"[OK] PDF 4P gerado: {cand}")
+            break
+        except PermissionError:
+            continue
+    if not saved_pdf:
+        print(f"[ERRO] Nao foi possivel salvar PDF para {cfg['name']} (todos os arquivos bloqueados).")
+    cfg["pdf"] = saved_pdf
     await page.close()
 
 async def main():
@@ -75,7 +91,10 @@ async def main():
     for cfg in CONFIGS:
         shutil.copy2(cfg["html"], os.path.join(CENTRAL_DIR, os.path.basename(cfg["html"])))
         if os.path.exists(cfg["pdf"]):
-            shutil.copy2(cfg["pdf"], os.path.join(CENTRAL_DIR, os.path.basename(cfg["pdf"])))
+            try:
+                shutil.copy2(cfg["pdf"], os.path.join(CENTRAL_DIR, os.path.basename(cfg["pdf"])))
+            except Exception as e:
+                print(f"[AVISO] Nao foi possivel replicar {os.path.basename(cfg['pdf'])} para a central: {e}")
         for prev in cfg["previews"]:
             if os.path.exists(prev):
                 shutil.copy2(prev, os.path.join(CENTRAL_DIR, os.path.basename(prev)))

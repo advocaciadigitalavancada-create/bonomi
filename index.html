@@ -10,6 +10,8 @@
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="shortcut icon" href="favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#111213">
 
   <!-- SEO & Standard Meta Fallbacks -->
   <meta name="title" content="BONOMI RESTAURANTE • Cozinha Autoral, Brasa Viva & Reservas">
@@ -49,27 +51,28 @@
 
   <style>
     /* =========================================================
-       VARIÁVEIS DE COR: MODO BRASA vs MODO SALA
+       VARIÁVEIS DE COR: PALETA OFICIAL BONOMI (paleta.txt)
        ========================================================= */
     :root {
-      /* MODO BRASA: Carvão Profundo, Fogo & Fita Crepe */
-      --bg: #0A0B0D;
-      --bg-surface: #121418;
-      --bg-surface-elevated: #1B1E24;
-      --text: #F3F1EC;
-      --text-muted: #8E9299;
-      --accent: #FF4D00;
-      --accent-glow: rgba(255, 77, 0, 0.28);
-      --accent-secondary: #FFB800;
-      --border: rgba(255, 255, 255, 0.09);
-      --border-strong: rgba(255, 255, 255, 0.22);
-      --hud-bg: #050608;
+      /* MODO BRASA: Dark Bistrô (#111213), Curry (#E06D26) & Fita Crepe */
+      --bg: #111213;
+      --bg-surface: #1B1D1F;
+      --bg-surface-elevated: #24272B;
+      --text: #F4F1EA;
+      --text-muted: #9EA3A8;
+      --accent: #E06D26;
+      --accent-glow: rgba(224, 109, 38, 0.25);
+      --accent-secondary: #D49B4B;
+      --accent-green: #5E7153;
+      --border: #2D3035;
+      --border-strong: #3F444D;
+      --hud-bg: #0C0D0E;
 
       /* Fita Crepe Autêntica */
       --tape-bg: #EFE4C8;
       --tape-text: #111315;
       --tape-border: #D2C4A0;
-      --tape-stamp: #991B1B;
+      --tape-stamp: #A84E18;
       --tape-edge-shadow: rgba(0, 0, 0, 0.35);
 
       --font-display: 'Big Shoulders Display', sans-serif;
@@ -80,24 +83,24 @@
       --transition-mode: background 0.35s ease, color 0.35s ease, border-color 0.35s ease;
     }
 
-    /* MODO SALA: Papel Cerâmico Cru, Tipografia Editorial & Vinho Tinto */
+    /* MODO SALA: Papel Cerâmico Cru (#F4F1EA), Tipografia Editorial & Bistrô */
     body.mode-sala {
       --bg: #F4F1EA;
-      --bg-surface: #FFFFFF;
-      --bg-surface-elevated: #E9E5DC;
+      --bg-surface: #EAE6DD;
+      --bg-surface-elevated: #E0DBD0;
       --text: #121316;
       --text-muted: #5E6268;
-      --accent: #A31D1D;
-      --accent-glow: rgba(163, 29, 29, 0.18);
-      --accent-secondary: #8B5A2B;
-      --border: rgba(0, 0, 0, 0.10);
-      --border-strong: rgba(0, 0, 0, 0.25);
-      --hud-bg: #EAE6DD;
-      --tape-bg: #E2ECED;
+      --accent: #E06D26;
+      --accent-glow: rgba(224, 109, 38, 0.18);
+      --accent-secondary: #5E7153;
+      --border: #D4CEBE;
+      --border-strong: #121316;
+      --hud-bg: #E4DFD5;
+      --tape-bg: #EAE3CF;
       --tape-text: #0E161A;
-      --tape-border: #BACDD1;
-      --tape-stamp: #1A4770;
-      --tape-edge-shadow: rgba(0, 0, 0, 0.15);
+      --tape-border: #C8BF9F;
+      --tape-stamp: #7A1C2C;
+      --tape-edge-shadow: rgba(0, 0, 0, 0.12);
     }
 
     * {
@@ -105,16 +108,33 @@
       margin: 0;
       padding: 0;
       -webkit-tap-highlight-color: transparent;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    *::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
     }
 
     body {
-      background-color: var(--bg);
+      background-color: #0A0A0B;
       color: var(--text);
       font-family: var(--font-sans);
       line-height: 1.5;
       padding-bottom: 96px;
       overflow-x: hidden;
       transition: var(--transition-mode);
+    }
+
+    .app-shell {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background-color: var(--bg);
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
+      position: relative;
     }
 
     /* TOP HUD METEOROLÓGICO */
@@ -557,6 +577,144 @@
       text-transform: uppercase;
       padding: 2px 6px;
       color: #111315;
+    }
+
+    /* ROLETA DO CHEF RAFAEL SINKO // COMBINAÇÃO BRASA & VINHO */
+    .roleta-box {
+      background: var(--bg-surface);
+      border: 2px solid var(--accent);
+      padding: 16px;
+      margin-top: 24px;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .roleta-badge-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-bottom: 1px dashed var(--border-strong);
+      padding-bottom: 8px;
+    }
+    .roleta-display-card {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-strong);
+      padding: 12px;
+      margin-bottom: 12px;
+      transition: all 0.25s ease;
+    }
+    .roleta-img-frame {
+      width: 78px;
+      height: 78px;
+      border: 1px solid var(--border-strong);
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #000;
+    }
+    .roleta-img-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.15s ease, transform 0.25s ease;
+    }
+    .roleta-info { flex: 1; }
+    .roleta-dish-cat {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 800;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .roleta-dish-title {
+      font-family: var(--font-grotesk);
+      font-size: 14.5px;
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--text);
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .roleta-dish-desc {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.35;
+      margin-bottom: 6px;
+    }
+    .roleta-wine-box {
+      background: var(--bg);
+      border-left: 2.5px solid var(--accent-secondary);
+      padding: 6px 10px;
+      font-size: 10.5px;
+      color: var(--text);
+      line-height: 1.35;
+      font-family: var(--font-sans);
+    }
+    .roleta-wine-box strong { color: var(--accent-secondary); font-family: var(--font-mono); }
+    .roleta-btn-spin {
+      width: 100%;
+      background: var(--accent);
+      color: #FFFFFF;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 13px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 16px var(--accent-glow);
+      transition: all 0.2s ease;
+    }
+    .roleta-btn-spin:active {
+      transform: scale(0.98);
+    }
+    .roleta-btn-action {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      margin-top: 8px;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      padding: 9px;
+      border: 1px solid var(--border-strong);
+      background: var(--bg-surface);
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .roleta-btn-action:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* MINI THUMB CARDÁPIO */
+    .menu-row-thumb {
+      width: 44px;
+      height: 44px;
+      object-fit: cover;
+      border: 1px solid var(--border-strong);
+      flex-shrink: 0;
+      margin-right: 10px;
+      display: block;
     }
 
     /* BANNER DE TRANSIÇÃO BRASA -> SALA */
@@ -1007,8 +1165,10 @@
     .bottom-booking-bar {
       position: fixed;
       bottom: 0;
-      left: 0;
-      right: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
       background: var(--hud-bg);
       border-top: 2px solid var(--border-strong);
       padding: 10px 16px;
@@ -1041,9 +1201,204 @@
       cursor: pointer;
       border: none;
     }
+
+    /* BIO HUB // LINKTREE AUTORAL */
+    .bio-hub-card {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-strong);
+      padding: 14px 12px;
+      margin-bottom: 20px;
+    }
+    .bio-hub-title {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .bio-hub-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .bio-hub-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 14px;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s ease;
+      font-family: var(--font-grotesk);
+      font-size: 13.5px;
+      font-weight: 700;
+    }
+    .bio-hub-btn:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .bio-hub-btn.featured {
+      border: 1.5px solid var(--accent);
+      background: var(--accent-glow);
+    }
+    .bio-hub-btn-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .bio-hub-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .bio-hub-sub {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .bio-hub-tag {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 800;
+      padding: 3px 7px;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+    .bio-hub-tag.meitre {
+      color: #3b82f6;
+      border-color: #3b82f6;
+      background: rgba(59, 130, 246, 0.1);
+    }
+    .bio-hub-tag.wa {
+      color: #22c55e;
+      border-color: #22c55e;
+      background: rgba(34, 197, 94, 0.1);
+    }
+
+    /* =========================================================
+       EASTER EGG // MORTAL KOMBAT "TOASTY!" CHEF POP-UP
+       ========================================================= */
+    .toasty-chef-container {
+      position: fixed;
+      bottom: 82px;
+      right: max(10px, calc(50% - 240px + 10px));
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      pointer-events: none;
+      transform: translate3d(140%, 30%, 0) rotate(22deg);
+      opacity: 0;
+      transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.22s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .toasty-chef-container.is-toasty-visible {
+      transform: translate3d(0, 0, 0) rotate(-14deg);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .toasty-balloon {
+      background: var(--tape-bg);
+      color: var(--tape-text);
+      border: 1.5px solid var(--tape-border);
+      border-radius: 8px 8px 0 8px;
+      padding: 4px 9px;
+      margin-bottom: 5px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      transform: translate3d(4px, 0, 0);
+      position: relative;
+    }
+
+    .toasty-balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      right: 18px;
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid var(--tape-bg);
+    }
+
+    .toasty-shout {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 18px;
+      letter-spacing: 0.05em;
+      line-height: 1;
+      color: var(--accent);
+      text-transform: uppercase;
+      text-shadow: 0 1px 1px rgba(0,0,0,0.15);
+    }
+
+    .toasty-sub {
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      font-weight: 800;
+      color: #111315;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 1px;
+    }
+
+    .toasty-frame {
+      width: 112px;
+      height: 138px;
+      border-radius: 12px;
+      border: 2.5px solid var(--accent);
+      background: #1B1D1F;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8), 0 0 20px var(--accent-glow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .toasty-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      filter: contrast(1.15) brightness(0.95);
+    }
+
+    .toasty-badge-mk {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      background: rgba(17, 18, 19, 0.85);
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 7.5px;
+      font-weight: 800;
+      padding: 2px 5px;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+      letter-spacing: 0.04em;
+    }
   </style>
 </head>
 <body>
+<div class="app-shell">
 
   <!-- TOP HUD METEOROLÓGICO & STATUS DE BALCÃO -->
   <div class="top-hud">
@@ -1106,6 +1461,70 @@
         </div>
       </header>
 
+      <!-- BIO HUB // LINKTREE AUTORAL BONOMI -->
+      <div class="bio-hub-card">
+        <div class="bio-hub-title">
+          <span class="hud-live-dot"></span>
+          <span>Acesso Rápido &bull; Hub Autoral Bonomi</span>
+        </div>
+        <div class="bio-hub-links">
+          <a href="#menu-oficial-anchor" class="bio-hub-btn featured">
+            <div class="bio-hub-btn-left">
+              <span class="bio-hub-icon">🍽️</span>
+              <div>
+                <span>Ver Cardápio Completo</span>
+                <span class="bio-hub-sub">Pequenos pratos à la carte para compartilhar</span>
+              </div>
+            </div>
+            <span style="color:var(--accent); font-weight:800; font-size:16px;">&darr;</span>
+          </a>
+
+          <a href="#vinhos-anchor" class="bio-hub-btn" onclick="triggerToastyFromHub()">
+            <div class="bio-hub-btn-left">
+              <span class="bio-hub-icon">🍷</span>
+              <div>
+                <span>Carta de Vinhos Naturais</span>
+                <span class="bio-hub-sub">Biodinâmicos, taças do dia & Cozalinda</span>
+              </div>
+            </div>
+            <span style="color:var(--accent); font-weight:800; font-size:16px;">&darr;</span>
+          </a>
+
+          <a href="https://bonomi.meitre.com" target="_blank" rel="noopener" class="bio-hub-btn">
+            <div class="bio-hub-btn-left">
+              <span class="bio-hub-icon">📅</span>
+              <div>
+                <span>Reservar Mesa no Meitre</span>
+                <span class="bio-hub-sub">Sistema oficial atual de agendamento</span>
+              </div>
+            </div>
+            <span class="bio-hub-tag meitre">MEITRE</span>
+          </a>
+
+          <button onclick="goToSalaAndReserve()" class="bio-hub-btn" style="width:100%; text-align:left; cursor:pointer; background:none;">
+            <div class="bio-hub-btn-left">
+              <span class="bio-hub-icon">💬</span>
+              <div>
+                <span>Reserva Direta no WhatsApp</span>
+                <span class="bio-hub-sub">Sem cadastro burocrático &bull; Balcão ou Salão</span>
+              </div>
+            </div>
+            <span class="bio-hub-tag wa">WHATSAPP</span>
+          </button>
+
+          <a href="https://maps.google.com/?q=Bonomi+Restaurante+Rio+Tavares" target="_blank" rel="noopener" class="bio-hub-btn">
+            <div class="bio-hub-btn-left">
+              <span class="bio-hub-icon">📍</span>
+              <div>
+                <span>Como Chegar // Rio Tavares</span>
+                <span class="bio-hub-sub">Rod. Dr. Antônio Luiz Moura Gonzaga 1895</span>
+              </div>
+            </div>
+            <span class="bio-hub-tag">MAPS</span>
+          </a>
+        </div>
+      </div>
+
       <!-- FOTO HERO: CORTE AUTORAL NA BRASA -->
       <div class="hero-photo-frame">
         <img src="referencias_visuais/atum_curry_vagem_cebola_frita.jpg" alt="Atum com curry, vagem e cebola frita no Bonomi Restaurante">
@@ -1136,10 +1555,41 @@
         </div>
       </div>
 
+      <!-- A ROLETA DO CHEF RAFAEL SINKO // SUGESTÃO DA NOITE -->
+      <div class="roleta-box">
+        <div class="roleta-badge-top">
+          <span>🎲 EXPERIÊNCIA TÁTIL // BRASA &amp; VINHO</span>
+          <span>A ROLETA DO CHEF</span>
+        </div>
+
+        <div id="roleta-card" class="roleta-display-card">
+          <div class="roleta-img-frame">
+            <img id="roleta-img" src="referencias_visuais/atum_curry_vagem_cebola_frita.jpg" alt="Sugestão do Chef">
+          </div>
+          <div class="roleta-info">
+            <div id="roleta-cat" class="roleta-dish-cat">DO MAR // BRASA A 800°C</div>
+            <div id="roleta-title" class="roleta-dish-title">Atum Selado, Curry &amp; Vagem</div>
+            <div id="roleta-desc" class="roleta-dish-desc">Lombo de atum selado no fogo, curry aromático, vagem crocante e cebola frita.</div>
+            <div class="roleta-wine-box">
+              <strong>Harmonização:</strong> <span id="roleta-wine">Vinho Branco Viognier Mas des Agrunelles (2022)</span>
+            </div>
+          </div>
+        </div>
+
+        <button class="roleta-btn-spin" onclick="spinRoleta()">
+          <span>GIRAR ROLETA DO CHEF</span>
+          <span>🎲</span>
+        </button>
+
+        <button class="roleta-btn-action" onclick="applyRoletaDishToReservation()">
+          Quero esta sugestão na minha reserva &rarr;
+        </button>
+      </div>
+
       <!-- =========================================================
            CARDÁPIO OFICIAL COMPLETO (EXTRAÍDO DOS STORIES OFICIAIS)
            ========================================================= -->
-      <div class="section-header-block">
+      <div id="menu-oficial-anchor" class="section-header-block">
         <div class="section-header-title">
           <div class="official-menu-symbol-box" style="width:24px;height:24px;border-width:1.5px;">
             <div class="symbol-center-dot" style="width:8px;height:8px;"></div>
@@ -1265,7 +1715,7 @@
       <!-- =========================================================
            CARTA DE VINHOS NATURAIS OFICIAL (RESUMO SELECIONADO)
            ========================================================= -->
-      <div class="section-header-block">
+      <div id="vinhos-anchor" class="section-header-block">
         <div class="section-header-title">Vinhos Naturais</div>
         <div class="section-header-meta">Mínima Intervenção &bull; Vinhos Vivos</div>
       </div>
@@ -1424,7 +1874,7 @@
           <span class="res-card-badge">CENTRAL DE RESERVAS SOBERANA</span>
           <div class="res-card-title">Reserve seu Assento</div>
           <div class="res-card-desc">
-            Direto com a equipe do Bonomi. Zero cadastro burocrático no Google, zero comissões Meitre e zero formulários burocráticos.
+            Direto com a equipe do Bonomi via WhatsApp. Sem necessidade de cadastro prévio, sem senhas e com atendimento humano da casa.
           </div>
         </div>
 
@@ -1529,13 +1979,13 @@
           <span style="font-size:18px;">&rarr;</span>
         </a>
 
-        <!-- DESARME DE OBJEÇÃO: CONVIVÊNCIA HÍBRIDA MEITRE -->
+        <!-- CONVIVÊNCIA HÍBRIDA: LINK OFICIAL MEITRE -->
         <div class="meitre-fallback-box" style="margin-top: 14px; text-align: center; padding-top: 12px; border-top: 1px dashed var(--border);">
           <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px; font-family: var(--font-mono);">
-            Prefere reservar com caução de R$ 50 no cartão de crédito via plataforma externa?
+            Prefere reservar pelo sistema tradicional de agendamento?
           </div>
-          <a href="https://meitre.com/pt/bonomi" target="_blank" rel="noopener" class="btn-meitre-fallback" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-main); text-decoration: none; padding: 8px 16px; border: 1px solid var(--border-strong); background: var(--bg-surface); transition: all 0.2s;">
-            <span>Acessar Meitre Oficial (Caução R$ 50)</span>
+          <a href="https://bonomi.meitre.com" target="_blank" rel="noopener" class="btn-meitre-fallback" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text); text-decoration: none; padding: 8px 16px; border: 1px solid var(--border-strong); background: var(--bg-surface); transition: all 0.2s;">
+            <span>Acessar Meitre Oficial (bonomi.meitre.com)</span>
             <span style="font-size: 12px;">↗</span>
           </a>
         </div>
@@ -1625,10 +2075,20 @@
     <!-- RODAPÉ SOBERANO -->
     <footer class="footer-soberano">
       <strong>BONOMI RESTAURANTE LTDA &bull; CNPJ 49.460.864/0001-85</strong><br>
-      Site Móvel Soberano &bull; Sem mensalidades, sem comissões Meitre e sem intermediários.<br>
+      Site Móvel Soberano &bull; Autonomia de cardápio, zero mensalidades e liberdade operacional.<br>
       Arquitetura Digital por <strong>WorkAround TI</strong> (Rio Tavares, Sul da Ilha).
     </footer>
 
+  <!-- EASTER EGG // CHEF TOASTY (MORTAL KOMBAT STYLE) -->
+  <div id="toasty-chef-card" class="toasty-chef-container" onclick="triggerToastyInteractive()" title="Chef Rafael Sinko // Toasty!">
+    <div class="toasty-balloon">
+      <span class="toasty-shout">TOASTY! 🍷</span>
+      <span class="toasty-sub">Vinho Natural!</span>
+    </div>
+    <div class="toasty-frame">
+      <img src="toasty_chef_hd_bw.png" alt="Chef Rafael Sinko" class="toasty-img">
+      <div class="toasty-badge-mk">MK // CHEF</div>
+    </div>
   </div>
 
   <!-- BARRA FIXA INFERIOR DE NAVEGAÇÃO & RESERVA DINÂMICA -->
@@ -1648,6 +2108,93 @@
     var resTurno = "19:00";
     var resSeat = "Balcão da Brasa (Frente à Cozinha)";
     var resDiet = "Não, como de tudo";
+    var selectedRoletaDish = null;
+
+    // ROLETA DO CHEF // DADOS OFICIAIS & COMBINAÇÃO BRASA + VINHO
+    var chefPairings = [
+      {
+        dish: "Atum Selado, Curry & Vagem Crocante",
+        cat: "DO MAR // BRASA A 800°C",
+        desc: "Lombo de atum selado no fogo, curry aromático fresco, vagem crocante e cebola frita.",
+        wine: "Vinho Branco Viognier Mas des Agrunelles (2022) ou Praya Lager",
+        img: "referencias_visuais/atum_curry_vagem_cebola_frita.jpg"
+      },
+      {
+        dish: "Pimentões Assados, Brioche & Ovo Perfeito",
+        cat: "VEGETAIS // FORNO & FOGO",
+        desc: "Brioche tostado na brasa, bechamel aveludado, pimentões tostados e ovo curado.",
+        wine: "Pet-Nat Cantina Mincarone Sangiovese (2023)",
+        img: "referencias_visuais/pimentoes_assados_prato_cheio.jpg"
+      },
+      {
+        dish: "Pão de Levain & Mel Fermentado",
+        cat: "PÃO DE ABERTURA // FERMENTAÇÃO NATURAL",
+        desc: "Pão de fermentação natural com manteiga noisette tostada e mel da casa.",
+        wine: "Taça de Vinho Branco Natural do Dia (R$ 33)",
+        img: "referencias_visuais/mesa_banquete_polvo_tostadas_vinhos.jpg"
+      },
+      {
+        dish: "Língua de Angus com Alho Negro",
+        cat: "CARNES // COZIMENTO LENTO & BRASA",
+        desc: "Creme untuoso de grão de bico com alho negro fermentado e brotos frescos.",
+        wine: "Tinto Krontiras Malbec Biodinâmico (2023, Mendoza)",
+        img: "referencias_visuais/cozinha_servico.jpg"
+      },
+      {
+        dish: "Peixe Curado com Chili Oil & Kiwi",
+        cat: "DO MAR // FRESCOR DA COSTA",
+        desc: "Pescado do dia curado artesanalmente, óleo de pimenta tostado e toque cítrico.",
+        wine: "Branco Tüzkö Birtok Grüner Veltliner (2023, Hungria)",
+        img: "referencias_visuais/prato_peixe_molho_ervas.jpg"
+      },
+      {
+        dish: "Pancetta na Brasa, Mamão Verde & Café",
+        cat: "CARNES // CROCÂNCIA & INFUSÃO",
+        desc: "Pancetta crocante no carvão, tiras frescas de mamão verde e demiglace de café.",
+        wine: "Laranja Lazy Winemaker Sauvignon Blanc (2025, Chile)",
+        img: "referencias_visuais/vinho_natural_viognier_azul.jpg"
+      }
+    ];
+
+    var currentRoletaIndex = 0;
+    var roletaSpinning = false;
+
+    function spinRoleta() {
+      if (roletaSpinning) return;
+      roletaSpinning = true;
+      var spins = 10;
+      var count = 0;
+      var interval = setInterval(function() {
+        currentRoletaIndex = (currentRoletaIndex + 1) % chefPairings.length;
+        var p = chefPairings[currentRoletaIndex];
+        var imgEl = document.getElementById('roleta-img');
+        if (imgEl) {
+          imgEl.style.opacity = '0.35';
+          imgEl.src = p.img;
+        }
+        document.getElementById('roleta-cat').innerText = p.cat;
+        document.getElementById('roleta-title').innerText = p.dish;
+        document.getElementById('roleta-desc').innerText = p.desc;
+        document.getElementById('roleta-wine').innerText = p.wine;
+        setTimeout(function() { if (imgEl) imgEl.style.opacity = '1'; }, 50);
+
+        count++;
+        if (count >= spins) {
+          clearInterval(interval);
+          roletaSpinning = false;
+          selectedRoletaDish = chefPairings[currentRoletaIndex].dish + " + " + chefPairings[currentRoletaIndex].wine;
+        }
+      }, 85);
+    }
+
+    function applyRoletaDishToReservation() {
+      var p = chefPairings[currentRoletaIndex];
+      selectedRoletaDish = p.dish + " (" + p.wine + ")";
+      setMode('sala');
+      var card = document.getElementById('card-reserva-soberano');
+      if (card) card.scrollIntoView({ behavior: 'smooth' });
+      updateWhatsAppReservationUrl();
+    }
 
     function updateWhatsAppReservationUrl() {
       var phone = "5548991040698";
@@ -1657,8 +2204,11 @@
                 "• Data: " + resDate + "\n" +
                 "• Turno: " + resTurno + " (" + (resTurno === '19:00' ? '1º turno até 21h' : '2º turno até 23h30') + ")\n" +
                 "• Assento: " + resSeat + "\n" +
-                "• Restrições: " + resDiet + "\n\n" +
-                "Estou ciente da tolerância de 15min e do cancelamento com 6h. Por favor confirmem a disponibilidade!";
+                "• Restrições: " + resDiet + "\n";
+      if (selectedRoletaDish) {
+        msg += "• Sugestão da Roleta: " + selectedRoletaDish + "\n";
+      }
+      msg += "\nEstou ciente da tolerância de 15min e do cancelamento com 6h. Por favor confirmem a disponibilidade!";
       
       var url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
       var btn = document.getElementById('btn-confirm-reserva');
@@ -1740,7 +2290,116 @@
       updateWhatsAppReservationUrl();
     }
 
+    // =========================================================
+    // EASTER EGG // MORTAL KOMBAT "TOASTY!" CHEF ENGINE
+    // =========================================================
+    var toastyActive = false;
+    var toastyLastTrigger = 0;
+    var toastyCooldownMs = 30000; // 30s de intervalo para manter o frescor
+    var toastyTimer = null;
+
+    function playToastySound() {
+      try {
+        var AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        var ctx = new AudioCtx();
+        if (ctx.state === 'suspended') {
+          ctx.resume();
+        }
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.type = 'triangle';
+
+        var now = ctx.currentTime;
+        // Glissando ágil clássico estilo falsete fliperama anos 90
+        osc.frequency.setValueAtTime(400, now);
+        osc.frequency.exponentialRampToValueAtTime(1200, now + 0.16);
+        osc.frequency.exponentialRampToValueAtTime(800, now + 0.32);
+
+        gain.gain.setValueAtTime(0.001, now);
+        gain.gain.linearRampToValueAtTime(0.18, now + 0.04);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.36);
+      } catch (e) {
+        // Áudio desativado silenciosamente em restrições de autoplay
+      }
+    }
+
+    function popToastyChef(force) {
+      var now = Date.now();
+      if (!force && (toastyActive || (now - toastyLastTrigger < toastyCooldownMs))) {
+        return;
+      }
+      var card = document.getElementById('toasty-chef-card');
+      if (!card) return;
+
+      toastyActive = true;
+      toastyLastTrigger = now;
+      card.classList.add('is-toasty-visible');
+      playToastySound();
+
+      if (toastyTimer) clearTimeout(toastyTimer);
+      toastyTimer = setTimeout(function() {
+        card.classList.remove('is-toasty-visible');
+        toastyActive = false;
+      }, 1400); // 1.4s de exibição clássica
+    }
+
+    function triggerToastyInteractive() {
+      if (navigator.vibrate) {
+        try { navigator.vibrate([35, 40, 35]); } catch (e) {}
+      }
+      var card = document.getElementById('toasty-chef-card');
+      if (card) {
+        card.style.transform = 'translate3d(0, 0, 0) scale(1.12) rotate(-8deg)';
+        setTimeout(function() {
+          card.classList.remove('is-toasty-visible');
+          card.style.transform = '';
+          toastyActive = false;
+        }, 320);
+      }
+      var vinhos = document.getElementById('vinhos-anchor');
+      if (vinhos) {
+        vinhos.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function triggerToastyFromHub() {
+      setTimeout(function() {
+        popToastyChef(true);
+      }, 450);
+    }
+
+    // DISPARO INTELIGENTE DURANTE A ROLAGEM
+    var wineScrolledIn = false;
+    window.addEventListener('scroll', function() {
+      var vinhosEl = document.getElementById('vinhos-anchor');
+      if (!vinhosEl) return;
+      var rect = vinhosEl.getBoundingClientRect();
+      var winH = window.innerHeight || document.documentElement.clientHeight;
+
+      // Quando a seção de Vinhos Naturais entra no campo de visão
+      if (rect.top < winH * 0.70 && rect.bottom > 80) {
+        if (!wineScrolledIn) {
+          wineScrolledIn = true;
+          popToastyChef(false);
+        }
+      } else {
+        wineScrolledIn = false;
+      }
+    }, { passive: true });
+
     updateWhatsAppReservationUrl();
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
   </script>
+</div><!-- /.app-shell -->
 </body>
 </html>

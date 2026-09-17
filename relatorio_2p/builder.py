@@ -1,27 +1,12 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<title>Bonomi Restaurante // Proposta Executiva Soberana 4P (P&B)</title>
-<meta name="workaround:engine" content="Playwright / Chromium Headless">
-<meta name="workaround:source" content="relatorio_bonomi_4paginas_pb.html">
-<meta name="workaround:standard" content="A4-SWISS-EDITORIAL-4P (210mm x 297mm - 260mm Main)">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700;800&family=Spectral:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
-<style>
-  @page {
-    size: A4 portrait;
-    margin: 0;
-  }
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+import os
 
-  :root {
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+def build_html(is_pb=False):
+    title_suffix = " (P&B)" if is_pb else ""
+    
+    if is_pb:
+        root_vars = """
     --bg-page: #FFFFFF;
     --c-primary: #000000;
     --c-accent: #000000;
@@ -40,10 +25,8 @@
     --c-tape-border: #999999;
     --c-green: #222222;
     --c-green-soft: #EFEFEF;
-        
-  }
-
-
+        """
+        extra_css = """
   body {
     background-color: #DDDDDD;
     font-family: 'Plus Jakarta Sans', sans-serif;
@@ -54,9 +37,67 @@
   img {
     filter: grayscale(100%) contrast(120%);
   }
-        
+        """
+    else:
+        root_vars = """
+    --bg-page: #FBF9F5;
+    --c-primary: #121316;
+    --c-accent: #D96B27;
+    --c-accent-dark: #A84E18;
+    --c-accent-soft: #FCEEE6;
+    --c-sand: #EFE8DE;
+    --c-sand-light: #F7F3EC;
+    --c-ink: #16181B;
+    --c-ink-muted: #4F5157;
+    --c-surface: #FFFFFF;
+    --c-border: rgba(18, 19, 22, 0.16);
+    --c-border-strong: #121316;
+    --c-wine: #7A1C2C;
+    --c-wine-soft: #FAF0F2;
+    --c-tape: #EFE5BF;
+    --c-tape-border: #D6C796;
+    --c-green: #1F6B43;
+    --c-green-soft: #E9F4EE;
+        """
+        extra_css = """
+  body {
+    background-color: #D6D1C2;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--c-ink);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+        """
 
-  .page {
+    html = f"""<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Bonomi Restaurante // Proposta Executiva Soberana 4P{title_suffix}</title>
+<meta name="workaround:engine" content="Playwright / Chromium Headless">
+<meta name="workaround:source" content="relatorio_bonomi_4paginas_{'pb' if is_pb else 'color'}.html">
+<meta name="workaround:standard" content="A4-SWISS-EDITORIAL-4P (210mm x 297mm - 260mm Main)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700;800&family=Spectral:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  @page {{
+    size: A4 portrait;
+    margin: 0;
+  }}
+  * {{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }}
+
+  :root {{
+{root_vars}
+  }}
+
+{extra_css}
+
+  .page {{
     width: 210mm;
     height: 297mm;
     page-break-after: always;
@@ -69,18 +110,18 @@
     justify-content: space-between;
     margin: 0 auto 10mm auto;
     box-shadow: 0 6px 30px rgba(0,0,0,0.12);
-  }
+  }}
 
-  @media print {
-    body { background: transparent; }
-    .page {
+  @media print {{
+    body {{ background: transparent; }}
+    .page {{
       margin: 0;
       box-shadow: none;
-    }
-  }
+    }}
+  }}
 
   /* HEADER & FOOTER RIGOROSOS */
-  .doc-header {
+  .doc-header {{
     height: 7.5mm;
     display: flex;
     justify-content: space-between;
@@ -88,8 +129,8 @@
     border-bottom: 2.5px solid var(--c-border-strong);
     padding-bottom: 1.5mm;
     flex-shrink: 0;
-  }
-  .doc-header .tagline {
+  }}
+  .doc-header .tagline {{
     font-family: 'JetBrains Mono', monospace;
     font-size: 8.2pt;
     font-weight: 800;
@@ -99,22 +140,22 @@
     display: flex;
     align-items: center;
     gap: 6px;
-  }
-  .doc-header .tagline::before {
+  }}
+  .doc-header .tagline::before {{
     content: "";
     display: inline-block;
     width: 8px;
     height: 8px;
     background: var(--c-accent);
-  }
-  .doc-header .serial {
+  }}
+  .doc-header .serial {{
     font-family: 'JetBrains Mono', monospace;
     font-size: 8.2pt;
     font-weight: 800;
     color: var(--c-accent);
-  }
+  }}
 
-  .doc-footer {
+  .doc-footer {{
     height: 7mm;
     display: flex;
     justify-content: space-between;
@@ -125,23 +166,23 @@
     font-size: 8pt;
     color: var(--c-ink-muted);
     flex-shrink: 0;
-  }
-  .doc-footer .doc-ref {
+  }}
+  .doc-footer .doc-ref {{
     font-size: 7.4pt;
     letter-spacing: 0.08em;
     font-weight: 700;
     color: var(--c-primary);
-  }
-  .doc-footer .page-indicator {
+  }}
+  .doc-footer .page-indicator {{
     font-weight: 800;
     background: var(--c-primary);
     color: #FFFFFF;
     padding: 0.8mm 3.5mm;
     letter-spacing: 0.05em;
-  }
+  }}
 
   /* A LEI ÁUREA DO A4: CONTAINER PRINCIPAL A 260MM COM RESPIRO EDITORIAL */
-  .page-main {
+  .page-main {{
     height: 260mm;
     display: flex;
     flex-direction: column;
@@ -151,24 +192,24 @@
     flex-shrink: 0;
     position: relative;
     z-index: 2;
-  }
+  }}
 
-  .band-top { flex-shrink: 0; }
-  .band-core {
+  .band-top {{ flex-shrink: 0; }}
+  .band-core {{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     gap: 3.5mm;
     min-height: 0;
     flex: 1;
-  }
-  .band-bottom {
+  }}
+  .band-bottom {{
     flex-shrink: 0;
     margin-top: auto;
-  }
+  }}
 
   /* TIPOGRAFIA & ELEMENTOS BAUHAUS COM RESPIRO */
-  .kicker {
+  .kicker {{
     font-family: 'JetBrains Mono', monospace;
     font-size: 8pt;
     font-weight: 800;
@@ -179,11 +220,11 @@
     display: flex;
     align-items: center;
     gap: 6px;
-  }
-  .kicker.wine { color: var(--c-wine); }
-  .kicker.green { color: var(--c-green); }
+  }}
+  .kicker.wine {{ color: var(--c-wine); }}
+  .kicker.green {{ color: var(--c-green); }}
 
-  .lead-title {
+  .lead-title {{
     font-family: 'Space Grotesk', sans-serif;
     font-size: 24pt;
     line-height: 0.95;
@@ -191,22 +232,22 @@
     letter-spacing: -0.035em;
     text-transform: uppercase;
     color: var(--c-primary);
-  }
-  .lead-title.tight {
+  }}
+  .lead-title.tight {{
     font-size: 21pt;
     letter-spacing: -0.03em;
-  }
+  }}
 
-  .subtitle-editorial {
+  .subtitle-editorial {{
     font-family: 'Spectral', Georgia, serif;
     font-size: 10pt;
     font-style: italic;
     color: var(--c-ink-muted);
     line-height: 1.35;
     margin-top: 1.5mm;
-  }
+  }}
 
-  .sec-heading {
+  .sec-heading {{
     display: flex;
     align-items: center;
     gap: 2.5mm;
@@ -217,20 +258,20 @@
     text-transform: uppercase;
     color: var(--c-primary);
     margin-bottom: 1.5mm;
-  }
-  .sec-heading .badge {
+  }}
+  .sec-heading .badge {{
     background: var(--c-primary);
     color: #FFFFFF;
     font-family: 'JetBrains Mono', monospace;
     font-size: 7.2pt;
     font-weight: 800;
     padding: 0.5mm 2.4mm;
-  }
-  .sec-heading .badge.accent { background: var(--c-accent); }
-  .sec-heading .badge.wine { background: var(--c-wine); }
-  .sec-heading .badge.green { background: var(--c-green); }
+  }}
+  .sec-heading .badge.accent {{ background: var(--c-accent); }}
+  .sec-heading .badge.wine {{ background: var(--c-wine); }}
+  .sec-heading .badge.green {{ background: var(--c-green); }}
 
-  .stamp-box {
+  .stamp-box {{
     display: inline-flex;
     flex-direction: column;
     align-items: center;
@@ -240,71 +281,71 @@
     transform: rotate(-1.5deg);
     background: var(--c-accent-soft);
     box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.15);
-  }
-  .stamp-box .stamp-line1 {
+  }}
+  .stamp-box .stamp-line1 {{
     font-family: 'JetBrains Mono', monospace;
     font-size: 6.8pt;
     font-weight: 800;
     color: var(--c-accent-dark);
     letter-spacing: 0.12em;
     text-transform: uppercase;
-  }
-  .stamp-box .stamp-line2 {
+  }}
+  .stamp-box .stamp-line2 {{
     font-family: 'Space Grotesk', sans-serif;
     font-size: 9.2pt;
     font-weight: 800;
     color: var(--c-accent-dark);
     letter-spacing: 0.05em;
     text-transform: uppercase;
-  }
+  }}
 
-  .tape-strip {
+  .tape-strip {{
     background-color: var(--c-tape);
     border: 1px dashed var(--c-tape-border);
     padding: 2.5mm 3.4mm;
     position: relative;
     box-shadow: 1px 1px 4px rgba(0,0,0,0.06);
-  }
-  .tape-strip.rot-neg { transform: rotate(-0.5deg); }
+  }}
+  .tape-strip.rot-neg {{ transform: rotate(-0.5deg); }}
 
   /* O CHASSI SOBERANO // ASSINATURA CARLOS LINZMEYER */
-  .chassi-card {
+  .chassi-card {{
     background: var(--c-primary);
     color: #FFFFFF;
     padding: 2.5mm 3.4mm;
     border: 2px solid var(--c-primary);
     position: relative;
-  }
-  .chassi-card .chassi-header {
+  }}
+  .chassi-card .chassi-header {{
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid rgba(255,255,255,0.25);
     padding-bottom: 1mm;
     margin-bottom: 1.2mm;
-  }
-  .chassi-card .chassi-title {
+  }}
+  .chassi-card .chassi-title {{
     font-family: 'JetBrains Mono', monospace;
     font-size: 7.8pt;
     font-weight: 800;
     letter-spacing: 0.08em;
     color: #FFFFFF;
-  }
-  .chassi-card .chassi-base {
+  }}
+  .chassi-card .chassi-base {{
     font-family: 'JetBrains Mono', monospace;
     font-size: 7pt;
     font-weight: 800;
     color: var(--c-accent);
-  }
-  .chassi-card .chassi-manifesto {
+  }}
+  .chassi-card .chassi-manifesto {{
     font-family: 'Spectral', Georgia, serif;
     font-size: 8.4pt;
     font-style: italic;
     line-height: 1.34;
     color: #E2E4EB;
     margin-bottom: 1.2mm;
-  }
-  .chassi-card .chassi-meta-grid {
+  }}
+  .chassi-card .chassi-meta-grid {{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2mm;
@@ -313,39 +354,39 @@
     border-top: 1px dashed rgba(255,255,255,0.25);
     padding-top: 1.2mm;
     color: #A0A4B0;
-  }
-  .chassi-card .chassi-meta-grid strong {
+  }}
+  .chassi-card .chassi-meta-grid strong {{
     color: #FFFFFF;
     display: block;
-  }
+  }}
 
-  .grid-2col {
+  .grid-2col {{
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4mm;
-  }
-  .grid-3col {
+  }}
+  .grid-3col {{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 3.2mm;
-  }
+  }}
 
-  .card-metric {
+  .card-metric {{
     background: var(--c-surface);
     border: 1.5px solid var(--c-border);
     padding: 2.2mm 3mm;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-  }
-  .card-metric .num {
+  }}
+  .card-metric .num {{
     font-family: 'Space Grotesk', sans-serif;
     font-size: 15pt;
     font-weight: 800;
     line-height: 1;
     color: var(--c-primary);
-  }
-  .card-metric .lbl {
+  }}
+  .card-metric .lbl {{
     font-family: 'JetBrains Mono', monospace;
     font-size: 6.8pt;
     font-weight: 700;
@@ -353,10 +394,10 @@
     color: var(--c-ink-muted);
     letter-spacing: 0.05em;
     margin-top: 1mm;
-  }
+  }}
 
   /* CARDS SÓLIDOS COM RESPIRO EDITORIAL */
-  .content-card {
+  .content-card {{
     background: var(--c-surface);
     border: 1.5px solid var(--c-border);
     padding: 3.5mm 4mm;
@@ -364,13 +405,13 @@
     flex-direction: column;
     justify-content: flex-start;
     gap: 2.5mm;
-  }
-  .content-card.featured {
+  }}
+  .content-card.featured {{
     background: var(--c-sand-light);
     border: 2px solid var(--c-border-strong);
-  }
+  }}
 
-  .friction-item {
+  .friction-item {{
     display: flex;
     align-items: flex-start;
     gap: 2.5mm;
@@ -378,8 +419,8 @@
     border-left: 3px solid var(--c-accent);
     padding: 1.4mm 2.2mm;
     margin-bottom: 1.2mm;
-  }
-  .friction-item .num-badge {
+  }}
+  .friction-item .num-badge {{
     background: var(--c-accent);
     color: #FFFFFF;
     font-family: 'JetBrains Mono', monospace;
@@ -387,27 +428,27 @@
     font-weight: 800;
     padding: 0.3mm 1.6mm;
     flex-shrink: 0;
-  }
-  .friction-item .content {
+  }}
+  .friction-item .content {{
     font-size: 8pt;
     line-height: 1.3;
     color: var(--c-ink);
-  }
-  .friction-item .content strong {
+  }}
+  .friction-item .content strong {{
     color: var(--c-primary);
     display: inline;
     font-size: 8.2pt;
-  }
+  }}
 
-  .portal-block {
+  .portal-block {{
     background: var(--c-sand-light);
     border: 2px solid var(--c-border-strong);
     padding: 3.2mm 4mm;
     display: flex;
     align-items: center;
     gap: 4.5mm;
-  }
-  .portal-block .qr-container {
+  }}
+  .portal-block .qr-container {{
     width: 32mm;
     height: 32mm;
     background: #FFFFFF;
@@ -417,20 +458,20 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-  }
-  .portal-block .qr-container img {
+  }}
+  .portal-block .qr-container img {{
     width: 100%;
     height: 100%;
     display: block;
-  }
-  .portal-block .info-col {
+  }}
+  .portal-block .info-col {{
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-  }
+  }}
 
-  .pricing-table-card {
+  .pricing-table-card {{
     background: var(--c-surface);
     border: 2px solid var(--c-border-strong);
     padding: 2.6mm 3.4mm;
@@ -439,20 +480,20 @@
     flex-direction: column;
     justify-content: flex-start;
     gap: 1.8mm;
-  }
-  .pricing-table-card.featured {
+  }}
+  .pricing-table-card.featured {{
     background: var(--c-sand-light);
     border: 2.5px solid var(--c-accent);
-  }
-  .pricing-table-card .pkg-tag {
+  }}
+  .pricing-table-card .pkg-tag {{
     font-family: 'JetBrains Mono', monospace;
     font-size: 7pt;
     font-weight: 800;
     color: var(--c-accent);
     letter-spacing: 0.1em;
     text-transform: uppercase;
-  }
-  .pricing-table-card .pkg-name {
+  }}
+  .pricing-table-card .pkg-name {{
     font-family: 'Space Grotesk', sans-serif;
     font-size: 12.5pt;
     font-weight: 800;
@@ -460,34 +501,34 @@
     text-transform: uppercase;
     letter-spacing: -0.02em;
     margin-top: 0.5mm;
-  }
-  .pricing-table-card .price-row {
+  }}
+  .pricing-table-card .price-row {{
     margin: 1mm 0;
     display: flex;
     align-items: baseline;
     gap: 4px;
-  }
-  .pricing-table-card .price-num {
+  }}
+  .pricing-table-card .price-num {{
     font-family: 'Space Grotesk', sans-serif;
     font-size: 19pt;
     font-weight: 800;
     color: var(--c-primary);
     line-height: 1;
-  }
-  .pricing-table-card .price-sub {
+  }}
+  .pricing-table-card .price-sub {{
     font-family: 'JetBrains Mono', monospace;
     font-size: 7.2pt;
     color: var(--c-ink-muted);
     font-weight: 700;
-  }
+  }}
 
-  .permuta-box {
+  .permuta-box {{
     background: var(--c-sand-light);
     border: 1.5px dashed var(--c-border-strong);
     padding: 2mm 2.6mm;
     margin-top: 1mm;
-  }
-  .permuta-box .permuta-title {
+  }}
+  .permuta-box .permuta-title {{
     font-family: 'JetBrains Mono', monospace;
     font-size: 7.2pt;
     font-weight: 800;
@@ -496,14 +537,14 @@
     align-items: center;
     gap: 4px;
     margin-bottom: 0.8mm;
-  }
-  .permuta-box .permuta-values {
+  }}
+  .permuta-box .permuta-values {{
     font-size: 7.6pt;
     line-height: 1.28;
     color: var(--c-ink);
-  }
+  }}
 
-  .brand-symbol-circle {
+  .brand-symbol-circle {{
     display: inline-block;
     width: 10px;
     height: 10px;
@@ -512,8 +553,8 @@
     position: relative;
     vertical-align: middle;
     margin-right: 4px;
-  }
-  .brand-symbol-circle::after {
+  }}
+  .brand-symbol-circle::after {{
     content: "";
     position: absolute;
     top: 2px;
@@ -522,7 +563,7 @@
     height: 2.5px;
     background: var(--c-accent);
     border-radius: 50%;
-  }
+  }}
 </style>
 </head>
 <body>
@@ -1346,4 +1387,17 @@
 </div>
 
 </body>
-</html>
+</html>"""
+    return html
+
+if __name__ == "__main__":
+    color_content = build_html(is_pb=False)
+    pb_content = build_html(is_pb=True)
+
+    with open(os.path.join(BASE_DIR, "relatorio_bonomi_4paginas_color.html"), "w", encoding="utf-8") as f:
+        f.write(color_content)
+
+    with open(os.path.join(BASE_DIR, "relatorio_bonomi_4paginas_pb.html"), "w", encoding="utf-8") as f:
+        f.write(pb_content)
+
+    print("[SUCESSO] builder.py gerou com perfeicao os arquivos Color e PB!")
