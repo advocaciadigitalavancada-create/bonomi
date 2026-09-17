@@ -2959,31 +2959,20 @@
     }, { passive: true });
 
     updateWhatsAppReservationUrl();
+    // Desregistra qualquer Service Worker antigo e limpa CacheStorage (Zero PWA, 100% Rede Direta)
     if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
       if ('caches' in window) {
         caches.keys().then(function(keys) {
           keys.forEach(function(key) {
-            if (key !== 'bonomi-v4-clean-paper') {
-              caches.delete(key);
-            }
+            caches.delete(key);
           });
         });
       }
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=4').then(reg => {
-          reg.update();
-          reg.onupdatefound = () => {
-            const installing = reg.installing;
-            if (installing) {
-              installing.onstatechange = () => {
-                if (installing.state === 'installed' && navigator.serviceWorker.controller) {
-                  window.location.reload();
-                }
-              };
-            }
-          };
-        }).catch(() => {});
-      });
     }
   </script>
 </div><!-- /.app-shell -->
