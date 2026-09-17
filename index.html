@@ -1688,7 +1688,7 @@
               <span class="bio-hub-icon">💬</span>
               <div>
                 <span>Reserva Direta no WhatsApp</span>
-                <span class="bio-hub-sub">Sem cadastro burocrático &bull; Balcão ou Salão</span>
+                <span class="bio-hub-sub">Sem cadastro burocrático &bull; Válida após confirmação</span>
               </div>
             </div>
             <span class="bio-hub-tag wa">WHATSAPP</span>
@@ -2157,7 +2157,7 @@
           <span class="res-card-badge">CENTRAL DE RESERVAS SOBERANA</span>
           <div class="res-card-title">Reserve seu Assento</div>
           <div class="res-card-desc">
-            Direto com a equipe do Bonomi via WhatsApp. Sem necessidade de cadastro prévio, sem senhas e com atendimento humano da casa.
+            Direto com a equipe do Bonomi via WhatsApp. Sem cadastro prévio, sem senhas e com atendimento humano da casa. <strong>Solicitação válida após confirmação.</strong>
           </div>
         </div>
 
@@ -2243,6 +2243,9 @@
             <span>🛡️ DETALHES DA GARANTIA & COMPROMISSO</span>
           </div>
           <div class="guarantee-rule-line">
+            • <strong>Confirmação da Equipe:</strong> Toda solicitação é <strong>válida após confirmação da equipe Bonomi</strong> via WhatsApp.
+          </div>
+          <div class="guarantee-rule-line">
             • <strong>Tolerância de Atraso:</strong> 15 minutos. Após esse período a mesa é liberada para a fila de espera.
           </div>
           <div class="guarantee-rule-line">
@@ -2255,7 +2258,7 @@
             • <strong>Carta de Vinhos &amp; Rolha:</strong> Seleção viva com mais de 20 rótulos naturais. Se preferir trazer seu vinho de casa, a taxa de rolha é de <strong>R$ 100</strong> por garrafa.
           </div>
           <div class="guarantee-notice-clean">
-            ✓ Sem login com Google &bull; Sem formulários com letras miúdas &bull; Conversa direta de balcão
+            ✓ Sem login com Google &bull; Válida após confirmação &bull; Conversa direta de balcão
           </div>
         </div>
 
@@ -2264,6 +2267,9 @@
           <span>CONCLUIR RESERVA DIRETA NO WHATSAPP</span>
           <span style="font-size:18px;">&rarr;</span>
         </a>
+        <div style="font-family: var(--font-mono); font-size: 10px; color: var(--accent-wine); text-align: center; margin-top: 8px; font-weight: 700; letter-spacing: 0.04em;">
+          * RESERVA VÁLIDA MEDIANTE CONFIRMAÇÃO DA EQUIPE BONOMI VIA WHATSAPP
+        </div>
 
         <!-- CONVIVÊNCIA HÍBRIDA: LINK OFICIAL MEITRE -->
         <div class="meitre-fallback-box" style="margin-top: 14px; text-align: center; padding-top: 12px; border-top: 1px dashed var(--border);">
@@ -2485,7 +2491,7 @@
     function updateWhatsAppReservationUrl() {
       var phone = "5548991040698";
       var msg = "Olá Chef Rafael e equipe Bonomi!\n" +
-                "Gostaria de solicitar uma reserva direta:\n" +
+                "Gostaria de solicitar uma reserva direta (ciente de que é válida após confirmação):\n" +
                 "• Pessoas: " + resPax + "\n" +
                 "• Data: " + resDate + "\n" +
                 "• Turno: " + resTurno + " (" + (resTurno === '19:00' ? '1º turno até 21h' : '2º turno até 23h30') + ")\n" +
@@ -2494,7 +2500,7 @@
       if (selectedRoletaDish) {
         msg += "• Sugestão da Roleta: " + selectedRoletaDish + "\n";
       }
-      msg += "\nEstou ciente da tolerância de 15min e do cancelamento com 6h. Por favor confirmem a disponibilidade!";
+      msg += "\nEstou ciente de que a reserva é válida mediante confirmação da equipe, da tolerância de 15min e do cancelamento com 6h.";
       
       var url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
       var btn = document.getElementById('btn-confirm-reserva');
