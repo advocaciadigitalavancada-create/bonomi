@@ -2960,8 +2960,29 @@
 
     updateWhatsAppReservationUrl();
     if ('serviceWorker' in navigator) {
+      if ('caches' in window) {
+        caches.keys().then(function(keys) {
+          keys.forEach(function(key) {
+            if (key !== 'bonomi-v4-clean-paper') {
+              caches.delete(key);
+            }
+          });
+        });
+      }
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').catch(() => {});
+        navigator.serviceWorker.register('./sw.js?v=4').then(reg => {
+          reg.update();
+          reg.onupdatefound = () => {
+            const installing = reg.installing;
+            if (installing) {
+              installing.onstatechange = () => {
+                if (installing.state === 'installed' && navigator.serviceWorker.controller) {
+                  window.location.reload();
+                }
+              };
+            }
+          };
+        }).catch(() => {});
       });
     }
   </script>
