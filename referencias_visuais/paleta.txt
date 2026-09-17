@@ -1,12 +1,15 @@
-PALETA DE CORES // BONOMI RESTAURANTE (RIO TAVARES)
-Estética: Bistrô Contemporâneo Orgânico / Bauhaus Editorial
+PALETA DE CORES OFICIAL // BONOMI RESTAURANTE (RIO TAVARES)
+Estética: Editorial Bistrô Autoral / Papel Cru Artesanal & Tipografia Monumental
 
-- Fundo Principal (Dark Bistrô): #111213
-- Fundo Secundário / Cards: #1B1D1F
-- Borda / Linhas Arquiteturais: #2D3035
-- Texto Principal: #F4F1EA (Cerâmica Crua / Off-White)
-- Texto Secundário: #9EA3A8
-- Acento Primário (Curry & Pimentão Tostado): #E06D26
-- Acento Secundário (Vinho Natural Âmbar): #D49B4B
-- Acento Herbal (Azeite & Cebolinha): #5E7153
-- Branco Puro (Impressão / Sulfite): #FFFFFF
+- Fundo Principal (Papel Cerâmica Cru / Warm Off-White): #F7F4EE (secundário: #F4F1EA / #EDEAE3)
+- Fundo dos Cards / Superfícies: #FFFFFF (sulfite limpo) / #EFECE4 (papel encorpado)
+- Fundo Externo Desktop: #E5E0D4 (tom cru arquitetural)
+- Texto Principal (Tinta Preta Profunda / Carvão Puro): #111213
+- Texto Secundário (Grafite / Muted): #5C5F63
+- Bordas e Réguas Arquiteturais: #D8D3C5 / #CCC6B5
+- Linhas Divisórias Fortes: #111213
+- Acento Primário (Preto Monumental & Tipografia de Cartaz): #111213
+- Acento Secundário (Vinho Tinto Natural & Bagaça Selvagem): #7A1C2C
+- Acento Terciário (Oliva & Ervas Frescas): #4A5840
+- Acento Quente Pontual (Terracotta / Pimentão Tostado Muted): #A84E18
+- Fita Crepe Autêntica: Fundo #EFE4C8, Texto #111315, Borda #D2C4A0, Carimbo #7A1C2C

@@ -11,7 +11,7 @@
   <link rel="shortcut icon" href="favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#111213">
+  <meta name="theme-color" content="#F7F4EE">
 
   <!-- SEO & Standard Meta Fallbacks -->
   <meta name="title" content="BONOMI RESTAURANTE • Cozinha Autoral, Brasa Viva & Reservas">
@@ -52,55 +52,59 @@
   <style>
     /* =========================================================
        VARIÁVEIS DE COR: PALETA OFICIAL BONOMI (paleta.txt)
+       Papel Cerâmica Cru (#F7F4EE), Tinta Preta Profunda (#111213)
        ========================================================= */
     :root {
-      /* MODO BRASA: Dark Bistrô (#111213), Curry (#E06D26) & Fita Crepe */
-      --bg: #111213;
-      --bg-surface: #1B1D1F;
-      --bg-surface-elevated: #24272B;
-      --text: #F4F1EA;
-      --text-muted: #9EA3A8;
-      --accent: #E06D26;
-      --accent-glow: rgba(224, 109, 38, 0.25);
-      --accent-secondary: #D49B4B;
-      --accent-green: #5E7153;
-      --border: #2D3035;
-      --border-strong: #3F444D;
-      --hud-bg: #0C0D0E;
+      --bg: #F7F4EE;
+      --bg-surface: #FFFFFF;
+      --bg-surface-elevated: #EFECE4;
+      --text: #111213;
+      --text-muted: #5C5F63;
+      --accent: #111213;
+      --accent-wine: #7A1C2C;
+      --accent-glow: rgba(17, 18, 19, 0.08);
+      --accent-secondary: #7A1C2C;
+      --accent-green: #4A5840;
+      --accent-terracotta: #A84E18;
+      --border: #D8D3C5;
+      --border-strong: #111213;
+      --hud-bg: #EBE6DA;
 
       /* Fita Crepe Autêntica */
       --tape-bg: #EFE4C8;
       --tape-text: #111315;
       --tape-border: #D2C4A0;
-      --tape-stamp: #A84E18;
-      --tape-edge-shadow: rgba(0, 0, 0, 0.35);
+      --tape-stamp: #7A1C2C;
+      --tape-edge-shadow: rgba(0, 0, 0, 0.08);
 
       --font-display: 'Big Shoulders Display', sans-serif;
       --font-grotesk: 'Space Grotesk', sans-serif;
       --font-sans: 'Plus Jakarta Sans', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
       
-      --transition-mode: background 0.35s ease, color 0.35s ease, border-color 0.35s ease;
+      --transition-mode: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
     }
 
-    /* MODO SALA: Papel Cerâmico Cru (#F4F1EA), Tipografia Editorial & Bistrô */
+    /* MODO SALA (Central de Reservas): Mesma pureza de papel editorial */
     body.mode-sala {
-      --bg: #F4F1EA;
-      --bg-surface: #EAE6DD;
-      --bg-surface-elevated: #E0DBD0;
-      --text: #121316;
-      --text-muted: #5E6268;
-      --accent: #E06D26;
-      --accent-glow: rgba(224, 109, 38, 0.18);
-      --accent-secondary: #5E7153;
-      --border: #D4CEBE;
-      --border-strong: #121316;
-      --hud-bg: #E4DFD5;
-      --tape-bg: #EAE3CF;
-      --tape-text: #0E161A;
-      --tape-border: #C8BF9F;
+      --bg: #F7F4EE;
+      --bg-surface: #FFFFFF;
+      --bg-surface-elevated: #EFECE4;
+      --text: #111213;
+      --text-muted: #5C5F63;
+      --accent: #111213;
+      --accent-wine: #7A1C2C;
+      --accent-glow: rgba(17, 18, 19, 0.08);
+      --accent-secondary: #7A1C2C;
+      --accent-green: #4A5840;
+      --border: #D8D3C5;
+      --border-strong: #111213;
+      --hud-bg: #EBE6DA;
+      --tape-bg: #EFE4C8;
+      --tape-text: #111315;
+      --tape-border: #D2C4A0;
       --tape-stamp: #7A1C2C;
-      --tape-edge-shadow: rgba(0, 0, 0, 0.12);
+      --tape-edge-shadow: rgba(0, 0, 0, 0.08);
     }
 
     * {
@@ -118,7 +122,7 @@
     }
 
     body {
-      background-color: #0A0A0B;
+      background-color: #E5E0D4;
       color: var(--text);
       font-family: var(--font-sans);
       line-height: 1.5;
@@ -133,7 +137,9 @@
       margin: 0 auto;
       min-height: 100vh;
       background-color: var(--bg);
-      box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
       position: relative;
     }
 
@@ -150,14 +156,14 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      color: var(--accent-secondary);
+      color: var(--text);
       transition: var(--transition-mode);
     }
     .hud-live-dot {
       display: inline-block;
       width: 7px;
       height: 7px;
-      background: var(--accent);
+      background: var(--accent-wine);
       border-radius: 50%;
       margin-right: 5px;
       animation: pulse-dot 1.4s infinite alternate ease-in-out;
@@ -182,7 +188,7 @@
     .mode-switch-bar {
       display: flex;
       border: 2px solid var(--border-strong);
-      background: var(--bg-surface);
+      background: var(--bg-surface-elevated);
       padding: 3px;
     }
     .mode-btn {
@@ -204,9 +210,9 @@
       transition: all 0.2s ease;
     }
     .mode-btn.active {
-      background: var(--accent);
+      background: #111213;
       color: #FFFFFF;
-      box-shadow: 0 2px 10px var(--accent-glow);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
     }
 
     /* CONTROLE DE EXIBIÇÃO ENTRE OS DOIS MODOS */
@@ -226,10 +232,10 @@
       margin-bottom: 12px;
     }
     .badge-prazeres-mesa {
-      background: var(--accent);
+      background: #111213;
       color: #FFFFFF;
       font-family: var(--font-mono);
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 900;
       text-transform: uppercase;
       padding: 6px 10px;
@@ -237,10 +243,11 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      border: 1px solid #111213;
     }
     .badge-michelin-tag {
       background: var(--bg-surface-elevated);
-      border: 1px solid var(--border-strong);
+      border: 1px solid var(--border);
       color: var(--text);
       font-family: var(--font-mono);
       font-size: 9.5px;
@@ -263,10 +270,8 @@
       object-fit: contain;
       display: block;
     }
-    body.mode-sala .wordmark-light { display: none; }
-    body.mode-sala .wordmark-dark { display: block; }
-    body:not(.mode-sala) .wordmark-light { display: block; }
-    body:not(.mode-sala) .wordmark-dark { display: none; }
+    .wordmark-light { display: none !important; }
+    .wordmark-dark { display: block !important; }
 
     /* SÍMBOLO OFICIAL DO MENU (CÍRCULO COM PONTO PRETO) */
     .official-menu-symbol-box {
@@ -274,11 +279,11 @@
       height: 44px;
       border-radius: 50%;
       background: #FFFFFF;
-      border: 2px solid #000;
+      border: 2px solid #111213;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
       flex-shrink: 0;
     }
     .symbol-center-dot {
@@ -331,7 +336,7 @@
     .hero-photo-frame {
       position: relative;
       border: 2px solid var(--border-strong);
-      background: #000;
+      background: var(--bg-surface-elevated);
       margin-bottom: 24px;
       overflow: hidden;
     }
@@ -340,27 +345,27 @@
       height: 270px;
       object-fit: cover;
       display: block;
-      filter: contrast(1.06) brightness(0.96);
+      filter: contrast(1.04);
     }
     .photo-corner-stamp {
       position: absolute;
       top: 10px;
       left: 10px;
-      background: rgba(10, 11, 13, 0.88);
+      background: rgba(247, 244, 238, 0.94);
       backdrop-filter: blur(4px);
-      border: 1px solid var(--accent);
+      border: 1px solid var(--border-strong);
       padding: 4px 8px;
       font-family: var(--font-mono);
       font-size: 9px;
       font-weight: 800;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--text);
       letter-spacing: 0.06em;
     }
     .photo-caption-bar {
       background: var(--bg-surface);
       border-top: 1px solid var(--border);
-      padding: 8px 12px;
+      padding: 9px 12px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -369,7 +374,7 @@
       font-weight: 700;
     }
     .photo-caption-bar .dish-name { color: var(--text); text-transform: uppercase; }
-    .photo-caption-bar .dish-tag { color: var(--accent); text-transform: uppercase; font-size: 9px; }
+    .photo-caption-bar .dish-tag { color: var(--accent-wine); text-transform: uppercase; font-size: 9px; font-weight: 800; }
 
     /* SEPARADOR INDUSTRIAL BAUHAUS */
     .section-header-block {
@@ -383,7 +388,7 @@
     }
     .section-header-title {
       font-family: var(--font-display);
-      font-size: 28px;
+      font-size: 32px;
       font-weight: 900;
       text-transform: uppercase;
       line-height: 0.9;
@@ -396,9 +401,10 @@
     .section-header-meta {
       font-family: var(--font-mono);
       font-size: 9.5px;
-      font-weight: 700;
-      color: var(--accent);
+      font-weight: 800;
+      color: var(--accent-wine);
       text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     /* CARDÁPIO COMPLETO EM TABELAS FLUIDAS (ESTILO STORIES OFICIAIS) */
@@ -407,17 +413,18 @@
       border: 2px solid var(--border-strong);
       padding: 16px;
       margin-bottom: 24px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
     }
     .menu-category-title {
       font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 800;
+      font-size: 11.5px;
+      font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--accent);
-      border-bottom: 1px solid var(--border-strong);
+      color: var(--text);
+      border-bottom: 2px solid var(--border-strong);
       padding-bottom: 4px;
-      margin-top: 14px;
+      margin-top: 18px;
       margin-bottom: 10px;
     }
     .menu-category-title:first-child { margin-top: 0; }
@@ -426,8 +433,8 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      padding: 8px 0;
-      border-bottom: 1px dashed var(--border);
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border);
     }
     .menu-item-left {
       flex: 1;
@@ -464,22 +471,182 @@
       margin-bottom: 16px;
     }
     .story-rule-card {
-      background: var(--bg-surface-elevated);
-      border: 1px solid var(--border-strong);
-      padding: 10px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 12px;
     }
     .story-rule-card .r-icon {
       font-family: var(--font-mono);
-      font-size: 8.5px;
+      font-size: 9px;
       font-weight: 800;
-      color: var(--accent);
+      color: var(--accent-wine);
       text-transform: uppercase;
       margin-bottom: 4px;
     }
     .story-rule-card .r-text {
-      font-size: 11px;
+      font-size: 11.5px;
       color: var(--text);
       line-height: 1.35;
+    }
+
+    /* =========================================================
+       DIRETRIZES DA CASA // FAQ OFICIAL DO SALÃO (ROLHA, RESERVAS, PETS)
+       Inspirado no papel timbrado com anotações manuais do Chef Rafael Sinko
+       ========================================================= */
+    .official-faq-sheet {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-strong);
+      padding: 20px 16px;
+      margin-top: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+      position: relative;
+    }
+    .faq-sheet-stamp {
+      border-bottom: 2px solid var(--border-strong);
+      padding-bottom: 10px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .faq-stamp-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .faq-stamp-sub {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      font-weight: 700;
+      color: var(--accent-wine);
+      text-transform: uppercase;
+    }
+    .faq-item-block {
+      display: flex;
+      gap: 12px;
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+      border-bottom: 1px dashed var(--border);
+    }
+    .faq-item-block:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+    .faq-num {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--accent-wine);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 24px;
+      text-align: center;
+    }
+    .faq-content { flex: 1; }
+    .faq-question {
+      font-family: var(--font-grotesk);
+      font-size: 13.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+      line-height: 1.25;
+    }
+    .faq-answer {
+      font-family: var(--font-sans);
+      font-size: 12.5px;
+      color: var(--text);
+      line-height: 1.45;
+    }
+    .faq-answer-sub {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-top: 6px;
+    }
+    .faq-corkage-callout {
+      margin-top: 10px;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent-wine);
+      padding: 10px 12px;
+    }
+    .faq-corkage-callout span.corkage-prompt {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: block;
+      margin-bottom: 6px;
+    }
+    .corkage-highlight-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #FFFFFF;
+      border: 1.5px solid var(--accent-wine);
+      padding: 6px 12px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent-wine);
+    }
+    .corkage-highlight-badge strong {
+      font-weight: 900;
+      letter-spacing: 0.04em;
+    }
+    .corkage-highlight-badge .corkage-note {
+      font-size: 9.5px;
+      color: var(--text-muted);
+    }
+    .faq-pills-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 8px;
+    }
+    .faq-pill {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      font-weight: 700;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      padding: 5px 8px;
+      color: var(--text);
+    }
+
+    /* NOTA DE ROLHA NO RODAPÉ DA CARTA DE VINHOS */
+    .wine-corkage-callout {
+      margin-top: 16px;
+      padding: 12px 14px;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent-wine);
+    }
+    .wine-corkage-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .wine-corkage-icon { font-size: 16px; }
+    .wine-corkage-title {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-wine);
+    }
+    .wine-corkage-body {
+      font-family: var(--font-sans);
+      font-size: 11.5px;
+      color: var(--text);
+      line-height: 1.4;
     }
 
     /* CARDÁPIO EM FITA CREPE (KITCHEN TAPE) */
@@ -582,13 +749,13 @@
     /* ROLETA DO CHEF RAFAEL SINKO // COMBINAÇÃO BRASA & VINHO */
     .roleta-box {
       background: var(--bg-surface);
-      border: 2px solid var(--accent);
+      border: 2px solid var(--border-strong);
       padding: 16px;
       margin-top: 24px;
       margin-bottom: 24px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
     }
     .roleta-badge-top {
       display: flex;
@@ -600,8 +767,8 @@
       font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--accent);
-      border-bottom: 1px dashed var(--border-strong);
+      color: var(--text);
+      border-bottom: 1px dashed var(--border);
       padding-bottom: 8px;
     }
     .roleta-display-card {
@@ -609,7 +776,7 @@
       gap: 12px;
       align-items: center;
       background: var(--bg-surface-elevated);
-      border: 1px solid var(--border-strong);
+      border: 1px solid var(--border);
       padding: 12px;
       margin-bottom: 12px;
       transition: all 0.25s ease;
@@ -617,10 +784,10 @@
     .roleta-img-frame {
       width: 78px;
       height: 78px;
-      border: 1px solid var(--border-strong);
+      border: 1px solid var(--border);
       overflow: hidden;
       flex-shrink: 0;
-      background: #000;
+      background: var(--bg);
     }
     .roleta-img-frame img {
       width: 100%;
@@ -634,7 +801,7 @@
       font-family: var(--font-mono);
       font-size: 9px;
       font-weight: 800;
-      color: var(--accent);
+      color: var(--accent-wine);
       text-transform: uppercase;
       margin-bottom: 2px;
     }
@@ -654,18 +821,18 @@
       margin-bottom: 6px;
     }
     .roleta-wine-box {
-      background: var(--bg);
-      border-left: 2.5px solid var(--accent-secondary);
+      background: var(--bg-surface);
+      border-left: 3px solid var(--accent-wine);
       padding: 6px 10px;
       font-size: 10.5px;
       color: var(--text);
       line-height: 1.35;
       font-family: var(--font-sans);
     }
-    .roleta-wine-box strong { color: var(--accent-secondary); font-family: var(--font-mono); }
+    .roleta-wine-box strong { color: var(--accent-wine); font-family: var(--font-mono); }
     .roleta-btn-spin {
       width: 100%;
-      background: var(--accent);
+      background: #111213;
       color: #FFFFFF;
       font-family: var(--font-mono);
       font-size: 12px;
@@ -679,7 +846,7 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 4px 16px var(--accent-glow);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       transition: all 0.2s ease;
     }
     .roleta-btn-spin:active {
@@ -696,14 +863,15 @@
       color: var(--text);
       text-decoration: none;
       padding: 9px;
-      border: 1px solid var(--border-strong);
+      border: 1px solid var(--border);
       background: var(--bg-surface);
       transition: all 0.2s;
       cursor: pointer;
     }
     .roleta-btn-action:hover {
-      border-color: var(--accent);
-      color: var(--accent);
+      border-color: var(--border-strong);
+      color: var(--text);
+      background: var(--bg-surface-elevated);
     }
 
     /* MINI THUMB CARDÁPIO */
@@ -721,9 +889,10 @@
     .brasa-to-sala-cta {
       margin-top: 24px;
       background: var(--bg-surface);
-      border: 2px solid var(--accent);
+      border: 2px solid var(--border-strong);
       padding: 16px;
       text-align: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
     }
     .brasa-to-sala-cta h3 {
       font-family: var(--font-grotesk);
@@ -740,7 +909,7 @@
     .btn-goto-sala {
       display: inline-block;
       width: 100%;
-      background: var(--accent);
+      background: #111213;
       color: #FFF;
       font-family: var(--font-mono);
       font-size: 11px;
@@ -749,7 +918,7 @@
       padding: 12px;
       border: none;
       cursor: pointer;
-      box-shadow: 0 4px 15px var(--accent-glow);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
     /* =========================================================
@@ -757,10 +926,10 @@
        ========================================================= */
     .reservation-card-soberano {
       background: var(--bg-surface);
-      border: 2px solid var(--accent);
+      border: 2px solid var(--border-strong);
       padding: 18px 16px;
       margin-top: 14px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
     }
     .res-card-header {
       border-bottom: 2px solid var(--border-strong);
@@ -769,7 +938,7 @@
     }
     .res-card-badge {
       display: inline-block;
-      background: var(--accent);
+      background: #111213;
       color: #FFF;
       font-family: var(--font-mono);
       font-size: 9px;
@@ -806,7 +975,7 @@
       display: flex;
       justify-content: space-between;
     }
-    .res-step-label span.req { color: var(--accent); }
+    .res-step-label span.req { color: var(--accent-wine); }
 
     .pax-selector-row {
       display: grid;
@@ -815,7 +984,7 @@
     }
     .btn-pax {
       background: var(--bg-surface-elevated);
-      border: 1px solid var(--border-strong);
+      border: 1px solid var(--border);
       color: var(--text);
       font-family: var(--font-mono);
       font-size: 11px;
@@ -825,9 +994,9 @@
       cursor: pointer;
     }
     .btn-pax.active {
-      background: var(--accent);
+      background: #111213;
       color: #FFF;
-      border-color: var(--accent);
+      border-color: #111213;
     }
 
     .date-pill-row {
@@ -838,7 +1007,7 @@
     }
     .btn-date-pill {
       background: var(--bg-surface-elevated);
-      border: 1px solid var(--border-strong);
+      border: 1px solid var(--border);
       color: var(--text);
       font-family: var(--font-mono);
       font-size: 10px;
@@ -848,9 +1017,9 @@
       cursor: pointer;
     }
     .btn-date-pill.active {
-      background: var(--accent);
+      background: #111213;
       color: #FFF;
-      border-color: var(--accent);
+      border-color: #111213;
     }
 
     .turnos-sala-grid {
@@ -860,14 +1029,14 @@
     }
     .btn-turno-sala {
       background: var(--bg-surface-elevated);
-      border: 2px solid var(--border-strong);
+      border: 2px solid var(--border);
       padding: 12px 8px;
       text-align: center;
       cursor: pointer;
     }
     .btn-turno-sala.active {
-      border-color: var(--accent);
-      background: rgba(163, 29, 29, 0.08);
+      border-color: #111213;
+      background: #FFFFFF;
     }
     .btn-turno-sala .t-time {
       font-family: var(--font-display);
@@ -880,7 +1049,7 @@
       font-family: var(--font-mono);
       font-size: 9px;
       font-weight: 800;
-      color: var(--accent);
+      color: var(--accent-wine);
       text-transform: uppercase;
       margin-top: 2px;
     }
@@ -892,7 +1061,7 @@
     }
     .btn-seat-type {
       background: var(--bg-surface-elevated);
-      border: 1px solid var(--border-strong);
+      border: 1px solid var(--border);
       color: var(--text);
       font-family: var(--font-mono);
       font-size: 10px;
@@ -903,16 +1072,16 @@
       text-align: center;
     }
     .btn-seat-type.active {
-      background: var(--accent);
+      background: #111213;
       color: #FFF;
-      border-color: var(--accent);
+      border-color: #111213;
     }
 
     .diet-toggle-row { display: flex; gap: 8px; }
     .btn-diet {
       flex: 1;
       background: var(--bg-surface-elevated);
-      border: 1px solid var(--border-strong);
+      border: 1px solid var(--border);
       color: var(--text);
       font-family: var(--font-mono);
       font-size: 10px;
@@ -923,12 +1092,12 @@
     }
     .btn-diet.active {
       background: var(--text);
-      color: var(--bg);
+      color: #FFFFFF;
     }
 
     .guarantee-box-soberana {
       background: var(--bg-surface-elevated);
-      border: 1px solid var(--border-strong);
+      border: 1px solid var(--border);
       padding: 12px;
       margin-top: 14px;
       margin-bottom: 16px;
@@ -938,7 +1107,7 @@
       font-size: 9.5px;
       font-weight: 800;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--accent-wine);
       margin-bottom: 6px;
       display: flex;
       align-items: center;
@@ -950,7 +1119,7 @@
       color: var(--text);
       margin-bottom: 6px;
     }
-    .guarantee-rule-line strong { color: var(--accent); }
+    .guarantee-rule-line strong { color: #111213; }
     .guarantee-notice-clean {
       font-family: var(--font-mono);
       font-size: 9px;
@@ -962,7 +1131,7 @@
 
     .btn-submit-soberano {
       width: 100%;
-      background: var(--accent);
+      background: #111213;
       color: #FFFFFF;
       font-family: var(--font-mono);
       font-size: 13px;
@@ -976,7 +1145,7 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      box-shadow: 0 4px 20px var(--accent-glow);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
       cursor: pointer;
       border: none;
     }
@@ -1169,13 +1338,13 @@
       transform: translateX(-50%);
       width: 100%;
       max-width: 480px;
-      background: var(--hud-bg);
+      background: var(--bg-surface-elevated);
       border-top: 2px solid var(--border-strong);
       padding: 10px 16px;
       z-index: 1000;
       display: flex;
       justify-content: center;
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
     }
     .bottom-booking-inner {
       width: 100%;
@@ -1183,7 +1352,7 @@
     }
     .btn-main-booking {
       width: 100%;
-      background: var(--accent);
+      background: #111213;
       color: #FFFFFF;
       font-family: var(--font-mono);
       font-size: 12px;
@@ -1197,7 +1366,7 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 4px 20px var(--accent-glow);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
       cursor: pointer;
       border: none;
     }
@@ -1208,6 +1377,7 @@
       border: 2px solid var(--border-strong);
       padding: 14px 12px;
       margin-bottom: 20px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
     }
     .bio-hub-title {
       font-family: var(--font-mono);
@@ -1215,7 +1385,7 @@
       font-weight: 800;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--text);
       margin-bottom: 10px;
       display: flex;
       align-items: center;
@@ -1242,12 +1412,13 @@
       font-weight: 700;
     }
     .bio-hub-btn:hover {
-      border-color: var(--accent);
+      border-color: var(--border-strong);
+      background: #FFFFFF;
       transform: translateY(-1px);
     }
     .bio-hub-btn.featured {
-      border: 1.5px solid var(--accent);
-      background: var(--accent-glow);
+      border: 2px solid var(--border-strong);
+      background: #FFFFFF;
     }
     .bio-hub-btn-left {
       display: flex;
@@ -1476,7 +1647,7 @@
                 <span class="bio-hub-sub">Pequenos pratos à la carte para compartilhar</span>
               </div>
             </div>
-            <span style="color:var(--accent); font-weight:800; font-size:16px;">&darr;</span>
+            <span style="color:var(--text); font-weight:900; font-size:16px;">&darr;</span>
           </a>
 
           <a href="#vinhos-anchor" class="bio-hub-btn" onclick="triggerToastyFromHub()">
@@ -1487,7 +1658,18 @@
                 <span class="bio-hub-sub">Biodinâmicos, taças do dia & Cozalinda</span>
               </div>
             </div>
-            <span style="color:var(--accent); font-weight:800; font-size:16px;">&darr;</span>
+            <span style="color:var(--text); font-weight:900; font-size:16px;">&darr;</span>
+          </a>
+
+          <a href="#faq-regras-anchor" class="bio-hub-btn">
+            <div class="bio-hub-btn-left">
+              <span class="bio-hub-icon">📋</span>
+              <div>
+                <span>Diretrizes, Rolha &amp; Balcão</span>
+                <span class="bio-hub-sub">Taxa de Rolha R$ 100 &bull; 6 lugares sem reserva &bull; FAQ</span>
+              </div>
+            </div>
+            <span class="bio-hub-tag" style="color:var(--accent-wine); border-color:var(--accent-wine); background:rgba(122,28,44,0.06);">ROLHA</span>
           </a>
 
           <a href="https://bonomi.meitre.com" target="_blank" rel="noopener" class="bio-hub-btn">
@@ -1545,13 +1727,102 @@
           <div class="r-icon">📅 TERÇA A QUINTA</div>
           <div class="r-text">Mesas quase sempre disponíveis por ordem de chegada no balcão.</div>
         </div>
-        <div class="story-rule-card">
+        <div class="story-rule-card" style="border-left: 3px solid var(--accent-wine);">
           <div class="r-icon">🍷 TAXA DE ROLHA</div>
           <div class="r-text">Nossa carta é viva. Se preferir trazer seu rótulo, a rolha é <strong>R$ 100</strong>.</div>
         </div>
         <div class="story-rule-card">
           <div class="r-icon">⏳ TOLERÂNCIA</div>
           <div class="r-text">Tolerância de <strong>15 minutos</strong> de atraso antes de liberar o assento.</div>
+        </div>
+      </div>
+
+      <!-- =========================================================
+           DIRETRIZES DA CASA // FAQ OFICIAL (ROLHA, RESERVAS, PETS)
+           Transposição fiel do documento editorial do Chef Rafael Sinko
+           ========================================================= -->
+      <div id="faq-regras-anchor" class="section-header-block">
+        <div class="section-header-title">
+          <span>Diretrizes da Casa</span>
+        </div>
+        <div class="section-header-meta">FAQ Oficial do Salão</div>
+      </div>
+
+      <div class="official-faq-sheet">
+        <div class="faq-sheet-stamp">
+          <span class="faq-stamp-tag">RESTAURANTE BONOMI &bull; RIO TAVARES</span>
+          <span class="faq-stamp-sub">Regras Oficiais de Balcão e Salão // Chef Rafael Sinko</span>
+        </div>
+
+        <!-- 1. TAXA DE ROLHA -->
+        <div class="faq-item-block">
+          <div class="faq-num">①</div>
+          <div class="faq-content">
+            <h4 class="faq-question">POSSO LEVAR MINHA GARRAFA DE VINHO?</h4>
+            <p class="faq-answer">
+              Nossa carta de vinhos foi pensada com muito cuidado e carinho para fazer sentido com nossos pratos e a proposta da casa, então a sugestão é que provem o que temos para oferecer!
+            </p>
+            <div class="faq-corkage-callout">
+              <span class="corkage-prompt">Se preferir trazer um vinho de casa:</span>
+              <div class="corkage-highlight-badge">
+                <span style="font-size:15px;">🍷</span>
+                <strong>TAXA DE ROLHA: R$ 100</strong>
+                <span class="corkage-note">(por garrafa)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. RESERVAS & ESPONTÂNEO -->
+        <div class="faq-item-block">
+          <div class="faq-num">②</div>
+          <div class="faq-content">
+            <h4 class="faq-question">PRECISA RESERVAR SEMPRE?</h4>
+            <p class="faq-answer">
+              <strong>Não! Sempre recebemos por ordem de chegada também :)</strong>
+            </p>
+            <p class="faq-answer-sub">
+              Os melhores horários para conseguir um lugarzinho são por volta das <strong>19h ou das 21h</strong>, quando costuma haver mais disponibilidade.
+            </p>
+            <div class="faq-pills-row">
+              <span class="faq-pill">⚡ Mantemos sempre pelo menos 6 lugares disponíveis para quem prefere vir sem reserva</span>
+              <span class="faq-pill">📅 De terça a quinta, quase sempre temos mesas disponíveis por ordem de chegada</span>
+              <span class="faq-pill">⏳ No fim de semana, recomendamos reservar para garantir seu lugar</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. PET POLICY -->
+        <div class="faq-item-block">
+          <div class="faq-num">③</div>
+          <div class="faq-content">
+            <h4 class="faq-question">SÃO PET FRIENDLY?</h4>
+            <p class="faq-answer">
+              <strong>Adoraríamos! 🐾</strong> Mas, por conta da nossa <strong>cozinha aberta</strong> e das normas de segurança alimentar, não podemos receber pets.
+            </p>
+          </div>
+        </div>
+
+        <!-- 4. TOLERÂNCIA DE ATRASO -->
+        <div class="faq-item-block">
+          <div class="faq-num">④</div>
+          <div class="faq-content">
+            <h4 class="faq-question">QUAL A TOLERÂNCIA DE ATRASO?</h4>
+            <p class="faq-answer">
+              Tolerância de <strong>15 minutos</strong> de atraso. Após esse período, a mesa poderá ser liberada.
+            </p>
+          </div>
+        </div>
+
+        <!-- 5. HORÁRIOS -->
+        <div class="faq-item-block">
+          <div class="faq-num">⑤</div>
+          <div class="faq-content">
+            <h4 class="faq-question">HORÁRIOS DE ATENDIMENTO</h4>
+            <p class="faq-answer">
+              <strong>Terça a Sábado:</strong> das 19h00 às 23h30 (cozinha encerra pedidos às 22h30). Atendimento por ordem de chegada das 19h às 22h30.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -1799,6 +2070,18 @@
           </div>
           <div class="dish-price">17+</div>
         </div>
+
+        <!-- AVISO EDITORIAL DE ROLHA // CARTA DE VINHOS -->
+        <div class="wine-corkage-callout">
+          <div class="wine-corkage-header">
+            <span class="wine-corkage-icon">🍷</span>
+            <span class="wine-corkage-title">CARTA DE VINHOS VIVOS &amp; TAXA DE ROLHA</span>
+          </div>
+          <p class="wine-corkage-body">
+            Nossa carta foi pensada com muito cuidado e carinho para fazer sentido com nossos pratos e a proposta da casa, então a sugestão é que provem o que temos para oferecer! 
+            <strong>Se preferir trazer um vinho de casa, nossa taxa de rolha é R$ 100 por garrafa.</strong>
+          </p>
+        </div>
       </div>
 
       <!-- BANNER DE TRANSIÇÃO PARA RESERVA (MODO SALA) -->
@@ -1968,6 +2251,9 @@
           <div class="guarantee-rule-line">
             • <strong>Caução de R$ 50 Opcional:</strong> Para grupos e noites concorridas, confirmação via PIX direto da loja. <em>Você não entrega o número do seu cartão de crédito para plataformas de terceiros.</em>
           </div>
+          <div class="guarantee-rule-line">
+            • <strong>Carta de Vinhos &amp; Rolha:</strong> Seleção viva com mais de 20 rótulos naturais. Se preferir trazer seu vinho de casa, a taxa de rolha é de <strong>R$ 100</strong> por garrafa.
+          </div>
           <div class="guarantee-notice-clean">
             ✓ Sem login com Google &bull; Sem formulários com letras miúdas &bull; Conversa direta de balcão
           </div>
@@ -2064,7 +2350,7 @@
         <strong>Bonomi Restaurante</strong><br>
         Rodovia Dr. Antônio Luiz Moura Gonzaga, 1895 &bull; Loja 6<br>
         Rio Tavares &bull; Florianópolis / SC &bull; CEP 88048-300<br>
-        <span style="color: var(--accent); font-family: var(--font-mono); font-size: 11px;">Atendimento: Terça a Sábado das 19h às 23h30 (Cozinha fecha 22h30)</span>
+        <span style="color: var(--accent-wine); font-family: var(--font-mono); font-size: 11px; font-weight: 700;">Atendimento: Terça a Sábado das 19h às 23h30 (Cozinha fecha 22h30)</span>
       </div>
       <div class="location-btn-row">
         <a class="btn-map-link" href="https://maps.google.com/?q=Bonomi+Restaurante+Rio+Tavares+Florianopolis" target="_blank" rel="noopener">Abrir no Maps</a>
