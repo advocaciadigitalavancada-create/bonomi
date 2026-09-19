@@ -42,3 +42,3241 @@
   <meta name="twitter:title" content="BONOMI // Cozinha Autoral & Central de Reservas">
   <meta name="twitter:description" content="Chef Rafael Sinko no Rio Tavares, Florianópolis. Finalista Prêmio Prazeres da Mesa 2026.">
   <meta name="twitter:image" content="https://bonomi.vercel.app/og_capa.jpg?v=5">
+
+  <!-- Fontes Tipográficas Bauhaus & Construtivista Suíça -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;0,800;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       VARIÁVEIS DE COR: PALETA OFICIAL BONOMI (paleta.txt)
+       Papel Cerâmica Cru (#F7F4EE), Tinta Preta Profunda (#111213)
+       ========================================================= */
+    :root {
+      --bg: #F7F4EE;
+      --bg-surface: #FFFFFF;
+      --bg-surface-elevated: #EFECE4;
+      --text: #111213;
+      --text-muted: #5C5F63;
+      --accent: #111213;
+      --accent-wine: #7A1C2C;
+      --accent-glow: rgba(17, 18, 19, 0.08);
+      --accent-secondary: #7A1C2C;
+      --accent-green: #4A5840;
+      --accent-terracotta: #A84E18;
+      --border: #D8D3C5;
+      --border-strong: #111213;
+      --hud-bg: #EBE6DA;
+
+      /* Fita Crepe Autêntica */
+      --tape-bg: #EFE4C8;
+      --tape-text: #111315;
+      --tape-border: #D2C4A0;
+      --tape-stamp: #7A1C2C;
+      --tape-edge-shadow: rgba(0, 0, 0, 0.08);
+
+      --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-grotesk: 'Space Grotesk', sans-serif;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      
+      --transition-mode: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+
+    /* MODO SALA (Central de Reservas): Mesma pureza de papel editorial */
+    body.mode-sala {
+      --bg: #F7F4EE;
+      --bg-surface: #FFFFFF;
+      --bg-surface-elevated: #EFECE4;
+      --text: #111213;
+      --text-muted: #5C5F63;
+      --accent: #111213;
+      --accent-wine: #7A1C2C;
+      --accent-glow: rgba(17, 18, 19, 0.08);
+      --accent-secondary: #7A1C2C;
+      --accent-green: #4A5840;
+      --border: #D8D3C5;
+      --border-strong: #111213;
+      --hud-bg: #EBE6DA;
+      --tape-bg: #EFE4C8;
+      --tape-text: #111315;
+      --tape-border: #D2C4A0;
+      --tape-stamp: #7A1C2C;
+      --tape-edge-shadow: rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    *::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+
+    body {
+      background-color: #E5E0D4;
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      padding-bottom: 96px;
+      overflow-x: hidden;
+      transition: var(--transition-mode);
+    }
+
+    .app-shell {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background-color: var(--bg);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+
+    /* TOP HUD METEOROLÓGICO */
+    .top-hud {
+      background: var(--hud-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 7px 16px;
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text);
+      transition: var(--transition-mode);
+    }
+    .hud-live-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      background: var(--accent-wine);
+      border-radius: 50%;
+      margin-right: 5px;
+      animation: pulse-dot 1.4s infinite alternate ease-in-out;
+    }
+    @keyframes pulse-dot {
+      0% { opacity: 0.35; transform: scale(0.85); }
+      100% { opacity: 1; transform: scale(1.2); }
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* SWITCH MONUMENTAL: SALA vs. BRASA */
+    .mode-switch-wrapper {
+      margin-top: 14px;
+      margin-bottom: 10px;
+    }
+    .mode-switch-bar {
+      display: flex;
+      border: 2px solid var(--border-strong);
+      background: var(--bg-surface-elevated);
+      padding: 3px;
+    }
+    .mode-btn {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 10px 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .mode-btn.active {
+      background: #111213;
+      color: #FFFFFF;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    }
+
+    /* CONTROLE DE EXIBIÇÃO ENTRE OS DOIS MODOS */
+    .view-brasa-only { display: block; }
+    .view-sala-only { display: none; }
+    body.mode-sala .view-brasa-only { display: none; }
+    body.mode-sala .view-sala-only { display: block; }
+
+    /* HERO BANNER COM O WORDMARK E SÍMBOLO OFICIAL */
+    .hero {
+      padding: 14px 0 16px 0;
+    }
+    .hero-badge-strip {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+    .badge-prazeres-mesa {
+      background: #111213;
+      color: #FFFFFF;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      padding: 6px 10px;
+      letter-spacing: 0.06em;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid #111213;
+    }
+    .badge-michelin-tag {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      letter-spacing: 0.05em;
+      display: inline-block;
+    }
+
+    .hero-brand-official {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .official-wordmark-img {
+      height: 48px;
+      object-fit: contain;
+      display: block;
+    }
+    .wordmark-light { display: none !important; }
+    .wordmark-dark { display: block !important; }
+
+    /* SÍMBOLO OFICIAL DO MENU (CÍRCULO COM PONTO PRETO) */
+    .official-menu-symbol-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      border: 2px solid #111213;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      flex-shrink: 0;
+    }
+    .symbol-center-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #111213;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-grotesk);
+      font-size: 16.5px;
+      font-weight: 800;
+      line-height: 1.25;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .hero-subdesc {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+
+    /* PASSAPORTE KINETIC TICKER (MARQUEE INFINITO DA DIREITA PARA A ESQUERDA) */
+    .passport-ticker-wrap {
+      background: var(--bg-surface);
+      border-top: 1.5px solid var(--border-strong);
+      border-bottom: 1.5px solid var(--border-strong);
+      padding: 12px 0;
+      margin-bottom: 20px;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+    }
+    .passport-ticker-track {
+      display: inline-flex;
+      align-items: center;
+      gap: 48px;
+      width: max-content;
+      animation: ticker-marquee 32s linear infinite;
+      will-change: transform;
+    }
+    .passport-ticker-track:hover {
+      animation-play-state: paused;
+    }
+    .ticker-item-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 24px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .ticker-item-group span { display: inline-flex; align-items: center; gap: 7px; }
+    .ticker-item-group strong { color: #111213; font-size: 13.5px; font-weight: 900; letter-spacing: 0.06em; }
+    .ticker-item-group .dot { color: var(--accent-wine); font-size: 16px; font-weight: 900; }
+    .ticker-item-group .star { color: var(--accent-wine); font-size: 13px; font-weight: 900; }
+
+    @keyframes ticker-marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* FOTO HERO DO ATUM SELADO */
+    .hero-photo-frame {
+      position: relative;
+      border: 2px solid var(--border-strong);
+      background: var(--bg-surface-elevated);
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+    .hero-photo-frame img {
+      width: 100%;
+      height: 270px;
+      object-fit: cover;
+      display: block;
+      filter: contrast(1.04);
+    }
+    .photo-corner-stamp {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(247, 244, 238, 0.94);
+      backdrop-filter: blur(4px);
+      border: 1px solid var(--border-strong);
+      padding: 4px 8px;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--text);
+      letter-spacing: 0.06em;
+    }
+    .photo-caption-bar {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      padding: 9px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 700;
+    }
+    .photo-caption-bar .dish-name { color: var(--text); text-transform: uppercase; }
+    .photo-caption-bar .dish-tag { color: var(--accent-wine); text-transform: uppercase; font-size: 9px; font-weight: 800; }
+
+    /* SEPARADOR INDUSTRIAL BAUHAUS */
+    .section-header-block {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--border-strong);
+      padding-bottom: 6px;
+      margin-top: 28px;
+      margin-bottom: 12px;
+    }
+    .section-header-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-header-meta {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      font-weight: 800;
+      color: var(--accent-wine);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* CARDÁPIO COMPLETO & CARTA DE VINHOS (COM CONTROLE EXPANDIR / FECHAR) */
+    .official-menu-container {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-strong);
+      padding: 16px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+      transition: all 0.3s ease;
+    }
+    .official-menu-container.is-collapsed .menu-collapsible-body {
+      display: none;
+    }
+    .btn-menu-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 5px 9px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-menu-toggle:hover {
+      background: #111213;
+      color: #FFFFFF;
+    }
+    .btn-menu-toggle-footer {
+      width: 100%;
+      background: var(--bg-surface-elevated);
+      border: 1px dashed var(--border-strong);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 11px;
+      margin-top: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .btn-menu-toggle-footer:hover {
+      background: #111213;
+      color: #FFFFFF;
+      border-style: solid;
+    }
+    .menu-collapsed-preview {
+      display: none;
+      padding: 8px 0;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+    .official-menu-container.is-collapsed .menu-collapsed-preview {
+      display: block;
+    }
+    .menu-category-title {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text);
+      border-bottom: 2px solid var(--border-strong);
+      padding-bottom: 4px;
+      margin-top: 18px;
+      margin-bottom: 10px;
+    }
+    .menu-category-title:first-child { margin-top: 0; }
+
+    .menu-row-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .menu-item-left {
+      flex: 1;
+      padding-right: 12px;
+    }
+    .dish-head {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text);
+      line-height: 1.25;
+    }
+    .dish-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.35;
+      margin-top: 2px;
+    }
+    .dish-price {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    /* DESTAQUES OPERACIONAIS DOS STORIES */
+    .stories-rules-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+    .story-rule-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 12px;
+    }
+    .story-rule-card .r-icon {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 800;
+      color: var(--accent-wine);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .story-rule-card .r-text {
+      font-size: 11.5px;
+      color: var(--text);
+      line-height: 1.35;
+    }
+
+    /* =========================================================
+       DIRETRIZES DA CASA // FAQ OFICIAL DO SALÃO (ROLHA, RESERVAS, PETS)
+       Inspirado no papel timbrado com anotações manuais do Chef Rafael Sinko
+       ========================================================= */
+    .official-faq-sheet {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-strong);
+      padding: 20px 16px;
+      margin-top: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+      position: relative;
+    }
+    .faq-sheet-stamp {
+      border-bottom: 2px solid var(--border-strong);
+      padding-bottom: 10px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .faq-stamp-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .faq-stamp-sub {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      font-weight: 700;
+      color: var(--accent-wine);
+      text-transform: uppercase;
+    }
+    .faq-item-block {
+      display: flex;
+      gap: 12px;
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+      border-bottom: 1px dashed var(--border);
+    }
+    .faq-item-block:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+    .faq-num {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--accent-wine);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 24px;
+      text-align: center;
+    }
+    .faq-content { flex: 1; }
+    .faq-question {
+      font-family: var(--font-grotesk);
+      font-size: 13.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+      line-height: 1.25;
+    }
+    .faq-answer {
+      font-family: var(--font-sans);
+      font-size: 12.5px;
+      color: var(--text);
+      line-height: 1.45;
+    }
+    .faq-answer-sub {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-top: 6px;
+    }
+    .faq-corkage-callout {
+      margin-top: 10px;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent-wine);
+      padding: 10px 12px;
+    }
+    .faq-corkage-callout span.corkage-prompt {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: block;
+      margin-bottom: 6px;
+    }
+    .corkage-highlight-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #FFFFFF;
+      border: 1.5px solid var(--accent-wine);
+      padding: 6px 12px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent-wine);
+    }
+    .corkage-highlight-badge strong {
+      font-weight: 900;
+      letter-spacing: 0.04em;
+    }
+    .corkage-highlight-badge .corkage-note {
+      font-size: 9.5px;
+      color: var(--text-muted);
+    }
+    .faq-pills-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 8px;
+    }
+    .faq-pill {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      font-weight: 700;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      padding: 5px 8px;
+      color: var(--text);
+    }
+
+    /* NOTA DE ROLHA NO RODAPÉ DA CARTA DE VINHOS */
+    .wine-corkage-callout {
+      margin-top: 16px;
+      padding: 12px 14px;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent-wine);
+    }
+    .wine-corkage-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .wine-corkage-icon { font-size: 16px; }
+    .wine-corkage-title {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-wine);
+    }
+    .wine-corkage-body {
+      font-family: var(--font-sans);
+      font-size: 11.5px;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    /* CARDÁPIO EM FITA CREPE (KITCHEN TAPE) */
+    .tape-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 12px;
+    }
+    .kitchen-tape-strip {
+      background: var(--tape-bg);
+      color: var(--tape-text);
+      border-top: 1px solid var(--tape-border);
+      border-bottom: 1px solid var(--tape-border);
+      padding: 12px 16px;
+      position: relative;
+      box-shadow: 0 4px 14px var(--tape-edge-shadow);
+      clip-path: polygon(
+        0% 0%, 100% 0%,
+        98% 8%, 100% 16%, 98% 24%, 100% 32%, 98% 40%, 100% 48%,
+        98% 56%, 100% 64%, 98% 72%, 100% 80%, 98% 88%, 100% 96%, 98% 100%,
+        0% 100%,
+        2% 92%, 0% 84%, 2% 76%, 0% 68%, 2% 60%, 0% 52%,
+        2% 44%, 0% 36%, 2% 28%, 0% 20%, 2% 12%, 0% 4%
+      );
+    }
+    .kitchen-tape-strip:nth-child(odd) { transform: rotate(-0.7deg); }
+    .kitchen-tape-strip:nth-child(even) { transform: rotate(0.6deg); }
+
+    .tape-label-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--tape-stamp);
+      border-bottom: 1px dashed rgba(0, 0, 0, 0.25);
+      padding-bottom: 4px;
+      margin-bottom: 8px;
+    }
+    .tape-main-content {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .tape-thumb-frame {
+      position: relative;
+      flex-shrink: 0;
+    }
+    .tape-thumb {
+      width: 66px;
+      height: 66px;
+      object-fit: cover;
+      display: block;
+      border: 1px solid rgba(0,0,0,0.3);
+      filter: contrast(1.06);
+    }
+    .photo-pin-tape {
+      position: absolute;
+      top: -4px;
+      left: 10px;
+      width: 26px;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(0,0,0,0.15);
+      transform: rotate(-12deg);
+      pointer-events: none;
+    }
+    .tape-info { flex: 1; }
+    .tape-dish-title {
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1.15;
+      color: #0B0D0F;
+      margin-bottom: 4px;
+    }
+    .tape-dish-desc {
+      font-family: var(--font-sans);
+      font-size: 11.5px;
+      color: #2D3035;
+      line-height: 1.35;
+    }
+    .tape-tag-badge {
+      display: inline-block;
+      margin-top: 6px;
+      background: rgba(0,0,0,0.10);
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      color: #111315;
+    }
+
+    /* ROLETA DO CHEF RAFAEL SINKO // COMBINAÇÃO BRASA & VINHO */
+    .roleta-box {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-strong);
+      padding: 16px;
+      margin-top: 24px;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    }
+    .roleta-badge-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text);
+      border-bottom: 1px dashed var(--border);
+      padding-bottom: 8px;
+    }
+    .roleta-display-card {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      padding: 12px;
+      margin-bottom: 12px;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    .roleta-img-frame {
+      width: 78px;
+      height: 78px;
+      border: 1px solid var(--border-strong);
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--bg);
+      position: relative;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .roleta-img-frame:active {
+      transform: scale(1.08);
+    }
+    .roleta-img-frame::after {
+      content: '🔍';
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      font-size: 10px;
+      background: rgba(17, 18, 19, 0.7);
+      color: #FFFFFF;
+      padding: 1px 3px;
+      border-radius: 2px;
+      pointer-events: none;
+      opacity: 0.85;
+    }
+    .roleta-img-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.15s ease, transform 0.25s ease;
+    }
+
+    /* MODAL LIGHTBOX EXPANSÃO TÁTIL // ROLETA DO CHEF */
+    .dish-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(17, 18, 19, 0.88);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 100000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      cursor: pointer;
+    }
+    .dish-modal-overlay.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .dish-modal-content {
+      background: var(--bg);
+      border: 2px solid var(--border-strong);
+      max-width: 380px;
+      width: 100%;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+      overflow: hidden;
+      transform: scale(0.92);
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: default;
+    }
+    .dish-modal-overlay.is-open .dish-modal-content {
+      transform: scale(1);
+    }
+    .dish-modal-img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      display: block;
+      filter: contrast(1.05);
+    }
+    .dish-modal-body {
+      padding: 14px 16px;
+      background: #FFFFFF;
+    }
+    .dish-modal-cat {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      font-weight: 800;
+      color: var(--accent-wine);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .dish-modal-title {
+      font-family: var(--font-grotesk);
+      font-size: 16px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .dish-modal-desc {
+      font-family: var(--font-sans);
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+    .dish-modal-close-hint {
+      display: block;
+      text-align: center;
+      margin-top: 12px;
+      color: #FFFFFF;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .roleta-info { flex: 1; }
+    .roleta-dish-cat {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 800;
+      color: var(--accent-wine);
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .roleta-dish-title {
+      font-family: var(--font-grotesk);
+      font-size: 14.5px;
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--text);
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .roleta-dish-desc {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.35;
+      margin-bottom: 6px;
+    }
+    .roleta-wine-box {
+      background: var(--bg-surface);
+      border-left: 3px solid var(--accent-wine);
+      padding: 6px 10px;
+      font-size: 10.5px;
+      color: var(--text);
+      line-height: 1.35;
+      font-family: var(--font-sans);
+    }
+    .roleta-wine-box strong { color: var(--accent-wine); font-family: var(--font-mono); }
+    .roleta-btn-spin {
+      width: 100%;
+      background: #111213;
+      color: #FFFFFF;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 13px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: all 0.2s ease;
+    }
+    .roleta-btn-spin:active {
+      transform: scale(0.98);
+    }
+    .roleta-btn-action {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      margin-top: 8px;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      padding: 9px;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .roleta-btn-action:hover {
+      border-color: var(--border-strong);
+      color: var(--text);
+      background: var(--bg-surface-elevated);
+    }
+
+    /* MINI THUMB CARDÁPIO */
+    .menu-row-thumb {
+      width: 44px;
+      height: 44px;
+      object-fit: cover;
+      border: 1px solid var(--border-strong);
+      flex-shrink: 0;
+      margin-right: 10px;
+      display: block;
+    }
+
+    /* BANNER DE TRANSIÇÃO BRASA -> SALA */
+    .brasa-to-sala-cta {
+      margin-top: 24px;
+      background: var(--bg-surface);
+      border: 2px solid var(--border-strong);
+      padding: 16px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .brasa-to-sala-cta h3 {
+      font-family: var(--font-grotesk);
+      font-size: 16px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .brasa-to-sala-cta p {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .btn-goto-sala {
+      display: inline-block;
+      width: 100%;
+      background: #111213;
+      color: #FFF;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 12px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    /* =========================================================
+       CENTRAL DE RESERVAS SOBERANA (EXCLUSIVA DO MODO SALA)
+       ========================================================= */
+    .reservation-card-soberano {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-strong);
+      padding: 18px 16px;
+      margin-top: 14px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+    }
+    .res-card-header {
+      border-bottom: 2px solid var(--border-strong);
+      padding-bottom: 10px;
+      margin-bottom: 16px;
+    }
+    .res-card-badge {
+      display: inline-block;
+      background: #111213;
+      color: #FFF;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 3px 6px;
+      margin-bottom: 6px;
+      letter-spacing: 0.05em;
+    }
+    .res-card-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      color: var(--text);
+    }
+    .res-card-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    .res-step-group { margin-bottom: 16px; }
+    .res-step-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--text);
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .res-step-label span.req { color: var(--accent-wine); }
+
+    .pax-selector-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+    .btn-pax {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      padding: 10px 4px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .btn-pax.active {
+      background: #111213;
+      color: #FFF;
+      border-color: #111213;
+    }
+
+    .date-pill-row {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+    .btn-date-pill {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 8px 10px;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .btn-date-pill.active {
+      background: #111213;
+      color: #FFF;
+      border-color: #111213;
+    }
+
+    .turnos-sala-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .btn-turno-sala {
+      background: var(--bg-surface-elevated);
+      border: 2px solid var(--border);
+      padding: 12px 8px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .btn-turno-sala.active {
+      border-color: #111213;
+      background: #FFFFFF;
+    }
+    .btn-turno-sala .t-time {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    .btn-turno-sala .t-sub {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 800;
+      color: var(--accent-wine);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .seat-type-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .btn-seat-type {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 10px 6px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .btn-seat-type.active {
+      background: #111213;
+      color: #FFF;
+      border-color: #111213;
+    }
+
+    .diet-toggle-row { display: flex; gap: 8px; }
+    .btn-diet {
+      flex: 1;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 8px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .btn-diet.active {
+      background: var(--text);
+      color: #FFFFFF;
+    }
+
+    .guarantee-box-soberana {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      padding: 12px;
+      margin-top: 14px;
+      margin-bottom: 16px;
+    }
+    .guarantee-badge-top {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--accent-wine);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .guarantee-rule-line {
+      font-size: 11px;
+      line-height: 1.45;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .guarantee-rule-line strong { color: #111213; }
+    .guarantee-notice-clean {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      padding-top: 6px;
+      margin-top: 6px;
+    }
+
+    .btn-submit-soberano {
+      width: 100%;
+      background: #111213;
+      color: #FFFFFF;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-align: center;
+      padding: 16px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      cursor: pointer;
+      border: none;
+    }
+
+    /* PASSAPORTE DO FORAGING */
+    .passport-section {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-strong);
+      padding: 16px;
+      margin-top: 14px;
+    }
+    .passport-intro-lead {
+      font-family: var(--font-grotesk);
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 1.3;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    .stamps-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .michelin-stamp-card {
+      border: 2px solid var(--border-strong);
+      padding: 10px;
+      background: var(--bg-surface-elevated);
+      position: relative;
+    }
+    .michelin-stamp-card:nth-child(1) { transform: rotate(-1deg); }
+    .michelin-stamp-card:nth-child(2) { transform: rotate(1deg); }
+    .michelin-stamp-card:nth-child(3) { transform: rotate(-0.5deg); }
+    .michelin-stamp-card.award-prazeres {
+      transform: rotate(0.8deg);
+      border: 2px solid var(--accent);
+      background: rgba(255, 77, 0, 0.07);
+    }
+    .stamp-badge {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 4px;
+      display: block;
+    }
+    .stamp-restaurant {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .stamp-city {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .stamp-focus {
+      font-size: 9.5px;
+      color: var(--text);
+      margin-top: 6px;
+      line-height: 1.25;
+      border-top: 1px solid var(--border);
+      padding-top: 4px;
+    }
+
+    .chef-portrait-box {
+      border: 1px solid var(--border-strong);
+      position: relative;
+      margin-top: 14px;
+      background: #000;
+    }
+    .chef-portrait-box img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      filter: grayscale(15%) contrast(1.1);
+      display: block;
+    }
+    .chef-portrait-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.92), transparent);
+      padding: 12px 14px;
+    }
+    .chef-portrait-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #FFF;
+    }
+    .chef-portrait-sub {
+      font-size: 11px;
+      color: #C2C6CC;
+      line-height: 1.3;
+    }
+
+    /* SEÇÕES COMUNS */
+    .maps-social-container { margin-top: 14px; }
+    .review-bubble {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-strong);
+      padding: 14px;
+      margin-bottom: 10px;
+    }
+    .review-top-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .review-stars {
+      color: var(--accent-secondary);
+      font-size: 13px;
+      letter-spacing: 2px;
+    }
+    .review-source {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .review-quote {
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: var(--text);
+      font-style: italic;
+      margin-bottom: 6px;
+    }
+    .review-author {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .location-card {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-strong);
+      padding: 14px;
+      margin-top: 14px;
+    }
+    .location-details {
+      font-size: 12.5px;
+      line-height: 1.45;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    .location-btn-row { display: flex; gap: 8px; }
+    .btn-map-link {
+      flex: 1;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 10px;
+      text-align: center;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .footer-soberano {
+      margin-top: 36px;
+      padding: 24px 0 12px 0;
+      border-top: 1px solid var(--border-strong);
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .footer-soberano strong { color: var(--text); }
+
+    .bottom-booking-bar {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      background: var(--bg-surface-elevated);
+      border-top: 2px solid var(--border-strong);
+      padding: 10px 16px;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+    }
+    .bottom-booking-inner {
+      width: 100%;
+      max-width: 480px;
+    }
+    .btn-main-booking {
+      width: 100%;
+      background: #111213;
+      color: #FFFFFF;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-align: center;
+      padding: 14px 12px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      cursor: pointer;
+      border: none;
+    }
+
+    /* BIO HUB // LINKTREE AUTORAL */
+    .bio-hub-card {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-strong);
+      padding: 14px 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .bio-hub-title {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .bio-hub-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .bio-hub-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 14px;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s ease;
+      font-family: var(--font-grotesk);
+      font-size: 13.5px;
+      font-weight: 700;
+    }
+    .bio-hub-btn:hover {
+      border-color: var(--border-strong);
+      background: #FFFFFF;
+      transform: translateY(-1px);
+    }
+    .bio-hub-btn.featured {
+      border: 2px solid var(--border-strong);
+      background: #FFFFFF;
+    }
+    .bio-hub-btn-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .bio-hub-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .bio-hub-sub {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .bio-hub-tag {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 800;
+      padding: 3px 7px;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+    .bio-hub-tag.meitre {
+      color: #3b82f6;
+      border-color: #3b82f6;
+      background: rgba(59, 130, 246, 0.1);
+    }
+    .bio-hub-tag.wa {
+      color: #22c55e;
+      border-color: #22c55e;
+      background: rgba(34, 197, 94, 0.1);
+    }
+
+    /* =========================================================
+       EASTER EGG // MORTAL KOMBAT "TOASTY!" CHEF POP-UP
+       ========================================================= */
+    .toasty-chef-container {
+      position: fixed;
+      bottom: 82px;
+      right: max(10px, calc(50% - 240px + 10px));
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      pointer-events: none;
+      transform: translate3d(140%, 30%, 0) rotate(22deg);
+      opacity: 0;
+      transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.22s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .toasty-chef-container.is-toasty-visible {
+      transform: translate3d(0, 0, 0) rotate(-14deg);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .toasty-balloon {
+      background: var(--tape-bg);
+      color: var(--tape-text);
+      border: 1.5px solid var(--tape-border);
+      border-radius: 8px 8px 0 8px;
+      padding: 4px 9px;
+      margin-bottom: 5px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      transform: translate3d(4px, 0, 0);
+      position: relative;
+    }
+
+    .toasty-balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      right: 18px;
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid var(--tape-bg);
+    }
+
+    .toasty-shout {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+      line-height: 1;
+      color: var(--accent);
+      text-transform: uppercase;
+      text-shadow: 0 1px 1px rgba(0,0,0,0.15);
+    }
+
+    .toasty-sub {
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      font-weight: 800;
+      color: #111315;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 1px;
+    }
+
+    .toasty-frame {
+      width: 112px;
+      height: 138px;
+      border-radius: 12px;
+      border: 2.5px solid var(--accent);
+      background: #1B1D1F;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8), 0 0 20px var(--accent-glow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .toasty-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      filter: contrast(1.15) brightness(0.95);
+    }
+
+    .toasty-badge-mk {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      background: rgba(17, 18, 19, 0.85);
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 7.5px;
+      font-weight: 800;
+      padding: 2px 5px;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+      letter-spacing: 0.04em;
+    }
+
+    /* =========================================================
+       SEÇÃO: A CASA & A TRAJETÓRIA DO CHEF RAFAEL SINKO
+       Do rigor dos estrelados à brasa viva no Rio Tavares
+       ========================================================= */
+    .chef-casa-sheet {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-strong);
+      padding: 22px 18px;
+      margin-top: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      position: relative;
+    }
+    .chef-casa-stamp {
+      border-bottom: 2px solid var(--border-strong);
+      padding-bottom: 12px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .chef-stamp-tag {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-wine);
+    }
+    .chef-stamp-sub {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .chef-photo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .chef-photo-item {
+      position: relative;
+      background: var(--bg);
+      border: 1px solid var(--border-strong);
+      overflow: hidden;
+    }
+    .chef-photo-item img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      display: block;
+      filter: contrast(1.05);
+    }
+    .chef-photo-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(17, 18, 19, 0.88);
+      color: #F7F4EE;
+      padding: 6px 8px;
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+    }
+    .trajectory-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .trajectory-item {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      border-left: 3.5px solid var(--border-strong);
+    }
+    .trajectory-item.highlight {
+      border-left-color: var(--accent-wine);
+      background: rgba(122, 28, 44, 0.03);
+    }
+    .trajectory-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+    .trajectory-place {
+      font-family: var(--font-grotesk);
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+    }
+    .trajectory-badge {
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      font-weight: 800;
+      background: var(--text);
+      color: #FFFFFF;
+      padding: 2px 6px;
+      text-transform: uppercase;
+    }
+    .trajectory-badge.wine {
+      background: var(--accent-wine);
+    }
+    .trajectory-desc {
+      font-family: var(--font-sans);
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.38;
+    }
+    .chef-manifesto-box {
+      background: #FFFFFF;
+      border: 1px dashed var(--border-strong);
+      padding: 14px 16px;
+      margin-top: 14px;
+      margin-bottom: 14px;
+    }
+    .chef-manifesto-p {
+      font-family: var(--font-sans);
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .chef-quote-box {
+      border-left: 3px solid var(--accent-wine);
+      padding-left: 12px;
+      margin-top: 10px;
+      font-family: 'Spectral', serif;
+      font-style: italic;
+      font-size: 13.5px;
+      line-height: 1.4;
+      color: var(--accent-wine);
+    }
+    .chef-quote-author {
+      display: block;
+      margin-top: 4px;
+      font-family: var(--font-mono);
+      font-style: normal;
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+  </style>
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- TOP HUD METEOROLÓGICO & STATUS DE BALCÃO -->
+  <div class="top-hud">
+    <div><span class="hud-live-dot"></span>RIO TAVARES &bull; FLORIANÓPOLIS</div>
+    <div>50 LUGARES &bull; RESERVA SOBERANA</div>
+  </div>
+
+  <div class="container">
+
+    <!-- SWITCH ANALÓGICO MONUMENTAL: SALA vs. BRASA -->
+    <div class="mode-switch-wrapper">
+      <div class="mode-switch-bar">
+        <button id="btn-mode-brasa" class="mode-btn active" onclick="setMode('brasa')">
+          <span>🔥 MODO BRASA - RESTAURANTE E CHEF</span>
+        </button>
+        <button id="btn-mode-sala" class="mode-btn" onclick="setMode('sala')">
+          <span>🍷 MODO SALA - SALÃO E RESERVAS</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- =========================================================
+         [MODO BRASA]: O RESTAURANTE, A COMIDA, O FOGO & A ALMA
+         ========================================================= -->
+    <div class="view-brasa-only">
+
+      <!-- HERO HEADER COM WORDMARK OFICIAL & SÍMBOLO DO MENU -->
+      <header class="hero">
+        <div class="hero-badge-strip">
+          <span class="badge-prazeres-mesa">★ FINALISTA PRÊMIO PRAZERES DA MESA 2026</span>
+          <span class="badge-michelin-tag">ÚNICO DE SANTA CATARINA NA DISPUTA REGIONAL</span>
+        </div>
+
+        <div class="hero-brand-official">
+          <div>
+            <img class="official-wordmark-img wordmark-light" src="referencias_visuais/wordmark_bonomi_branco.png" alt="BONOMI Wordmark Oficial">
+            <img class="official-wordmark-img wordmark-dark" src="referencias_visuais/wordmark_bonomi_preto.png" alt="BONOMI Wordmark Oficial">
+          </div>
+          <!-- SÍMBOLO OFICIAL DO MENU (PRATO / CÍRCULO COM PONTO) -->
+          <div class="official-menu-symbol-box" title="Símbolo Oficial Bonomi">
+            <div class="symbol-center-dot"></div>
+          </div>
+        </div>
+
+        <div class="hero-tagline">Cozinha Autoral, Brasa Viva & Vinhos Naturais</div>
+
+        <p class="hero-subdesc">
+          Sem cerimônias, sem garçom engravatado. O rigor de quem passou pelo D.O.M., Tuju e Boragó executado ao vivo em 50 lugares na Rodovia do Rio Tavares.
+        </p>
+
+        <!-- PASSAPORTE KINETIC TICKER (MARQUEE INFINITO DA DIREITA PARA A ESQUERDA) -->
+        <div class="passport-ticker-wrap" title="Trajetória & Pedigree">
+          <div class="passport-ticker-track">
+            <div class="ticker-item-group">
+              <span><span class="star">★</span> <strong>D.O.M.</strong> 2★ MICHELIN</span>
+              <span class="dot">&bull;</span>
+              <span><span class="star">★</span> <strong>TUJU</strong> 2★ MICHELIN</span>
+              <span class="dot">&bull;</span>
+              <span><span class="star">★</span> <strong>BORAGÓ</strong> TOP 50 WORLD</span>
+              <span class="dot">&bull;</span>
+              <span><span class="star">★</span> <strong>RIO TAVARES</strong> COZINHA SOBERANA</span>
+              <span class="dot">&bull;</span>
+              <span><span class="star">★</span> <strong>PRAZERES DA MESA</strong> FINALISTA 2026</span>
+            </div>
+            <div class="ticker-item-group" aria-hidden="true">
+              <span><span class="star">★</span> <strong>D.O.M.</strong> 2★ MICHELIN</span>
+              <span class="dot">&bull;</span>
+              <span><span class="star">★</span> <strong>TUJU</strong> 2★ MICHELIN</span>
+              <span class="dot">&bull;</span>
+              <span><span class="star">★</span> <strong>BORAGÓ</strong> TOP 50 WORLD</span>
+              <span class="dot">&bull;</span>
+              <span><span class="star">★</span> <strong>RIO TAVARES</strong> COZINHA SOBERANA</span>
+              <span class="dot">&bull;</span>
+              <span><span class="star">★</span> <strong>PRAZERES DA MESA</strong> FINALISTA 2026</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- BIO HUB // LINKTREE AUTORAL BONOMI -->
+      <div class="bio-hub-card">
+        <div class="bio-hub-title">
+          <span class="hud-live-dot"></span>
+          <span>Acesso Rápido &bull; Hub Autoral Bonomi</span>
+        </div>
+        <div class="bio-hub-links">
+          <a href="#menu-oficial-anchor" class="bio-hub-btn featured">
+            <div class="bio-hub-btn-left">
+              <span class="bio-hub-icon">🍽️</span>
+              <div>
+                <span>Ver Cardápio Completo</span>
+                <span class="bio-hub-sub">Pequenos pratos à la carte para compartilhar</span>
+              </div>
+            </div>
+            <span style="color:var(--text); font-weight:900; font-size:16px;">&darr;</span>
+          </a>
+
+          <a href="#vinhos-anchor" class="bio-hub-btn" onclick="triggerToastyFromHub()">
+            <div class="bio-hub-btn-left">
+              <span class="bio-hub-icon">🍷</span>
+              <div>
+                <span>Carta de Vinhos Naturais</span>
+                <span class="bio-hub-sub">Biodinâmicos, taças do dia & Cozalinda</span>
+              </div>
+            </div>
+            <span style="color:var(--text); font-weight:900; font-size:16px;">&darr;</span>
+          </a>
+
+          <a href="#chef-casa-anchor" class="bio-hub-btn">
+            <div class="bio-hub-btn-left">
+              <span class="bio-hub-icon">👨‍🍳</span>
+              <div>
+                <span>A Casa &amp; O Chef // Rafael Sinko</span>
+                <span class="bio-hub-sub">D.O.M. 2★, Tuju 2★, Boragó &amp; Brasa a 800°C</span>
+              </div>
+            </div>
+            <span class="bio-hub-tag" style="color:var(--accent-curry); border-color:var(--accent-curry); background:rgba(224,109,38,0.08);">HISTÓRIA</span>
+          </a>
+
+          <a href="#faq-regras-anchor" class="bio-hub-btn">
+            <div class="bio-hub-btn-left">
+              <span class="bio-hub-icon">📋</span>
+              <div>
+                <span>Diretrizes, Rolha &amp; Balcão</span>
+                <span class="bio-hub-sub">Taxa de Rolha R$ 100 &bull; 6 lugares sem reserva &bull; FAQ</span>
+              </div>
+            </div>
+            <span class="bio-hub-tag" style="color:var(--accent-wine); border-color:var(--accent-wine); background:rgba(122,28,44,0.06);">ROLHA</span>
+          </a>
+
+          <a href="https://bonomi.meitre.com" target="_blank" rel="noopener" class="bio-hub-btn">
+            <div class="bio-hub-btn-left">
+              <span class="bio-hub-icon">📅</span>
+              <div>
+                <span>Reservar Mesa no Meitre</span>
+                <span class="bio-hub-sub">Sistema oficial atual de agendamento</span>
+              </div>
+            </div>
+            <span class="bio-hub-tag meitre">MEITRE</span>
+          </a>
+
+          <button onclick="goToSalaAndReserve()" class="bio-hub-btn" style="width:100%; text-align:left; cursor:pointer; background:none;">
+            <div class="bio-hub-btn-left">
+              <span class="bio-hub-icon">💬</span>
+              <div>
+                <span>Reserva Direta no WhatsApp</span>
+                <span class="bio-hub-sub">Sem cadastro burocrático &bull; Válida após confirmação</span>
+              </div>
+            </div>
+            <span class="bio-hub-tag wa">WHATSAPP</span>
+          </button>
+
+          <a href="https://maps.google.com/?q=Bonomi+Restaurante+Rio+Tavares" target="_blank" rel="noopener" class="bio-hub-btn">
+            <div class="bio-hub-btn-left">
+              <span class="bio-hub-icon">📍</span>
+              <div>
+                <span>Como Chegar // Rio Tavares</span>
+                <span class="bio-hub-sub">Rod. Dr. Antônio Luiz Moura Gonzaga 1895</span>
+              </div>
+            </div>
+            <span class="bio-hub-tag">MAPS</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- FOTO HERO: TARTAR AUTORAL DO BONOMI (SUBSTITUINDO O ATUM) -->
+      <div class="hero-photo-frame">
+        <img src="referencias_visuais/tartar_close_hero.png" alt="Tartar de Atum Fresco com chili oil, gergelim e folhas no Bonomi Restaurante">
+        <div class="photo-corner-stamp">PRATO ASSINATURA // COZINHA AUTORAL</div>
+        <div class="photo-caption-bar">
+          <span class="dish-name">Tartar de Atum Fresco &amp; Chili Oil</span>
+          <span class="dish-tag">Pesca do Dia &bull; Rio Tavares</span>
+        </div>
+      </div>
+
+      <!-- DESTAQUES OPERACIONAIS DOS STORIES DO BONOMI -->
+      <div class="stories-rules-grid">
+        <div class="story-rule-card">
+          <div class="r-icon">⚡ BALCÃO ESPONTÂNEO</div>
+          <div class="r-text">Mantemos sempre <strong>6 lugares livres</strong> para quem prefere vir sem reserva.</div>
+        </div>
+        <div class="story-rule-card">
+          <div class="r-icon">📅 TERÇA A QUINTA</div>
+          <div class="r-text">Mesas quase sempre disponíveis por ordem de chegada no balcão.</div>
+        </div>
+        <div class="story-rule-card" style="border-left: 3px solid var(--accent-wine);">
+          <div class="r-icon">🍷 TAXA DE ROLHA</div>
+          <div class="r-text">Nossa carta é viva. Se preferir trazer seu rótulo, a rolha é <strong>R$ 100</strong>.</div>
+        </div>
+        <div class="story-rule-card">
+          <div class="r-icon">⏳ TOLERÂNCIA</div>
+          <div class="r-text">Tolerância de <strong>15 minutos</strong> de atraso antes de liberar o assento.</div>
+        </div>
+      </div>
+
+      <!-- =========================================================
+           A CASA & A TRAJETÓRIA DO CHEF RAFAEL SINKO
+           Do rigor dos estrelados à brasa viva no Rio Tavares
+           ========================================================= -->
+      <div id="chef-casa-anchor" class="section-header-block">
+        <div class="section-header-title">
+          <span>A Casa &amp; O Chef</span>
+        </div>
+        <div class="section-header-meta">Rafael Sinko // Brasa &amp; Pedigree</div>
+      </div>
+
+      <div class="chef-casa-sheet">
+        <div class="chef-casa-stamp">
+          <div>
+            <span class="chef-stamp-tag">★ TRAJETÓRIA ESTRELADA &bull; BRASA VIVA A 800°C</span>
+            <div style="font-family:var(--font-grotesk); font-size:16px; font-weight:800; color:var(--text); text-transform:uppercase; margin-top:3px;">
+              Do Rigor dos Estrelados ao Fogo Livre no Tavares
+            </div>
+          </div>
+          <span class="chef-stamp-sub">50 Lugares &bull; Rod. Dr. Antônio Luiz Moura Gonzaga 1895</span>
+        </div>
+
+        <!-- GRID FOTOGRÁFICO AUTORAL -->
+        <div class="chef-photo-grid">
+          <div class="chef-photo-item">
+            <img src="referencias_visuais/chef_rafael_sinko.jpg" alt="Chef Rafael Sinko no Bonomi Restaurante">
+            <div class="chef-photo-caption">
+              <span>Chef Rafael Sinko</span>
+              <span>Comando do Fogo</span>
+            </div>
+          </div>
+          <div class="chef-photo-item">
+            <img src="referencias_visuais/equipe_bonomi_feliz.png" alt="Equipe de cozinha do Bonomi Restaurante feliz em serviço">
+            <div class="chef-photo-caption">
+              <span>Equipe Bonomi</span>
+              <span>Cozinha &amp; Brasa</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- MANIFESTO DA CASA -->
+        <div class="chef-manifesto-box">
+          <p class="chef-manifesto-p">
+            O <strong>Bonomi</strong> nasceu no Rio Tavares com uma premissa clara: despir a alta gastronomia de todo o protocolo engravatado e focar naquilo que realmente importa — o produto excepcional, o calor da brasa a 800°C e a conexão direta de quem cozinha com quem come.
+          </p>
+          <p class="chef-manifesto-p">
+            Em um salão intimista de apenas <strong>50 lugares</strong> na Rodovia do Rio Tavares, a cozinha aberta funciona como palco vivo. Os comensais sentem o calor do carvão, observam a finalização de cada prato e podem sentar espontaneamente nas <strong>6 banquetas do balcão</strong>, mantidas sempre livres sem necessidade de reserva prévia.
+          </p>
+          <div class="chef-quote-box">
+            "A cozinha autoral só tem sentido quando aproxima as pessoas do fogo, da terra e de quem produz."
+            <span class="chef-quote-author">— Chef Rafael Sinko</span>
+          </div>
+        </div>
+
+        <!-- LINHA DO TEMPO & PEDIGREE DO CHEF -->
+        <div class="trajectory-list">
+          <div class="trajectory-item highlight">
+            <div class="trajectory-item-header">
+              <span class="trajectory-place">D.O.M. // São Paulo</span>
+              <span class="trajectory-badge wine">2★ MICHELIN</span>
+            </div>
+            <div class="trajectory-desc">
+              O rigor técnico da cozinha de Alex Atala e o respeito absoluto pela biodiversidade e ingredientes brasileiros de pequenos produtores.
+            </div>
+          </div>
+
+          <div class="trajectory-item highlight">
+            <div class="trajectory-item-header">
+              <span class="trajectory-place">TUJU // São Paulo</span>
+              <span class="trajectory-badge wine">2★ MICHELIN</span>
+            </div>
+            <div class="trajectory-desc">
+              A vanguarda da pesquisa sazonal com Ivan Ralston: técnicas de precisão, infusões botânicas e a disciplina da alta gastronomia contemporânea.
+            </div>
+          </div>
+
+          <div class="trajectory-item highlight">
+            <div class="trajectory-item-header">
+              <span class="trajectory-place">BORAGÓ // Santiago do Chile</span>
+              <span class="trajectory-badge">TOP 50 WORLD</span>
+            </div>
+            <div class="trajectory-desc">
+              A imersão radical no território selvagem com Rodolfo Guzmán: domínio do fogo primitivo, colheita nativa e respeito à ancestralidade dos alimentos.
+            </div>
+          </div>
+
+          <div class="trajectory-item">
+            <div class="trajectory-item-header">
+              <span class="trajectory-place">PRÊMIO PRAZERES DA MESA 2026</span>
+              <span class="trajectory-badge wine">FINALISTA REGIONAL</span>
+            </div>
+            <div class="trajectory-desc">
+              Indicado a <strong>Melhor Restaurante da Região Sul</strong> — o único representante de Santa Catarina na disputa, colocando o Sul da Ilha no mapa da gastronomia brasileira.
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTÃO PARA ROLAR ATÉ O MENU -->
+        <a href="#menu-oficial-anchor" class="roleta-btn-action" style="display:block; text-align:center; text-decoration:none; margin-top:8px;">
+          Ver Cardápio Autoral na Brasa &darr;
+        </a>
+      </div>
+
+      <!-- =========================================================
+           DIRETRIZES DA CASA // FAQ OFICIAL (ROLHA, RESERVAS, PETS)
+           Transposição fiel do documento editorial do Chef Rafael Sinko
+           ========================================================= -->
+      <div id="faq-regras-anchor" class="section-header-block">
+        <div class="section-header-title">
+          <span>Diretrizes da Casa</span>
+        </div>
+        <div class="section-header-meta">FAQ Oficial do Salão</div>
+      </div>
+
+      <div class="official-faq-sheet">
+        <div class="faq-sheet-stamp">
+          <span class="faq-stamp-tag">RESTAURANTE BONOMI &bull; RIO TAVARES</span>
+          <span class="faq-stamp-sub">Regras Oficiais de Balcão e Salão // Chef Rafael Sinko</span>
+        </div>
+
+        <!-- 1. TAXA DE ROLHA -->
+        <div class="faq-item-block">
+          <div class="faq-num">①</div>
+          <div class="faq-content">
+            <h4 class="faq-question">POSSO LEVAR MINHA GARRAFA DE VINHO?</h4>
+            <p class="faq-answer">
+              Nossa carta de vinhos foi pensada com muito cuidado e carinho para fazer sentido com nossos pratos e a proposta da casa, então a sugestão é que provem o que temos para oferecer!
+            </p>
+            <div class="faq-corkage-callout">
+              <span class="corkage-prompt">Se preferir trazer um vinho de casa:</span>
+              <div class="corkage-highlight-badge">
+                <span style="font-size:15px;">🍷</span>
+                <strong>TAXA DE ROLHA: R$ 100</strong>
+                <span class="corkage-note">(por garrafa)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. RESERVAS & ESPONTÂNEO -->
+        <div class="faq-item-block">
+          <div class="faq-num">②</div>
+          <div class="faq-content">
+            <h4 class="faq-question">PRECISA RESERVAR SEMPRE?</h4>
+            <p class="faq-answer">
+              <strong>Não! Sempre recebemos por ordem de chegada também :)</strong>
+            </p>
+            <p class="faq-answer-sub">
+              Os melhores horários para conseguir um lugarzinho são por volta das <strong>19h ou das 21h</strong>, quando costuma haver mais disponibilidade.
+            </p>
+            <div class="faq-pills-row">
+              <span class="faq-pill">⚡ Mantemos sempre pelo menos 6 lugares disponíveis para quem prefere vir sem reserva</span>
+              <span class="faq-pill">📅 De terça a quinta, quase sempre temos mesas disponíveis por ordem de chegada</span>
+              <span class="faq-pill">⏳ No fim de semana, recomendamos reservar para garantir seu lugar</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. PET POLICY -->
+        <div class="faq-item-block">
+          <div class="faq-num">③</div>
+          <div class="faq-content">
+            <h4 class="faq-question">SÃO PET FRIENDLY?</h4>
+            <p class="faq-answer">
+              <strong>Adoraríamos! 🐾</strong> Mas, por conta da nossa <strong>cozinha aberta</strong> e das normas de segurança alimentar, não podemos receber pets.
+            </p>
+          </div>
+        </div>
+
+        <!-- 4. TOLERÂNCIA DE ATRASO -->
+        <div class="faq-item-block">
+          <div class="faq-num">④</div>
+          <div class="faq-content">
+            <h4 class="faq-question">QUAL A TOLERÂNCIA DE ATRASO?</h4>
+            <p class="faq-answer">
+              Tolerância de <strong>15 minutos</strong> de atraso. Após esse período, a mesa poderá ser liberada.
+            </p>
+          </div>
+        </div>
+
+        <!-- 5. HORÁRIOS -->
+        <div class="faq-item-block">
+          <div class="faq-num">⑤</div>
+          <div class="faq-content">
+            <h4 class="faq-question">HORÁRIOS DE ATENDIMENTO</h4>
+            <p class="faq-answer">
+              <strong>Terça a Sábado:</strong> das 19h00 às 23h30 (cozinha encerra pedidos às 22h30). Atendimento por ordem de chegada das 19h às 22h30.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- A ROLETA DO CHEF RAFAEL SINKO // SUGESTÃO DA NOITE -->
+      <div class="roleta-box">
+        <div class="roleta-badge-top">
+          <span>🎲 EXPERIÊNCIA TÁTIL // BRASA &amp; VINHO</span>
+          <span>A ROLETA DO CHEF</span>
+        </div>
+
+        <div id="roleta-card" class="roleta-display-card">
+          <div class="roleta-img-frame" onclick="openDishModal()" title="Toque para expandir a foto do prato">
+            <img id="roleta-img" src="referencias_visuais/tartar_close_hero.png" alt="Sugestão do Chef: Tartar de Atum Fresco">
+          </div>
+          <div class="roleta-info">
+            <div id="roleta-cat" class="roleta-dish-cat">DO MAR // COZINHA AUTORAL</div>
+            <div id="roleta-title" class="roleta-dish-title">Tartar de Atum Fresco</div>
+            <div id="roleta-desc" class="roleta-dish-desc">Pesca da costa no corte clássico crú, óleo de pimenta artesanal, gergelim e ervas frescas.</div>
+            <div class="roleta-wine-box">
+              <strong>Harmonização:</strong> <span id="roleta-wine">Vinho Branco Viognier Mas des Agrunelles (2022)</span>
+            </div>
+          </div>
+        </div>
+
+        <button class="roleta-btn-spin" onclick="spinRoleta()">
+          <span>GIRAR ROLETA DO CHEF</span>
+          <span>🎲</span>
+        </button>
+
+        <button class="roleta-btn-action" onclick="applyRoletaDishToReservation()">
+          Quero esta sugestão na minha reserva &rarr;
+        </button>
+      </div>
+
+      <!-- =========================================================
+           CARDÁPIO OFICIAL COMPLETO (EXTRAÍDO DOS STORIES OFICIAIS)
+           ========================================================= -->
+      <div id="menu-oficial-anchor" class="section-header-block">
+        <div class="section-header-title">
+          <div class="official-menu-symbol-box" style="width:24px;height:24px;border-width:1.5px;">
+            <div class="symbol-center-dot" style="width:8px;height:8px;"></div>
+          </div>
+          <span>Menu Oficial</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <button id="btn-toggle-menu" class="btn-menu-toggle" onclick="toggleContainer('container-menu-oficial', 'btn-toggle-menu', 'Menu')">
+            <span class="toggle-icon">+</span>
+            <span class="toggle-text">Ver Menu</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="container-menu-oficial" class="official-menu-container is-collapsed">
+        
+        <div class="menu-collapsed-preview">
+          Cardápio recolhido. Clique no botão acima ou abaixo para expandir a lista completa de pequenos pratos à la carte.
+        </div>
+
+        <div class="menu-collapsible-body">
+          <!-- PÃO -->
+          <div class="menu-category-title">PÃO</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Pão de Levain</div>
+              <div class="dish-sub">Manteiga noisette & mel fermentado artesanal da casa.</div>
+            </div>
+            <div class="dish-price">25</div>
+          </div>
+
+          <!-- VEGETAIS -->
+          <div class="menu-category-title">VEGETAIS</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Pimentões Assados</div>
+              <div class="dish-sub">Brioche dourado, bechamel aveludado e ovo perfeito.</div>
+            </div>
+            <div class="dish-price">42</div>
+          </div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Alho-Poró na Brasa</div>
+              <div class="dish-sub">Demiglace vegetal profundo, picles crocante de enoki e pão frito.</div>
+            </div>
+            <div class="dish-price">42</div>
+          </div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Milho Tostado</div>
+              <div class="dish-sub">Cogumelos portobello, manteiga de levedura e uva fresca.</div>
+            </div>
+            <div class="dish-price">39</div>
+          </div>
+
+          <!-- DO MAR -->
+          <div class="menu-category-title">DO MAR</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Tartar de Atum Fresco</div>
+              <div class="dish-sub">Pesca da costa selada no ponto crú, infusão de chili oil artesanal da casa, gergelim e ervas.</div>
+            </div>
+            <div class="dish-price">56</div>
+          </div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Peixe Curado</div>
+              <div class="dish-sub">Pescado fresco da costa, chili oil artesanal e kiwi.</div>
+            </div>
+            <div class="dish-price">44</div>
+          </div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Quenelle de Peixe Branco</div>
+              <div class="dish-sub">Molho rico de conchas marinhas e emulsão de ervas.</div>
+            </div>
+            <div class="dish-price">46</div>
+          </div>
+
+          <!-- CARNES -->
+          <div class="menu-category-title">CARNES</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Tartar de Carne</div>
+              <div class="dish-sub">Tomate queimado na brasa, cebola confit, mostarda e queijo curado.</div>
+            </div>
+            <div class="dish-price">42</div>
+          </div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Kufteh de Cordeiro</div>
+              <div class="dish-sub">Cordeiro aromático na brasa, hortelã fresca e labneh cremoso.</div>
+            </div>
+            <div class="dish-price">43</div>
+          </div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Língua de Angus</div>
+              <div class="dish-sub">Creme untuoso de grão de bico com alho negro e folhas frescas.</div>
+            </div>
+            <div class="dish-price">40</div>
+          </div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Pancetta na Brasa (2un)</div>
+              <div class="dish-sub">Mamão verde em tiras, gohan clássico e demiglace com infusão de café.</div>
+            </div>
+            <div class="dish-price">43</div>
+          </div>
+
+          <!-- SOBREMESAS -->
+          <div class="menu-category-title">SOBREMESAS</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Sorvete de Chocolate</div>
+              <div class="dish-sub">Calda dandan aromática e crocante biscoito de gergelim tostado.</div>
+            </div>
+            <div class="dish-price">39</div>
+          </div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Bolo de Tâmaras Quente</div>
+              <div class="dish-sub">Especiarias amazônicas, toffee aveludado e crème fraîche batido.</div>
+            </div>
+            <div class="dish-price">39</div>
+          </div>
+
+          <div style="font-family: var(--font-mono); font-size: 9.5px; color: var(--text-muted); margin-top: 14px; text-align: center;">
+            *Por favor, avise-nos previamente sobre qualquer restrição ou alergia alimentar.
+          </div>
+
+          <button class="btn-menu-toggle-footer" onclick="toggleContainer('container-menu-oficial', 'btn-toggle-menu', 'Menu')">
+            <span>▲ Recolher Cardápio</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- =========================================================
+           CARTA DE VINHOS NATURAIS OFICIAL (RESUMO SELECIONADO)
+           ========================================================= -->
+      <div id="vinhos-anchor" class="section-header-block">
+        <div class="section-header-title">
+          <span>Vinhos Naturais</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <button id="btn-toggle-vinhos" class="btn-menu-toggle" onclick="toggleContainer('container-vinhos-oficial', 'btn-toggle-vinhos', 'Carta')">
+            <span class="toggle-icon">+</span>
+            <span class="toggle-text">Ver Carta</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="container-vinhos-oficial" class="official-menu-container is-collapsed">
+        
+        <div class="menu-collapsed-preview">
+          Carta de vinhos recolhida. Clique no botão acima ou abaixo para expandir rótulos naturais, biodinâmicos, taças do dia e cervejas selvagens.
+        </div>
+
+        <div class="menu-collapsible-body">
+          <div class="menu-category-title">PET-NAT & ESPUMANTES</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Cantina Mincarone (2023)</div>
+              <div class="dish-sub">Sangiovese &bull; Serra Gaúcha/RS, Brasil</div>
+            </div>
+            <div class="dish-price">195</div>
+          </div>
+
+          <div class="menu-category-title">BRANCOS & LARANJAS</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Vega Tolosa Macabeo (2022)</div>
+              <div class="dish-sub">Manchuela, Espanha &bull; Frescor e mineralidade pura</div>
+            </div>
+            <div class="dish-price">145</div>
+          </div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Lazy Winemaker Sauvignon Blanc (2025)</div>
+              <div class="dish-sub">Laranja &bull; Vale do Curicó, Chile &bull; Maceração em casca</div>
+            </div>
+            <div class="dish-price">185</div>
+          </div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Domaine Geigerkoenig (2022)</div>
+              <div class="dish-sub">Pinot Gris / Gewürztraminer &bull; Alsácia, França</div>
+            </div>
+            <div class="dish-price">265</div>
+          </div>
+
+          <div class="menu-category-title">TINTOS & TAÇAS</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Montlaiz Cabernet Sauvignon (2024)</div>
+              <div class="dish-sub">Mendoza, Argentina &bull; Fermentação selvagem</div>
+            </div>
+            <div class="dish-price">160</div>
+          </div>
+          <div class="menu-category-title">SEM ÁLCOOL & APERITIVOS</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Vinoh Moscato / Merlot (Sem Álcool)</div>
+              <div class="dish-sub">Garrafa 750ml &bull; Serra Gaúcha/RS &bull; Taça: R$ 33</div>
+            </div>
+            <div class="dish-price">160</div>
+          </div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Lucia Botânico Brasileiro (Aperitivo)</div>
+              <div class="dish-sub">Frutas vermelhas, cupuaçu, limão e leve amargor</div>
+            </div>
+            <div class="dish-price">36</div>
+          </div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Kombucha / Baer-Mate / Suco / Água Mamba</div>
+              <div class="dish-sub">Opções artesanais gaseificadas e cafés espresso (R$ 7 a R$ 23)</div>
+            </div>
+            <div class="dish-price">7-23</div>
+          </div>
+
+          <div class="menu-category-title">CERVEJAS SELVAGENS & ARTESANAIS</div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Cozalinda Fermentação Mista / Saison Mel</div>
+              <div class="dish-sub">Florianópolis, SC &bull; Cervejas selvagens de terroir manezinho &bull; 330/375ml</div>
+            </div>
+            <div class="dish-price">42</div>
+          </div>
+          <div class="menu-row-item">
+            <div class="menu-item-left">
+              <div class="dish-head">Cerveja Praya (Golden Ale / Sem Glúten)</div>
+              <div class="dish-sub">Ou Heineken, Heineken 0,0%, Lagunitas IPA (R$ 17 a R$ 25)</div>
+            </div>
+            <div class="dish-price">17+</div>
+          </div>
+
+          <!-- AVISO EDITORIAL DE ROLHA // CARTA DE VINHOS -->
+          <div class="wine-corkage-callout">
+            <div class="wine-corkage-header">
+              <span class="wine-corkage-icon">🍷</span>
+              <span class="wine-corkage-title">CARTA DE VINHOS VIVOS &amp; TAXA DE ROLHA</span>
+            </div>
+            <p class="wine-corkage-body">
+              Nossa carta foi pensada com muito cuidado e carinho para fazer sentido com nossos pratos e a proposta da casa, então a sugestão é que provem o que temos para oferecer! 
+              <strong>Se preferir trazer um vinho de casa, nossa taxa de rolha é R$ 100 por garrafa.</strong>
+            </p>
+          </div>
+
+          <button class="btn-menu-toggle-footer" onclick="toggleContainer('container-vinhos-oficial', 'btn-toggle-vinhos', 'Carta')">
+            <span>▲ Recolher Carta de Vinhos</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- BANNER DE TRANSIÇÃO PARA RESERVA (MODO SALA) -->
+      <div class="brasa-to-sala-cta">
+        <span class="badge-michelin-tag">CAPACIDADE: 50 ASSENTOS POR NOITE</span>
+        <h3 style="margin-top:8px;">Sentiu o cheiro da brasa?</h3>
+        <p>Acesse o Modo Sala para solicitar sua reserva de mesa ou balcão com agilidade e atendimento direto da casa.</p>
+        <button class="btn-goto-sala" onclick="goToSalaAndReserve()">
+          IR PARA O MODO SALA &bull; ESCOLHER ASSENTO &rarr;
+        </button>
+      </div>
+
+      <!-- PASSAPORTE DO FORAGING & CARIMBOS MICHELIN -->
+      <div class="section-header-block">
+        <div class="section-header-title">O Pedigree</div>
+        <div class="section-header-meta">Trajetória & Rigor Técnico</div>
+      </div>
+
+      <div class="passport-section">
+        <div class="passport-intro-lead">
+          A rota de formação do Chef Rafael Sinko até o balcão do Rio Tavares:
+        </div>
+
+        <div class="stamps-grid">
+          <div class="michelin-stamp-card">
+            <span class="stamp-badge">★★ 2 ESTRELAS MICHELIN</span>
+            <div class="stamp-restaurant">D.O.M.</div>
+            <div class="stamp-city">São Paulo &bull; Alex Atala</div>
+            <div class="stamp-focus">Escola de ingredientes nativos brasileiros e técnica implacável.</div>
+          </div>
+
+          <div class="michelin-stamp-card">
+            <span class="stamp-badge">★★ 2 ESTRELAS MICHELIN</span>
+            <div class="stamp-restaurant">TUJU</div>
+            <div class="stamp-city">São Paulo &bull; Ivan Ralston</div>
+            <div class="stamp-focus">Obsessão botânica, estações climáticas e microprodutores.</div>
+          </div>
+
+          <div class="michelin-stamp-card">
+            <span class="stamp-badge">TOP 50 THE WORLD</span>
+            <div class="stamp-restaurant">BORAGÓ</div>
+            <div class="stamp-city">Santiago &bull; Rodolfo Guzmán</div>
+            <div class="stamp-focus">Foraging selvagem, cozinha de fumaça e território chileno.</div>
+          </div>
+
+          <div class="michelin-stamp-card award-prazeres">
+            <span class="stamp-badge">★ PRÊMIO PRAZERES DA MESA 2026</span>
+            <div class="stamp-restaurant">BONOMI</div>
+            <div class="stamp-city">MELHOR RESTAURANTE DO SUL</div>
+            <div class="stamp-focus"><strong>ÚNICO DE SANTA CATARINA</strong> finalista na maior premiação gastronômica do país.</div>
+          </div>
+        </div>
+
+        <div class="chef-portrait-box">
+          <img src="referencias_visuais/equipe_rafael_sinko_porta_restaurante.jpg" alt="Chef Rafael Sinko e Equipe na porta do Bonomi">
+          <div class="chef-portrait-overlay">
+            <div class="chef-portrait-title">Chef Rafael Sinko & Equipe</div>
+            <div class="chef-portrait-sub">"A alta gastronomia não precisa de afetação. Precisa de fogo, respeito ao produtor e um balcão honesto."</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- =========================================================
+         [MODO SALA]: A CENTRAL DE RESERVAS SOBERANA
+         ========================================================= -->
+    <div class="view-sala-only">
+
+      <!-- CARD DE RESERVAS SOBERANO (SEM LOGIN GOOGLE, SEM FRICÇÃO MEITRE) -->
+      <div id="card-reserva-soberano" class="reservation-card-soberano">
+        <div class="res-card-header">
+          <span class="res-card-badge">CENTRAL DE RESERVAS SOBERANA</span>
+          <div class="res-card-title">Reserve seu Assento</div>
+          <div class="res-card-desc">
+            Direto com a equipe do Bonomi via WhatsApp. Sem cadastro prévio, sem senhas e com atendimento humano da casa. <strong>Solicitação válida após confirmação.</strong>
+          </div>
+        </div>
+
+        <!-- PASSO 1: QUANTAS PESSOAS -->
+        <div class="res-step-group">
+          <div class="res-step-label">
+            <span>1. Número de Comensais</span>
+            <span class="req">*obrigatório</span>
+          </div>
+          <div class="pax-selector-row">
+            <button class="btn-pax active" onclick="selectPax('2 Pessoas')">2 Pessoas</button>
+            <button class="btn-pax" onclick="selectPax('4 Pessoas')">4 Pessoas</button>
+            <button class="btn-pax" onclick="selectPax('1 Pessoa')">1 Pessoa</button>
+            <button class="btn-pax" onclick="selectPax('Grupo (6+)')">Grupo</button>
+          </div>
+        </div>
+
+        <!-- PASSO 2: DIA DA SEMANA -->
+        <div class="res-step-group">
+          <div class="res-step-label">
+            <span>2. Noite Desejada</span>
+            <span class="req">*terça a sábado</span>
+          </div>
+          <div class="date-pill-row">
+            <button class="btn-date-pill active" onclick="selectDate('Sexta-feira (Hoje/Próx)')">Sexta</button>
+            <button class="btn-date-pill" onclick="selectDate('Sábado')">Sábado</button>
+            <button class="btn-date-pill" onclick="selectDate('Terça-feira')">Terça</button>
+            <button class="btn-date-pill" onclick="selectDate('Quarta-feira')">Quarta</button>
+            <button class="btn-date-pill" onclick="selectDate('Quinta-feira')">Quinta</button>
+          </div>
+        </div>
+
+        <!-- PASSO 3: OS DOIS TURNOS (19h00 vs 21h15) -->
+        <div class="res-step-group">
+          <div class="res-step-label">
+            <span>3. Escolha o Turno</span>
+            <span class="req">*50 lugares/noite</span>
+          </div>
+          <div class="turnos-sala-grid">
+            <div id="btn-t-19" class="btn-turno-sala active" onclick="selectTurnoSala('19:00')">
+              <div class="t-time">19:00</div>
+              <div class="t-sub">1º Turno (Até 21:00)</div>
+              <div style="font-size: 10px; color: var(--text-muted); margin-top:3px;">Abertura do fogo & brasa</div>
+            </div>
+            <div id="btn-t-21" class="btn-turno-sala" onclick="selectTurnoSala('21:15')">
+              <div class="t-time">21:15</div>
+              <div class="t-sub">2º Turno (Até 23:30)</div>
+              <div style="font-size: 10px; color: var(--text-muted); margin-top:3px;">Noite viva & vinhos naturais</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PASSO 4: TIPO DE ASSENTO -->
+        <div class="res-step-group">
+          <div class="res-step-label">
+            <span>4. Preferência de Assento</span>
+            <span class="req">*experiência</span>
+          </div>
+          <div class="seat-type-grid">
+            <button id="btn-seat-balcao" class="btn-seat-type active" onclick="selectSeatType('Balcão da Brasa (Frente à Cozinha)')">
+              🔥 Balcão da Brasa (Ver o Chef)
+            </button>
+            <button id="btn-seat-salao" class="btn-seat-type" onclick="selectSeatType('Mesa do Salão')">
+              🍷 Mesa do Salão
+            </button>
+          </div>
+        </div>
+
+        <!-- PASSO 5: RESTRIÇÕES ALIMENTARES RÁPIDAS -->
+        <div class="res-step-group">
+          <div class="res-step-label">
+            <span>5. Possui restrições alimentares?</span>
+          </div>
+          <div class="diet-toggle-row">
+            <button id="btn-diet-no" class="btn-diet active" onclick="setDiet('Não, como de tudo')">NÃO</button>
+            <button id="btn-diet-yes" class="btn-diet" onclick="setDiet('Sim, informar na conversa')">SIM (Avisar)</button>
+          </div>
+        </div>
+
+        <!-- DETALHES DA GARANTIA SOBERANA (O CONTRASTE COM O MEITRE) -->
+        <div class="guarantee-box-soberana">
+          <div class="guarantee-badge-top">
+            <span>🛡️ DETALHES DA GARANTIA & COMPROMISSO</span>
+          </div>
+          <div class="guarantee-rule-line">
+            • <strong>Confirmação da Equipe:</strong> Toda solicitação é <strong>válida após confirmação da equipe Bonomi</strong> via WhatsApp.
+          </div>
+          <div class="guarantee-rule-line">
+            • <strong>Tolerância de Atraso:</strong> 15 minutos. Após esse período a mesa é liberada para a fila de espera.
+          </div>
+          <div class="guarantee-rule-line">
+            • <strong>Cancelamento & No-Show:</strong> Pedimos aviso com pelo menos <strong>6 horas de antecedência</strong> para remanejarmos os insumos frescos.
+          </div>
+          <div class="guarantee-rule-line">
+            • <strong>Caução de R$ 50 Opcional:</strong> Para grupos e noites concorridas, confirmação direta via chave PIX oficial da casa.
+          </div>
+          <div class="guarantee-rule-line">
+            • <strong>Carta de Vinhos &amp; Rolha:</strong> Seleção viva com mais de 20 rótulos naturais. Se preferir trazer seu vinho de casa, a taxa de rolha é de <strong>R$ 100</strong> por garrafa.
+          </div>
+          <div class="guarantee-notice-clean">
+            ✓ Atendimento humano direto &bull; Válida após confirmação &bull; Conversa direta de balcão
+          </div>
+        </div>
+
+        <!-- BOTÃO DE DISPARO DE RESERVA -->
+        <a id="btn-confirm-reserva" class="btn-submit-soberano" href="#" target="_blank" rel="noopener">
+          <span>CONCLUIR RESERVA DIRETA NO WHATSAPP</span>
+          <span style="font-size:18px;">&rarr;</span>
+        </a>
+        <div style="font-family: var(--font-mono); font-size: 10px; color: var(--accent-wine); text-align: center; margin-top: 8px; font-weight: 700; letter-spacing: 0.04em;">
+          * RESERVA VÁLIDA MEDIANTE CONFIRMAÇÃO DA EQUIPE BONOMI VIA WHATSAPP
+        </div>
+
+        <!-- CONVIVÊNCIA HÍBRIDA: LINK OFICIAL MEITRE -->
+        <div class="meitre-fallback-box" style="margin-top: 14px; text-align: center; padding-top: 12px; border-top: 1px dashed var(--border);">
+          <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px; font-family: var(--font-mono);">
+            Prefere reservar pelo sistema tradicional de agendamento?
+          </div>
+          <a href="https://bonomi.meitre.com" target="_blank" rel="noopener" class="btn-meitre-fallback" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text); text-decoration: none; padding: 8px 16px; border: 1px solid var(--border-strong); background: var(--bg-surface); transition: all 0.2s;">
+            <span>Acessar Meitre Oficial (bonomi.meitre.com)</span>
+            <span style="font-size: 12px;">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- MAPINHA DOS 50 LUGARES -->
+      <div class="seats-matrix-box" style="margin-top:20px;">
+        <div class="dots-seating-chart">
+          <div class="dots-label-row">
+            <span>50 ASSENTOS TÁTEIS // DOIS TURNOS</span>
+            <span>RIO TAVARES</span>
+          </div>
+          <div class="dots-row">
+            <div class="chair-dot balcao" title="Balcão"></div>
+            <div class="chair-dot balcao" title="Balcão"></div>
+            <div class="chair-dot balcao" title="Balcão"></div>
+            <div class="chair-dot balcao" title="Balcão"></div>
+            <div class="chair-dot balcao" title="Balcão"></div>
+            <div class="chair-dot balcao" title="Balcão"></div>
+            <div class="chair-dot balcao" title="Balcão"></div>
+            <div class="chair-dot balcao" title="Balcão"></div>
+            <div class="chair-dot balcao" title="Balcão"></div>
+            <div class="chair-dot balcao" title="Balcão"></div>
+            <div class="chair-dot mesa" title="Mesa"></div>
+            <div class="chair-dot mesa" title="Mesa"></div>
+            <div class="chair-dot mesa" title="Mesa"></div>
+            <div class="chair-dot mesa" title="Mesa"></div>
+            <div class="chair-dot mesa" title="Mesa"></div>
+            <div class="chair-dot mesa" title="Mesa"></div>
+            <div class="chair-dot mesa" title="Mesa"></div>
+            <div class="chair-dot mesa" title="Mesa"></div>
+            <div class="chair-dot mesa" title="Mesa"></div>
+            <div class="chair-dot mesa" title="Mesa"></div>
+            <div class="chair-dot mesa" title="Mesa"></div>
+            <div class="chair-dot mesa" title="Mesa"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SEÇÕES COMUNS: PROVA SOCIAL & LOCALIZAÇÃO -->
+    <div class="section-header-block">
+      <div class="section-header-title">Google Maps</div>
+      <div class="section-header-meta">Nota 4,8 ★ (+100 Avaliações)</div>
+    </div>
+
+    <div class="maps-social-container">
+      <div class="review-bubble">
+        <div class="review-top-line">
+          <span class="review-stars">★★★★★</span>
+          <span class="review-source">Google Maps Verified</span>
+        </div>
+        <div class="review-quote">"Experiência gastronômica inacreditável no Rio Tavares. O atum com curry e cebola frita e os pimentões no brioche são obras de arte."</div>
+        <div class="review-author">Cliente Google &bull; 5.0</div>
+      </div>
+
+      <div class="review-bubble">
+        <div class="review-top-line">
+          <span class="review-stars">★★★★★</span>
+          <span class="review-source">Local Guide Floripa</span>
+        </div>
+        <div class="review-quote">"Atendimento acolhedor, vinhos naturais impecáveis e ver o chef finalizando cada prato na cozinha aberta é impagável."</div>
+        <div class="review-author">Local Guide Nível 7 &bull; 5.0</div>
+      </div>
+    </div>
+
+    <!-- LOCALIZAÇÃO & ACESSO -->
+    <div class="section-header-block">
+      <div class="section-header-title">Coordenadas</div>
+      <div class="section-header-meta">Rodovia do Rio Tavares</div>
+    </div>
+
+    <div class="location-card">
+      <div class="location-details">
+        <strong>Bonomi Restaurante</strong><br>
+        Rodovia Dr. Antônio Luiz Moura Gonzaga, 1895 &bull; Loja 6<br>
+        Rio Tavares &bull; Florianópolis / SC &bull; CEP 88048-300<br>
+        <span style="color: var(--accent-wine); font-family: var(--font-mono); font-size: 11px; font-weight: 700;">Atendimento: Terça a Sábado das 19h às 23h30 (Cozinha fecha 22h30)</span>
+      </div>
+      <div class="location-btn-row">
+        <a class="btn-map-link" href="https://maps.google.com/?q=Bonomi+Restaurante+Rio+Tavares+Florianopolis" target="_blank" rel="noopener">Abrir no Maps</a>
+        <a class="btn-map-link" href="https://waze.com/ul?q=Bonomi+Restaurante+Florianopolis" target="_blank" rel="noopener">Waze</a>
+      </div>
+    </div>
+
+    <!-- RODAPÉ SOBERANO -->
+    <footer class="footer-soberano">
+      <strong>BONOMI RESTAURANTE LTDA &bull; CNPJ 49.460.864/0001-85</strong><br>
+      Site Móvel Soberano &bull; Autonomia de cardápio, zero mensalidades e liberdade operacional.<br>
+      Arquitetura Digital por <strong>WorkAround TI</strong> (Rio Tavares, Sul da Ilha).
+    </footer>
+
+  <!-- EASTER EGG // CHEF TOASTY (MORTAL KOMBAT STYLE) -->
+  <div id="toasty-chef-card" class="toasty-chef-container" onclick="triggerToastyInteractive()" title="Chef Rafael Sinko // Toasty!">
+    <div class="toasty-balloon">
+      <span class="toasty-shout">TOASTY! 🍷</span>
+      <span class="toasty-sub">Vinho Natural!</span>
+    </div>
+    <div class="toasty-frame">
+      <img src="toasty_chef_hd_bw.png" alt="Chef Rafael Sinko" class="toasty-img">
+      <div class="toasty-badge-mk">MK // CHEF</div>
+    </div>
+  </div>
+
+  <!-- MODAL DE EXPANSÃO TÁTIL // FOTO DO PRATO EM ALTA DEFINIÇÃO -->
+  <div id="dish-modal-overlay" class="dish-modal-overlay" onclick="closeDishModal(event)">
+    <div class="dish-modal-content" onclick="event.stopPropagation()">
+      <img id="dish-modal-img" class="dish-modal-img" src="referencias_visuais/tartar_close_hero.png" alt="Prato do Chef Expandido">
+      <div class="dish-modal-body">
+        <div id="dish-modal-cat" class="dish-modal-cat">DO MAR // COZINHA AUTORAL</div>
+        <div id="dish-modal-title" class="dish-modal-title">Tartar de Atum Fresco</div>
+        <div id="dish-modal-desc" class="dish-modal-desc">Pesca da costa no corte clássico crú, óleo de pimenta artesanal, gergelim e ervas frescas.</div>
+        <button class="roleta-btn-spin" onclick="closeDishModal()" style="margin-top:10px; padding:10px; font-size:11px;">
+          <span>FECHAR FOTO [X]</span>
+        </button>
+      </div>
+    </div>
+    <span class="dish-modal-close-hint">Toque em qualquer lugar fora para fechar</span>
+  </div>
+
+  <!-- BARRA FIXA INFERIOR DE NAVEGAÇÃO & RESERVA DINÂMICA -->
+  <div class="bottom-booking-bar">
+    <div class="bottom-booking-inner">
+      <button id="btn-bottom-dynamic" class="btn-main-booking" onclick="handleBottomBarAction()">
+        <span id="bottom-bar-text">MODO SALA - SALÃO E RESERVAS &rarr;</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- SCRIPT DE COMPORTAMENTO & BACKEND SOBERANO -->
+  <script>
+    // FUNÇÃO PARA ABRIR / FECHAR SEÇÕES DE CARDÁPIO E CARTA DE VINHOS
+    function toggleContainer(containerId, btnId, labelName) {
+      var container = document.getElementById(containerId);
+      var btn = document.getElementById(btnId);
+      if (!container) return;
+
+      var isCollapsed = container.classList.toggle('is-collapsed');
+      if (btn) {
+        var icon = btn.querySelector('.toggle-icon');
+        var text = btn.querySelector('.toggle-text');
+        if (isCollapsed) {
+          if (icon) icon.textContent = '+';
+          if (text) text.textContent = 'Ver ' + labelName;
+        } else {
+          if (icon) icon.textContent = '−';
+          if (text) text.textContent = 'Fechar ' + labelName;
+        }
+      }
+    }
+
+    // MODAL DE EXPANSÃO TÁTIL DA FOTO DO PRATO (ROLETA DO CHEF)
+    function openDishModal() {
+      var p = chefPairings[currentRoletaIndex];
+      if (!p) return;
+      var overlay = document.getElementById('dish-modal-overlay');
+      var img = document.getElementById('dish-modal-img');
+      var cat = document.getElementById('dish-modal-cat');
+      var title = document.getElementById('dish-modal-title');
+      var desc = document.getElementById('dish-modal-desc');
+
+      if (img) img.src = p.img;
+      if (cat) cat.innerText = p.cat;
+      if (title) title.innerText = p.dish;
+      if (desc) desc.innerText = p.desc;
+
+      if (overlay) overlay.classList.add('is-open');
+      if (navigator.vibrate) {
+        try { navigator.vibrate(25); } catch (e) {}
+      }
+    }
+
+    function closeDishModal(e) {
+      var overlay = document.getElementById('dish-modal-overlay');
+      if (overlay) overlay.classList.remove('is-open');
+    }
+
+    var currentMode = "brasa";
+    var resPax = "2 Pessoas";
+    var resDate = "Sexta-feira (Hoje/Próx)";
+    var resTurno = "19:00";
+    var resSeat = "Balcão da Brasa (Frente à Cozinha)";
+    var resDiet = "Não, como de tudo";
+    var selectedRoletaDish = null;
+
+    // ROLETA DO CHEF // DADOS OFICIAIS & COMBINAÇÃO BRASA + VINHO
+    var chefPairings = [
+      {
+        dish: "Tartar de Atum Fresco & Chili Oil",
+        cat: "DO MAR // COZINHA AUTORAL",
+        desc: "Pesca da costa no corte clássico crú, óleo de pimenta artesanal, gergelim e ervas frescas.",
+        wine: "Vinho Branco Viognier Mas des Agrunelles (2022) ou Praya Lager",
+        img: "referencias_visuais/tartar_atum_prato_oficial.png"
+      },
+      {
+        dish: "Pimentões Assados, Brioche & Ovo Perfeito",
+        cat: "VEGETAIS // FORNO & FOGO",
+        desc: "Brioche tostado na brasa, bechamel aveludado, pimentões tostados e ovo curado.",
+        wine: "Pet-Nat Cantina Mincarone Sangiovese (2023)",
+        img: "referencias_visuais/pimentoes_assados_prato_cheio.jpg"
+      },
+      {
+        dish: "Pão de Levain & Mel Fermentado",
+        cat: "PÃO DE ABERTURA // FERMENTAÇÃO NATURAL",
+        desc: "Pão de fermentação natural com manteiga noisette tostada e mel da casa.",
+        wine: "Taça de Vinho Branco Natural do Dia (R$ 33)",
+        img: "referencias_visuais/mesa_banquete_polvo_tostadas_vinhos.jpg"
+      },
+      {
+        dish: "Língua de Angus com Alho Negro",
+        cat: "CARNES // COZIMENTO LENTO & BRASA",
+        desc: "Creme untuoso de grão de bico com alho negro fermentado e brotos frescos.",
+        wine: "Tinto Krontiras Malbec Biodinâmico (2023, Mendoza)",
+        img: "referencias_visuais/cozinha_servico.jpg"
+      },
+      {
+        dish: "Peixe Curado com Chili Oil & Kiwi",
+        cat: "DO MAR // FRESCOR DA COSTA",
+        desc: "Pescado do dia curado artesanalmente, óleo de pimenta tostado e toque cítrico.",
+        wine: "Branco Tüzkö Birtok Grüner Veltliner (2023, Hungria)",
+        img: "referencias_visuais/prato_peixe_molho_ervas.jpg"
+      },
+      {
+        dish: "Pancetta na Brasa, Mamão Verde & Café",
+        cat: "CARNES // CROCÂNCIA & INFUSÃO",
+        desc: "Pancetta crocante no carvão, tiras frescas de mamão verde e demiglace de café.",
+        wine: "Laranja Lazy Winemaker Sauvignon Blanc (2025, Chile)",
+        img: "referencias_visuais/vinho_natural_viognier_azul.jpg"
+      }
+    ];
+
+    var currentRoletaIndex = 0;
+    var roletaSpinning = false;
+
+    function spinRoleta() {
+      if (roletaSpinning) return;
+      roletaSpinning = true;
+      var spins = 10;
+      var count = 0;
+      var interval = setInterval(function() {
+        currentRoletaIndex = (currentRoletaIndex + 1) % chefPairings.length;
+        var p = chefPairings[currentRoletaIndex];
+        var imgEl = document.getElementById('roleta-img');
+        if (imgEl) {
+          imgEl.style.opacity = '0.35';
+          imgEl.src = p.img;
+        }
+        document.getElementById('roleta-cat').innerText = p.cat;
+        document.getElementById('roleta-title').innerText = p.dish;
+        document.getElementById('roleta-desc').innerText = p.desc;
+        document.getElementById('roleta-wine').innerText = p.wine;
+        setTimeout(function() { if (imgEl) imgEl.style.opacity = '1'; }, 50);
+
+        count++;
+        if (count >= spins) {
+          clearInterval(interval);
+          roletaSpinning = false;
+          selectedRoletaDish = chefPairings[currentRoletaIndex].dish + " + " + chefPairings[currentRoletaIndex].wine;
+        }
+      }, 85);
+    }
+
+    function applyRoletaDishToReservation() {
+      var p = chefPairings[currentRoletaIndex];
+      selectedRoletaDish = p.dish + " (" + p.wine + ")";
+      setMode('sala');
+      var card = document.getElementById('card-reserva-soberano');
+      if (card) card.scrollIntoView({ behavior: 'smooth' });
+      updateWhatsAppReservationUrl();
+    }
+
+    function updateWhatsAppReservationUrl() {
+      var phone = "5548991040698";
+      var msg = "Olá Chef Rafael e equipe Bonomi!\n" +
+                "Gostaria de solicitar uma reserva direta (ciente de que é válida após confirmação):\n" +
+                "• Pessoas: " + resPax + "\n" +
+                "• Data: " + resDate + "\n" +
+                "• Turno: " + resTurno + " (" + (resTurno === '19:00' ? '1º turno até 21h' : '2º turno até 23h30') + ")\n" +
+                "• Assento: " + resSeat + "\n" +
+                "• Restrições: " + resDiet + "\n";
+      if (selectedRoletaDish) {
+        msg += "• Sugestão da Roleta: " + selectedRoletaDish + "\n";
+      }
+      msg += "\nEstou ciente de que a reserva é válida mediante confirmação da equipe, da tolerância de 15min e do cancelamento com 6h.";
+      
+      var url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
+      var btn = document.getElementById('btn-confirm-reserva');
+      if (btn) btn.href = url;
+    }
+
+    function setMode(mode) {
+      currentMode = mode;
+      var body = document.body;
+      var btnBrasa = document.getElementById('btn-mode-brasa');
+      var btnSala = document.getElementById('btn-mode-sala');
+      var bottomText = document.getElementById('bottom-bar-text');
+
+      if (mode === 'sala') {
+        body.classList.add('mode-sala');
+        btnSala.classList.add('active');
+        btnBrasa.classList.remove('active');
+        bottomText.innerText = "🔥 VOLTAR AO MODO BRASA - RESTAURANTE E CHEF";
+        updateWhatsAppReservationUrl();
+      } else {
+        body.classList.remove('mode-sala');
+        btnBrasa.classList.add('active');
+        btnSala.classList.remove('active');
+        bottomText.innerText = "🍷 MODO SALA - SALÃO E RESERVAS →";
+      }
+    }
+
+    function handleBottomBarAction() {
+      if (currentMode === 'brasa') {
+        setMode('sala');
+        var card = document.getElementById('card-reserva-soberano');
+        if (card) card.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        setMode('brasa');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function goToSalaAndReserve() {
+      setMode('sala');
+      var card = document.getElementById('card-reserva-soberano');
+      if (card) card.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function selectPax(pax) {
+      resPax = pax;
+      document.querySelectorAll('.btn-pax').forEach(function(b) {
+        b.classList.toggle('active', b.innerText === pax || (pax === 'Grupo (6+)' && b.innerText === 'Grupo'));
+      });
+      updateWhatsAppReservationUrl();
+    }
+
+    function selectDate(d) {
+      resDate = d;
+      document.querySelectorAll('.btn-date-pill').forEach(function(b) {
+        b.classList.toggle('active', d.indexOf(b.innerText) !== -1);
+      });
+      updateWhatsAppReservationUrl();
+    }
+
+    function selectTurnoSala(t) {
+      resTurno = t;
+      document.getElementById('btn-t-19').classList.toggle('active', t === '19:00');
+      document.getElementById('btn-t-21').classList.toggle('active', t === '21:15');
+      updateWhatsAppReservationUrl();
+    }
+
+    function selectSeatType(seat) {
+      resSeat = seat;
+      document.getElementById('btn-seat-balcao').classList.toggle('active', seat.indexOf('Balcão') !== -1);
+      document.getElementById('btn-seat-salao').classList.toggle('active', seat.indexOf('Salão') !== -1);
+      updateWhatsAppReservationUrl();
+    }
+
+    function setDiet(diet) {
+      resDiet = diet;
+      document.getElementById('btn-diet-no').classList.toggle('active', diet.indexOf('Não') !== -1);
+      document.getElementById('btn-diet-yes').classList.toggle('active', diet.indexOf('Sim') !== -1);
+      updateWhatsAppReservationUrl();
+    }
+
+    // =========================================================
+    // EASTER EGG // MORTAL KOMBAT "TOASTY!" CHEF ENGINE
+    // =========================================================
+    var toastyActive = false;
+    var toastyLastTrigger = 0;
+    var toastyCooldownMs = 30000; // 30s de intervalo para manter o frescor
+    var toastyTimer = null;
+
+    function playToastySound() {
+      try {
+        var AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        var ctx = new AudioCtx();
+        if (ctx.state === 'suspended') {
+          ctx.resume();
+        }
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.type = 'triangle';
+
+        var now = ctx.currentTime;
+        // Glissando ágil clássico estilo falsete fliperama anos 90
+        osc.frequency.setValueAtTime(400, now);
+        osc.frequency.exponentialRampToValueAtTime(1200, now + 0.16);
+        osc.frequency.exponentialRampToValueAtTime(800, now + 0.32);
+
+        gain.gain.setValueAtTime(0.001, now);
+        gain.gain.linearRampToValueAtTime(0.18, now + 0.04);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.36);
+      } catch (e) {
+        // Áudio desativado silenciosamente em restrições de autoplay
+      }
+    }
+
+    function popToastyChef(force) {
+      var now = Date.now();
+      if (!force && (toastyActive || (now - toastyLastTrigger < toastyCooldownMs))) {
+        return;
+      }
+      var card = document.getElementById('toasty-chef-card');
+      if (!card) return;
+
+      toastyActive = true;
+      toastyLastTrigger = now;
+      card.classList.add('is-toasty-visible');
+      playToastySound();
+
+      if (toastyTimer) clearTimeout(toastyTimer);
+      toastyTimer = setTimeout(function() {
+        card.classList.remove('is-toasty-visible');
+        toastyActive = false;
+      }, 1400); // 1.4s de exibição clássica
+    }
+
+    function triggerToastyInteractive() {
+      if (navigator.vibrate) {
+        try { navigator.vibrate([35, 40, 35]); } catch (e) {}
+      }
+      var card = document.getElementById('toasty-chef-card');
+      if (card) {
+        card.style.transform = 'translate3d(0, 0, 0) scale(1.12) rotate(-8deg)';
+        setTimeout(function() {
+          card.classList.remove('is-toasty-visible');
+          card.style.transform = '';
+          toastyActive = false;
+        }, 320);
+      }
+      var vinhos = document.getElementById('vinhos-anchor');
+      if (vinhos) {
+        vinhos.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function triggerToastyFromHub() {
+      setTimeout(function() {
+        popToastyChef(true);
+      }, 450);
+    }
+
+    // DISPARO INTELIGENTE DURANTE A ROLAGEM
+    var wineScrolledIn = false;
+    window.addEventListener('scroll', function() {
+      var vinhosEl = document.getElementById('vinhos-anchor');
+      if (!vinhosEl) return;
+      var rect = vinhosEl.getBoundingClientRect();
+      var winH = window.innerHeight || document.documentElement.clientHeight;
+
+      // Quando a seção de Vinhos Naturais entra no campo de visão
+      if (rect.top < winH * 0.70 && rect.bottom > 80) {
+        if (!wineScrolledIn) {
+          wineScrolledIn = true;
+          popToastyChef(false);
+        }
+      } else {
+        wineScrolledIn = false;
+      }
+    }, { passive: true });
+
+    updateWhatsAppReservationUrl();
+    // Desregistra qualquer Service Worker antigo e limpa CacheStorage (Zero PWA, 100% Rede Direta)
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+      if ('caches' in window) {
+        caches.keys().then(function(keys) {
+          keys.forEach(function(key) {
+            caches.delete(key);
+          });
+        });
+      }
+    }
+  </script>
+</div><!-- /.app-shell -->
+</body>
+</html>
